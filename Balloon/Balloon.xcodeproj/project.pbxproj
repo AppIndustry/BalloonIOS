@@ -14,6 +14,27 @@
 		28BA8D8E1ACC3F3500CB91D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8D8D1ACC3F3500CB91D1 /* Images.xcassets */; };
 		28BA8D911ACC3F3500CB91D1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8D8F1ACC3F3500CB91D1 /* LaunchScreen.xib */; };
 		28BA8D9D1ACC3F3500CB91D1 /* BalloonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8D9C1ACC3F3500CB91D1 /* BalloonTests.m */; };
+		28BA8DB71ACC3FB700CB91D1 /* BackCover.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DA71ACC3FB700CB91D1 /* BackCover.png */; };
+		28BA8DB81ACC3FB700CB91D1 /* BalloonLife.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DA81ACC3FB700CB91D1 /* BalloonLife.png */; };
+		28BA8DB91ACC3FB700CB91D1 /* DoublePlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DA91ACC3FB700CB91D1 /* DoublePlay.png */; };
+		28BA8DBA1ACC3FB700CB91D1 /* DownToZeroSecond.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DAA1ACC3FB700CB91D1 /* DownToZeroSecond.png */; };
+		28BA8DBB1ACC3FB700CB91D1 /* FiveSecond.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DAB1ACC3FB700CB91D1 /* FiveSecond.png */; };
+		28BA8DBC1ACC3FB700CB91D1 /* Hold.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DAC1ACC3FB700CB91D1 /* Hold.png */; };
+		28BA8DBD1ACC3FB700CB91D1 /* PlusOne.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DAD1ACC3FB700CB91D1 /* PlusOne.png */; };
+		28BA8DBE1ACC3FB700CB91D1 /* PlusTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DAE1ACC3FB700CB91D1 /* PlusTwo.png */; };
+		28BA8DBF1ACC3FB700CB91D1 /* Pop.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DAF1ACC3FB700CB91D1 /* Pop.png */; };
+		28BA8DC01ACC3FB700CB91D1 /* Popped.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DB01ACC3FB700CB91D1 /* Popped.png */; };
+		28BA8DC11ACC3FB700CB91D1 /* Reverse.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DB11ACC3FB700CB91D1 /* Reverse.png */; };
+		28BA8DC21ACC3FB700CB91D1 /* Skip.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DB21ACC3FB700CB91D1 /* Skip.png */; };
+		28BA8DC31ACC3FB700CB91D1 /* TenSecond.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DB31ACC3FB700CB91D1 /* TenSecond.png */; };
+		28BA8DC41ACC3FB700CB91D1 /* ToThirtySecond.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DB41ACC3FB700CB91D1 /* ToThirtySecond.png */; };
+		28BA8DC51ACC3FB700CB91D1 /* TradeHand.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DB51ACC3FB700CB91D1 /* TradeHand.png */; };
+		28BA8DC61ACC3FB700CB91D1 /* UpToSixtySecond.png in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8DB61ACC3FB700CB91D1 /* UpToSixtySecond.png */; };
+		28BA8DD41ACC407D00CB91D1 /* AIGameMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DC91ACC407D00CB91D1 /* AIGameMenuViewController.m */; };
+		28BA8DD51ACC407D00CB91D1 /* AIGameSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DCB1ACC407D00CB91D1 /* AIGameSceneViewController.m */; };
+		28BA8DD61ACC407D00CB91D1 /* AICommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DCE1ACC407D00CB91D1 /* AICommonUtils.m */; };
+		28BA8DD71ACC407D00CB91D1 /* AIGameCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DD11ACC407D00CB91D1 /* AIGameCard.m */; };
+		28BA8DD81ACC407D00CB91D1 /* AIGameCardImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DD31ACC407D00CB91D1 /* AIGameCardImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +61,33 @@
 		28BA8D961ACC3F3500CB91D1 /* BalloonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BalloonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28BA8D9B1ACC3F3500CB91D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28BA8D9C1ACC3F3500CB91D1 /* BalloonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BalloonTests.m; sourceTree = "<group>"; };
+		28BA8DA71ACC3FB700CB91D1 /* BackCover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackCover.png; sourceTree = "<group>"; };
+		28BA8DA81ACC3FB700CB91D1 /* BalloonLife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BalloonLife.png; sourceTree = "<group>"; };
+		28BA8DA91ACC3FB700CB91D1 /* DoublePlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoublePlay.png; sourceTree = "<group>"; };
+		28BA8DAA1ACC3FB700CB91D1 /* DownToZeroSecond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DownToZeroSecond.png; sourceTree = "<group>"; };
+		28BA8DAB1ACC3FB700CB91D1 /* FiveSecond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FiveSecond.png; sourceTree = "<group>"; };
+		28BA8DAC1ACC3FB700CB91D1 /* Hold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hold.png; sourceTree = "<group>"; };
+		28BA8DAD1ACC3FB700CB91D1 /* PlusOne.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusOne.png; sourceTree = "<group>"; };
+		28BA8DAE1ACC3FB700CB91D1 /* PlusTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusTwo.png; sourceTree = "<group>"; };
+		28BA8DAF1ACC3FB700CB91D1 /* Pop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pop.png; sourceTree = "<group>"; };
+		28BA8DB01ACC3FB700CB91D1 /* Popped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Popped.png; sourceTree = "<group>"; };
+		28BA8DB11ACC3FB700CB91D1 /* Reverse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reverse.png; sourceTree = "<group>"; };
+		28BA8DB21ACC3FB700CB91D1 /* Skip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Skip.png; sourceTree = "<group>"; };
+		28BA8DB31ACC3FB700CB91D1 /* TenSecond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TenSecond.png; sourceTree = "<group>"; };
+		28BA8DB41ACC3FB700CB91D1 /* ToThirtySecond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToThirtySecond.png; sourceTree = "<group>"; };
+		28BA8DB51ACC3FB700CB91D1 /* TradeHand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TradeHand.png; sourceTree = "<group>"; };
+		28BA8DB61ACC3FB700CB91D1 /* UpToSixtySecond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UpToSixtySecond.png; sourceTree = "<group>"; };
+		28BA8DC81ACC407D00CB91D1 /* AIGameMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIGameMenuViewController.h; sourceTree = "<group>"; };
+		28BA8DC91ACC407D00CB91D1 /* AIGameMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameMenuViewController.m; sourceTree = "<group>"; };
+		28BA8DCA1ACC407D00CB91D1 /* AIGameSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIGameSceneViewController.h; sourceTree = "<group>"; };
+		28BA8DCB1ACC407D00CB91D1 /* AIGameSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameSceneViewController.m; sourceTree = "<group>"; };
+		28BA8DCD1ACC407D00CB91D1 /* AICommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AICommonUtils.h; sourceTree = "<group>"; };
+		28BA8DCE1ACC407D00CB91D1 /* AICommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AICommonUtils.m; sourceTree = "<group>"; };
+		28BA8DCF1ACC407D00CB91D1 /* AIEnumCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIEnumCollection.h; sourceTree = "<group>"; };
+		28BA8DD01ACC407D00CB91D1 /* AIGameCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIGameCard.h; sourceTree = "<group>"; };
+		28BA8DD11ACC407D00CB91D1 /* AIGameCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameCard.m; sourceTree = "<group>"; };
+		28BA8DD21ACC407D00CB91D1 /* AIGameCardImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIGameCardImageView.h; sourceTree = "<group>"; };
+		28BA8DD31ACC407D00CB91D1 /* AIGameCardImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameCardImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +129,8 @@
 		28BA8D7F1ACC3F3500CB91D1 /* Balloon */ = {
 			isa = PBXGroup;
 			children = (
+				28BA8DC71ACC407D00CB91D1 /* Classes */,
+				28BA8DCC1ACC407D00CB91D1 /* CommonUtils */,
 				28BA8D841ACC3F3500CB91D1 /* AppDelegate.h */,
 				28BA8D851ACC3F3500CB91D1 /* AppDelegate.m */,
 				28BA8D871ACC3F3500CB91D1 /* ViewController.h */,
@@ -96,6 +146,7 @@
 		28BA8D801ACC3F3500CB91D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28BA8DA61ACC3FB700CB91D1 /* BalloonPopperCardImage */,
 				28BA8D811ACC3F3500CB91D1 /* Info.plist */,
 				28BA8D821ACC3F3500CB91D1 /* main.m */,
 			);
@@ -117,6 +168,54 @@
 				28BA8D9B1ACC3F3500CB91D1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		28BA8DA61ACC3FB700CB91D1 /* BalloonPopperCardImage */ = {
+			isa = PBXGroup;
+			children = (
+				28BA8DA71ACC3FB700CB91D1 /* BackCover.png */,
+				28BA8DA81ACC3FB700CB91D1 /* BalloonLife.png */,
+				28BA8DA91ACC3FB700CB91D1 /* DoublePlay.png */,
+				28BA8DAA1ACC3FB700CB91D1 /* DownToZeroSecond.png */,
+				28BA8DAB1ACC3FB700CB91D1 /* FiveSecond.png */,
+				28BA8DAC1ACC3FB700CB91D1 /* Hold.png */,
+				28BA8DAD1ACC3FB700CB91D1 /* PlusOne.png */,
+				28BA8DAE1ACC3FB700CB91D1 /* PlusTwo.png */,
+				28BA8DAF1ACC3FB700CB91D1 /* Pop.png */,
+				28BA8DB01ACC3FB700CB91D1 /* Popped.png */,
+				28BA8DB11ACC3FB700CB91D1 /* Reverse.png */,
+				28BA8DB21ACC3FB700CB91D1 /* Skip.png */,
+				28BA8DB31ACC3FB700CB91D1 /* TenSecond.png */,
+				28BA8DB41ACC3FB700CB91D1 /* ToThirtySecond.png */,
+				28BA8DB51ACC3FB700CB91D1 /* TradeHand.png */,
+				28BA8DB61ACC3FB700CB91D1 /* UpToSixtySecond.png */,
+			);
+			path = BalloonPopperCardImage;
+			sourceTree = "<group>";
+		};
+		28BA8DC71ACC407D00CB91D1 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				28BA8DC81ACC407D00CB91D1 /* AIGameMenuViewController.h */,
+				28BA8DC91ACC407D00CB91D1 /* AIGameMenuViewController.m */,
+				28BA8DCA1ACC407D00CB91D1 /* AIGameSceneViewController.h */,
+				28BA8DCB1ACC407D00CB91D1 /* AIGameSceneViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		28BA8DCC1ACC407D00CB91D1 /* CommonUtils */ = {
+			isa = PBXGroup;
+			children = (
+				28BA8DCD1ACC407D00CB91D1 /* AICommonUtils.h */,
+				28BA8DCE1ACC407D00CB91D1 /* AICommonUtils.m */,
+				28BA8DCF1ACC407D00CB91D1 /* AIEnumCollection.h */,
+				28BA8DD01ACC407D00CB91D1 /* AIGameCard.h */,
+				28BA8DD11ACC407D00CB91D1 /* AIGameCard.m */,
+				28BA8DD21ACC407D00CB91D1 /* AIGameCardImageView.h */,
+				28BA8DD31ACC407D00CB91D1 /* AIGameCardImageView.m */,
+			);
+			path = CommonUtils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,9 +298,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28BA8DBD1ACC3FB700CB91D1 /* PlusOne.png in Resources */,
+				28BA8DBC1ACC3FB700CB91D1 /* Hold.png in Resources */,
+				28BA8DC41ACC3FB700CB91D1 /* ToThirtySecond.png in Resources */,
+				28BA8DC11ACC3FB700CB91D1 /* Reverse.png in Resources */,
+				28BA8DC31ACC3FB700CB91D1 /* TenSecond.png in Resources */,
+				28BA8DB91ACC3FB700CB91D1 /* DoublePlay.png in Resources */,
+				28BA8DBA1ACC3FB700CB91D1 /* DownToZeroSecond.png in Resources */,
+				28BA8DC51ACC3FB700CB91D1 /* TradeHand.png in Resources */,
+				28BA8DB71ACC3FB700CB91D1 /* BackCover.png in Resources */,
 				28BA8D8C1ACC3F3500CB91D1 /* Main.storyboard in Resources */,
 				28BA8D911ACC3F3500CB91D1 /* LaunchScreen.xib in Resources */,
+				28BA8DBE1ACC3FB700CB91D1 /* PlusTwo.png in Resources */,
 				28BA8D8E1ACC3F3500CB91D1 /* Images.xcassets in Resources */,
+				28BA8DC61ACC3FB700CB91D1 /* UpToSixtySecond.png in Resources */,
+				28BA8DC01ACC3FB700CB91D1 /* Popped.png in Resources */,
+				28BA8DBF1ACC3FB700CB91D1 /* Pop.png in Resources */,
+				28BA8DC21ACC3FB700CB91D1 /* Skip.png in Resources */,
+				28BA8DB81ACC3FB700CB91D1 /* BalloonLife.png in Resources */,
+				28BA8DBB1ACC3FB700CB91D1 /* FiveSecond.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,8 +334,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28BA8DD71ACC407D00CB91D1 /* AIGameCard.m in Sources */,
 				28BA8D891ACC3F3500CB91D1 /* ViewController.m in Sources */,
+				28BA8DD41ACC407D00CB91D1 /* AIGameMenuViewController.m in Sources */,
 				28BA8D861ACC3F3500CB91D1 /* AppDelegate.m in Sources */,
+				28BA8DD81ACC407D00CB91D1 /* AIGameCardImageView.m in Sources */,
+				28BA8DD51ACC407D00CB91D1 /* AIGameSceneViewController.m in Sources */,
+				28BA8DD61ACC407D00CB91D1 /* AICommonUtils.m in Sources */,
 				28BA8D831ACC3F3500CB91D1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
