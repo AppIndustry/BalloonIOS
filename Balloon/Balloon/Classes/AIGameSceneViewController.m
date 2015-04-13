@@ -754,10 +754,26 @@
             
             if (tempGameCardObject.cardName == GameCardTradeHand)
             {
+                int randomNumber = arc4random_uniform(2);
                 
+                //work till here
+                NSMutableArray *tempHandArray = [[NSMutableArray alloc]init];
+                
+                if (randomNumber == 0)
+                {
+                    
+                }
+                else if (randomNumber == 1)
+                {
+                    
+                }
+                else if (randomNumber == 2)
+                {
+                    
+                }
             }
             else
-                [self cardSelectionValidation:GameCardObject];
+                [self cardSelectionValidation:tempGameCardObject];
             
             
         }
