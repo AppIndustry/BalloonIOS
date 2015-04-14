@@ -630,24 +630,7 @@
     {
         NSMutableArray *tempUserArray = [[NSMutableArray alloc]init];
         
-        switch (nextPlayerIDTurn)
-        {
-            case 1:
-                tempUserArray = [playerHandArray1 mutableCopy];
-                break;
-            
-            case 2:
-                tempUserArray = [playerHandArray2 mutableCopy];
-                break;
-                
-            case 3:
-                tempUserArray = [playerHandArray3 mutableCopy];
-                break;
-            
-            default:
-                return;
-                break;
-        }
+        tempUserArray = [self getCurrentPlayerHandArray];
         
         NSInteger tempSelectedCardIndex = 0;
         AIGameCardName tempSelectedGameCardName = GameCardDoublePlay; //simply assign a non-related value
@@ -733,24 +716,8 @@
             
             [tempUserArray removeObjectAtIndex:tempSelectedCardIndex];
             
-            switch (nextPlayerIDTurn)
-            {
-                case 1:
-                    playerHandArray1 = [tempUserArray mutableCopy];
-                    break;
-                    
-                case 2:
-                    playerHandArray2 = [tempUserArray mutableCopy];
-                    break;
-                    
-                case 3:
-                    playerHandArray3 = [tempUserArray mutableCopy];
-                    break;
-                    
-                default:
-                    return;
-                    break;
-            }
+            [self assignCurrentPlayerHandArray:tempUserArray];
+            
             
             if (tempGameCardObject.cardName == GameCardTradeHand)
             {
@@ -761,16 +728,51 @@
                 
                 if (randomNumber == 0)
                 {
+                    tempHandArray = [playerHandArray0 mutableCopy];
                     
                 }
                 else if (randomNumber == 1)
                 {
-                    
+                    if (randomNumber == nextPlayerIDTurn)
+                        tempHandArray = [playerHandArray2 mutableCopy];
+                    else
+                        tempHandArray = [playerHandArray1 mutableCopy];
                 }
                 else if (randomNumber == 2)
                 {
+                    if (randomNumber == nextPlayerIDTurn)
+                        tempHandArray = [playerHandArray3 mutableCopy];
+                    else
+                        tempHandArray = [playerHandArray2 mutableCopy];
+                }
+                
+                NSMutableArray *tempTradeArray = [[NSMutableArray alloc]init];
+                tempTradeArray = [tempUserArray mutableCopy];
+                
+                tempUserArray = [tempHandArray mutableCopy];
+                tempHandArray = [tempTradeArray mutableCopy];
+                
+                if (randomNumber == 0)
+                {
+                    playerHandArray0 = [tempHandArray mutableCopy];
                     
                 }
+                else if (randomNumber == 1)
+                {
+                    if (randomNumber == nextPlayerIDTurn)
+                        playerHandArray2 = [tempHandArray mutableCopy];
+                    else
+                        playerHandArray1 = [tempHandArray mutableCopy];
+                }
+                else if (randomNumber == 2)
+                {
+                    if (randomNumber == nextPlayerIDTurn)
+                        playerHandArray3 = [tempHandArray mutableCopy];
+                    else
+                        playerHandArray2 = [tempHandArray mutableCopy];
+                }
+                
+                [self assignCurrentPlayerHandArray:tempUserArray];
             }
             else
                 [self cardSelectionValidation:tempGameCardObject];
@@ -879,6 +881,54 @@
     
 }
 
+
+
+-(NSMutableArray *)getCurrentPlayerHandArray
+{
+    NSMutableArray *tempUserArray = [[NSMutableArray alloc]init];
+    
+    switch (nextPlayerIDTurn)
+    {
+        case 0:
+            tempUserArray = [playerHandArray0 mutableCopy];
+            break;
+            
+        case 1:
+            tempUserArray = [playerHandArray1 mutableCopy];
+            break;
+            
+        case 2:
+            tempUserArray = [playerHandArray2 mutableCopy];
+            break;
+            
+        case 3:
+            tempUserArray = [playerHandArray3 mutableCopy];
+            break;
+    }
+    
+    return tempUserArray;
+}
+
+-(void)assignCurrentPlayerHandArray:(NSMutableArray *)tempUserArray
+{
+    switch (nextPlayerIDTurn)
+    {
+        case 0:
+            playerHandArray0 = [tempUserArray mutableCopy];
+            
+        case 1:
+            playerHandArray1 = [tempUserArray mutableCopy];
+            break;
+            
+        case 2:
+            playerHandArray2 = [tempUserArray mutableCopy];
+            break;
+            
+        case 3:
+            playerHandArray3 = [tempUserArray mutableCopy];
+            break;
+    }
+}
 
 
 
