@@ -781,7 +781,54 @@
         }
         else if (timeCount == 60)
         {
-            
+            for (int i = 0; i < [tempUserArray count]; i++)
+            {
+                AIGameCard *tempGameCard = [[AIGameCard alloc]init];
+                tempGameCard = (AIGameCard *)[tempUserArray objectAtIndex:i];
+                
+                if (!tempGameCard.isNumberCard)
+                {
+                    if (tempGameCard.cardName == GameCardToThirtySecond)
+                    {
+                        tempSelectedCardIndex = i;
+                        tempSelectedGameCardName = GameCardToThirtySecond;
+                        break;
+                    }
+                    else if (tempGameCard.cardName == GameCardToZeroSecond)
+                    {
+                        tempSelectedCardIndex = i;
+                        tempSelectedGameCardName = GameCardToZeroSecond;
+                    }
+                    else if (tempGameCard.cardName == GameCardSkip || tempGameCard.cardName == GameCardReverse)
+                    {
+                        tempSelectedCardIndex = i;
+                        tempSelectedGameCardName = tempGameCard.cardName;
+                    }
+                    else if (tempGameCard.cardName == GameCardDrawOne || tempGameCard.cardName == GameCardDrawTwo)
+                    {
+                        tempSelectedCardIndex = i;
+                        tempSelectedGameCardName = tempGameCard.cardName;
+                    }
+                    else if (tempGameCard.cardName == GameCardDoublePlay)
+                    {
+                        tempSelectedCardIndex = i;
+                        tempSelectedGameCardName = tempGameCard.cardName;
+                    }
+                    else if (tempGameCard.cardName == GameCardTradeHand)
+                    {
+                        if (tempSelectedGameCardName != GameCardCut)
+                        {
+                            tempSelectedCardIndex = i;
+                            tempSelectedGameCardName = GameCardTradeHand;
+                        }
+                    }
+                }
+                else
+                {
+                    
+                    
+                }
+            }
         }
         else
         {
