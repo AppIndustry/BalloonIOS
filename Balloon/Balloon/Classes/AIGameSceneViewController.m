@@ -487,7 +487,7 @@
                             [self cardSelectionValidation:GameCardObject];
                     }];
                     
-                    [self nextPlayerTurn:NO];
+                    //[self nextPlayerTurn:NO];
                 }
             }
         }
@@ -622,6 +622,16 @@
                 nextPlayerIDTurn = 3;
         }
     }
+    
+    if (nextPlayerIDTurn == userID)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Player's turn" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    else
+    {
+        [self automateAIPlayer];
+    }
 }
 
 -(void)automateAIPlayer
@@ -634,6 +644,8 @@
         
         NSInteger tempSelectedCardIndex = 0;
         AIGameCardName tempSelectedGameCardName = GameCardDoublePlay; //simply assign a non-related value
+        
+        /////// STILL NEED SOME POLISHING HERE DUE TO COMPLICATED AI FLOW ///////
         
         if (isBalloonPop)
         {
@@ -708,76 +720,7 @@
                     }
                 }
             }
-            
-            AIGameCard *tempGameCardObject = [[AIGameCard alloc]init];
-            tempGameCardObject = (AIGameCard *)[tempUserArray objectAtIndex:tempSelectedCardIndex];
-            
-            [self addGameCardIntoDiscardDeck:tempGameCardObject];
-            
-            [tempUserArray removeObjectAtIndex:tempSelectedCardIndex];
-            
-            [self assignCurrentPlayerHandArray:tempUserArray];
-            
-            
-            if (tempGameCardObject.cardName == GameCardTradeHand)
-            {
-                int randomNumber = arc4random_uniform(2);
-                
-                //work till here
-                NSMutableArray *tempHandArray = [[NSMutableArray alloc]init];
-                
-                if (randomNumber == 0)
-                {
-                    tempHandArray = [playerHandArray0 mutableCopy];
-                    
-                }
-                else if (randomNumber == 1)
-                {
-                    if (randomNumber == nextPlayerIDTurn)
-                        tempHandArray = [playerHandArray2 mutableCopy];
-                    else
-                        tempHandArray = [playerHandArray1 mutableCopy];
-                }
-                else if (randomNumber == 2)
-                {
-                    if (randomNumber == nextPlayerIDTurn)
-                        tempHandArray = [playerHandArray3 mutableCopy];
-                    else
-                        tempHandArray = [playerHandArray2 mutableCopy];
-                }
-                
-                NSMutableArray *tempTradeArray = [[NSMutableArray alloc]init];
-                tempTradeArray = [tempUserArray mutableCopy];
-                
-                tempUserArray = [tempHandArray mutableCopy];
-                tempHandArray = [tempTradeArray mutableCopy];
-                
-                if (randomNumber == 0)
-                {
-                    playerHandArray0 = [tempHandArray mutableCopy];
-                    
-                }
-                else if (randomNumber == 1)
-                {
-                    if (randomNumber == nextPlayerIDTurn)
-                        playerHandArray2 = [tempHandArray mutableCopy];
-                    else
-                        playerHandArray1 = [tempHandArray mutableCopy];
-                }
-                else if (randomNumber == 2)
-                {
-                    if (randomNumber == nextPlayerIDTurn)
-                        playerHandArray3 = [tempHandArray mutableCopy];
-                    else
-                        playerHandArray2 = [tempHandArray mutableCopy];
-                }
-                
-                [self assignCurrentPlayerHandArray:tempUserArray];
-            }
-            else
-                [self cardSelectionValidation:tempGameCardObject];
-            
-            
+    
         }
         else if (timeCount == 60)
         {
@@ -786,55 +729,120 @@
                 AIGameCard *tempGameCard = [[AIGameCard alloc]init];
                 tempGameCard = (AIGameCard *)[tempUserArray objectAtIndex:i];
                 
-                if (!tempGameCard.isNumberCard)
+                tempSelectedCardIndex = i;
+                tempSelectedGameCardName = tempGameCard.cardName;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < [tempUserArray count]; i++)
+            {
+                AIGameCard *tempGameCard = [[AIGameCard alloc]init];
+                tempGameCard = (AIGameCard *)[tempUserArray objectAtIndex:i];
+                
+                if (tempGameCard.isNumberCard)
                 {
-                    if (tempGameCard.cardName == GameCardToThirtySecond)
+                    if (timeCount == 55 && tempGameCard.cardName == GameCardAddFiveSecond)
                     {
                         tempSelectedCardIndex = i;
-                        tempSelectedGameCardName = GameCardToThirtySecond;
+                        tempSelectedGameCardName = tempGameCard.cardName;
                         break;
                     }
-                    else if (tempGameCard.cardName == GameCardToZeroSecond)
-                    {
-                        tempSelectedCardIndex = i;
-                        tempSelectedGameCardName = GameCardToZeroSecond;
-                    }
-                    else if (tempGameCard.cardName == GameCardSkip || tempGameCard.cardName == GameCardReverse)
+                    else if (timeCount == 50 && tempGameCard.cardName == GameCardAddTenSecond)
                     {
                         tempSelectedCardIndex = i;
                         tempSelectedGameCardName = tempGameCard.cardName;
+                        break;
                     }
-                    else if (tempGameCard.cardName == GameCardDrawOne || tempGameCard.cardName == GameCardDrawTwo)
+                    else
                     {
                         tempSelectedCardIndex = i;
                         tempSelectedGameCardName = tempGameCard.cardName;
-                    }
-                    else if (tempGameCard.cardName == GameCardDoublePlay)
-                    {
-                        tempSelectedCardIndex = i;
-                        tempSelectedGameCardName = tempGameCard.cardName;
-                    }
-                    else if (tempGameCard.cardName == GameCardTradeHand)
-                    {
-                        if (tempSelectedGameCardName != GameCardCut)
-                        {
-                            tempSelectedCardIndex = i;
-                            tempSelectedGameCardName = GameCardTradeHand;
-                        }
                     }
                 }
                 else
                 {
                     
-                    
                 }
             }
         }
-        else
+        
+        //perform operation to discard card and continue process
+        [self automateAIPlayerDiscardCard:tempUserArray selectedCardIndex:tempSelectedCardIndex];
+    }
+}
+
+-(void)automateAIPlayerDiscardCard:(NSMutableArray *)tempUserArray selectedCardIndex:(NSInteger)tempSelectedCardIndex
+{
+    AIGameCard *tempGameCardObject = [[AIGameCard alloc]init];
+    tempGameCardObject = (AIGameCard *)[tempUserArray objectAtIndex:tempSelectedCardIndex];
+    
+    [self addGameCardIntoDiscardDeck:tempGameCardObject];
+    
+    [tempUserArray removeObjectAtIndex:tempSelectedCardIndex];
+    
+    [self assignCurrentPlayerHandArray:tempUserArray];
+    
+    
+    if (tempGameCardObject.cardName == GameCardTradeHand)
+    {
+        int randomNumber = arc4random_uniform(2);
+        
+        //work till here
+        NSMutableArray *tempHandArray = [[NSMutableArray alloc]init];
+        
+        if (randomNumber == 0)
         {
+            tempHandArray = [playerHandArray0 mutableCopy];
             
         }
+        else if (randomNumber == 1)
+        {
+            if (randomNumber == nextPlayerIDTurn)
+                tempHandArray = [playerHandArray2 mutableCopy];
+            else
+                tempHandArray = [playerHandArray1 mutableCopy];
+        }
+        else if (randomNumber == 2)
+        {
+            if (randomNumber == nextPlayerIDTurn)
+                tempHandArray = [playerHandArray3 mutableCopy];
+            else
+                tempHandArray = [playerHandArray2 mutableCopy];
+        }
+        
+        NSMutableArray *tempTradeArray = [[NSMutableArray alloc]init];
+        tempTradeArray = [tempUserArray mutableCopy];
+        
+        tempUserArray = [tempHandArray mutableCopy];
+        tempHandArray = [tempTradeArray mutableCopy];
+        
+        if (randomNumber == 0)
+        {
+            playerHandArray0 = [tempHandArray mutableCopy];
+            
+        }
+        else if (randomNumber == 1)
+        {
+            if (randomNumber == nextPlayerIDTurn)
+                playerHandArray2 = [tempHandArray mutableCopy];
+            else
+                playerHandArray1 = [tempHandArray mutableCopy];
+        }
+        else if (randomNumber == 2)
+        {
+            if (randomNumber == nextPlayerIDTurn)
+                playerHandArray3 = [tempHandArray mutableCopy];
+            else
+                playerHandArray2 = [tempHandArray mutableCopy];
+        }
+        
+        [self assignCurrentPlayerHandArray:tempUserArray];
     }
+    else
+        [self cardSelectionValidation:tempGameCardObject];
+    
+    
 }
 
 -(void)drawCardsToOtherThreePlayers:(NSInteger)numberOfDrawCard
@@ -1023,7 +1031,10 @@
         }
         else if (cardObject.cardName == GameCardReverse)
         {
-            isForwardPlay = NO;
+            if (isForwardPlay)
+                isForwardPlay = NO;
+            else
+                isForwardPlay = YES;
         }
         else if (cardObject.cardName == GameCardCut)
         {
@@ -1047,6 +1058,8 @@
         }
 
     }
+    
+    NSLog(@"Player %i discard %i, timecount at %i", nextPlayerIDTurn, cardObject.cardName, timeCount);
     
     [self nextPlayerTurn:isPlayerSkip];
 }
@@ -1084,6 +1097,10 @@
     
     [playerLifeCountDictionary setObject:[NSString stringWithFormat:@"%i", lifeCount] forKey:[NSString stringWithFormat:@"player%i", nextPlayerIDTurn]];
     
+    timeCount = 0;
+    
+    NSLog(@"playerLifeCount: %@", playerLifeCountDictionary);
+    
     if (lifeCount == 0)
         [self checkIfGameIsOver];
 }
@@ -1118,7 +1135,7 @@
 
 -(void)tapAtGameCardForId:(NSInteger)cardId arrayIndex:(NSInteger)arrayIndex cardName:(AIGameCardName)cardName
 {
-    NSLog(@"index: %lu", arrayIndex);
+    NSLog(@"index: %lu, selected %i", arrayIndex, cardName);
     
     selectedCardIndex = arrayIndex;
 }

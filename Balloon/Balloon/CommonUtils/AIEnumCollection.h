@@ -9,18 +9,18 @@
 
 typedef enum
 {
-    GameCardCut,
-    GameCardAddFiveSecond,
-    GameCardAddTenSecond,
-    GameCardReverse,
-    GameCardSkip,
-    GameCardToSixtySecond,
-    GameCardToThirtySecond,
-    GameCardToZeroSecond,
-    GameCardDrawOne,
-    GameCardDrawTwo,
-    GameCardTradeHand,
-    GameCardDoublePlay,
-    GameCardPop
+    GameCardCut,  //0
+    GameCardAddFiveSecond, //1
+    GameCardAddTenSecond, //2
+    GameCardReverse, //3
+    GameCardSkip, //4
+    GameCardToSixtySecond, //5
+    GameCardToThirtySecond, //6
+    GameCardToZeroSecond, //7
+    GameCardDrawOne, //8
+    GameCardDrawTwo, //9
+    GameCardTradeHand, //10
+    GameCardDoublePlay, //11
+    GameCardPop //12
     
 } AIGameCardName;
