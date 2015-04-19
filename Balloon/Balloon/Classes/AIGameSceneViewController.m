@@ -20,6 +20,7 @@
     BOOL isForwardPlay; // reverse play direction
     BOOL isDoublePlayNeeded; //return yes when a player discard a double play command card
     BOOL isBalloonPop; //return yes if a player discard a pop the balloon command card
+    BOOL hasDisplayEnlargeView; //return yes if a game card enlarge view has been shown and displayed
     
     NSMutableDictionary *playerLifeCountDictionary;
     
@@ -28,6 +29,10 @@
     
     AIGameCard *GameCardObject;
     AIGameCardImageView *GameCardImageView;
+    AIGameCardEnlargeView *GameCardEnlargeView;
+    
+    UILabel *lifeCountPlayer0, *lifeCountPlayer1, *lifeCountPlayer2, *lifeCountPlayer3;
+    UILabel *timeCountLabel;
 }
 
 @end
@@ -74,6 +79,9 @@
     //set balloon pop
     isBalloonPop = NO;
     
+    //set enlarge view flag
+    hasDisplayEnlargeView = NO;
+    
     //initialize player hand array
     playerHandArray0 = [[NSMutableArray alloc]init];
     playerHandArray1 = [[NSMutableArray alloc]init];
@@ -92,6 +100,9 @@
     nextPlayerIDTurn = 0;
     timeCount = 0;
     userID = 0;
+    
+    //add lifeCount and timeCount labels to screen
+    [self addLifeCountAndTimeCountLabel];
 
     //distribute card to players
     [self distributeCardsToPlayers:YES];
@@ -373,7 +384,7 @@
         
         GameCardImageView.cardName = GameCardObject.cardName;
         GameCardImageView.arrayIndex = i + 1;
-        GameCardImageView.image = [self getGameCardImageForGameCard:GameCardObject.cardName];
+        GameCardImageView.image = [AICommonUtils getGameCardImageForGameCard:GameCardObject.cardName];
         GameCardImageView.userInteractionEnabled = YES;
         GameCardImageView.cardId = GameCardObject.cardId;
         GameCardImageView.delegate = self;
@@ -403,7 +414,7 @@
             else
             {
                 GameCardImageView.cardId = DRAW_DECK_ID;
-                GameCardImageView.image = [self getGameCardBackCoverImage];
+                GameCardImageView.image = [AICommonUtils getGameCardBackCoverImage];
             }
             
             [self.view addSubview:GameCardImageView];
@@ -421,7 +432,7 @@
             
             GameCardImageView.cardId = DISCARD_DECK_ID;
             GameCardImageView.cardName = GameCardObject.cardName;
-            GameCardImageView.image = [self getGameCardImageForGameCard:GameCardObject.cardName];
+            GameCardImageView.image = [AICommonUtils getGameCardImageForGameCard:GameCardObject.cardName];
         }
     }
 }
@@ -437,6 +448,41 @@
                 [cardView removeFromSuperview];
             }
         }
+    }
+}
+
+-(void)addLifeCountAndTimeCountLabel
+{
+    CGFloat height = 17;
+    CGFloat width = 150;
+    CGFloat frameHeight = self.view.frame.size.height;
+    
+    lifeCountPlayer3 = [[UILabel alloc]initWithFrame:CGRectMake(20, frameHeight - height, width, height)];
+    lifeCountPlayer2 = [[UILabel alloc]initWithFrame:CGRectMake(20, frameHeight - (height * 2), width, height)];
+    lifeCountPlayer1 = [[UILabel alloc]initWithFrame:CGRectMake(20, frameHeight - (height * 3), width, height)];
+    lifeCountPlayer0 = [[UILabel alloc]initWithFrame:CGRectMake(20, frameHeight - (height * 4), width, height)];
+    
+    timeCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 100, 100, 150, height)];
+    
+    [self.view addSubview:timeCountLabel];
+    [self.view addSubview:lifeCountPlayer0];
+    [self.view addSubview:lifeCountPlayer1];
+    [self.view addSubview:lifeCountPlayer2];
+    [self.view addSubview:lifeCountPlayer3];
+    
+    [self updateTimeCountAndLifeCount:YES];
+}
+
+-(void)updateTimeCountAndLifeCount:(BOOL)updateLifeCount
+{
+    timeCountLabel.text = [NSString stringWithFormat:@"Time: %i", timeCount];
+    
+    if (updateLifeCount)
+    {
+        lifeCountPlayer0.text = [NSString stringWithFormat:@"Player: %@", [playerLifeCountDictionary objectForKey:@"player0"]];
+        lifeCountPlayer1.text = [NSString stringWithFormat:@"Computer1: %@", [playerLifeCountDictionary objectForKey:@"player1"]];
+        lifeCountPlayer2.text = [NSString stringWithFormat:@"Computer2: %@", [playerLifeCountDictionary objectForKey:@"player2"]];
+        lifeCountPlayer3.text = [NSString stringWithFormat:@"Computer3: %@", [playerLifeCountDictionary objectForKey:@"player3"]];
     }
 }
 
@@ -475,17 +521,11 @@
                         
                         [playerHandArray0 removeObjectAtIndex:selectedCardIndex - 1];
                         
-                        if (tempGameCardObject.cardName == GameCardTradeHand)
-                        {
-                            //action to trade hand and play another card
-                            
-                            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Trade Hand" message:@"Select a player to trade hand with the player" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Player 1", @"Player 2", @"Player 3", nil];
-                            alert.tag = 2;
-                            [alert show];
-                        }
-                        else
-                            [self cardSelectionValidation:GameCardObject];
+                        selectedCardIndex = 0;
+                        
+                        [self cardSelectionValidation:tempGameCardObject];
                     }];
+                    
                     
                     //[self nextPlayerTurn:NO];
                 }
@@ -512,77 +552,6 @@
 
 #pragma mark - Helper Methods
 
--(UIImage *)getGameCardImageForGameCard:(AIGameCardName)cardName
-{
-    UIImage *returnImage;
-    
-    switch (cardName)
-    {
-        case GameCardAddFiveSecond:
-            returnImage = [UIImage imageNamed:@"FiveSecond"];
-            break;
-            
-        case GameCardAddTenSecond:
-            returnImage = [UIImage imageNamed:@"TenSecond"];
-            break;
-            
-        case GameCardDoublePlay:
-            returnImage = [UIImage imageNamed:@"DoublePlay"];
-            break;
-            
-        case GameCardDrawOne:
-            returnImage = [UIImage imageNamed:@"PlusOne"];
-            break;
-            
-        case GameCardDrawTwo:
-            returnImage = [UIImage imageNamed:@"PlusTwo"];
-            break;
-            
-        case GameCardPop:
-            returnImage = [UIImage imageNamed:@"Popped"];
-            break;
-            
-        case GameCardReverse:
-            returnImage = [UIImage imageNamed:@"Reverse"];
-            break;
-            
-        case GameCardCut:
-            returnImage = [UIImage imageNamed:@"Hold"];
-            break;
-            
-        case GameCardSkip:
-            returnImage = [UIImage imageNamed:@"Skip"];
-            break;
-            
-        case GameCardToSixtySecond:
-            returnImage = [UIImage imageNamed:@"UpToSixtySecond"];
-            break;
-            
-        case GameCardToThirtySecond:
-            returnImage = [UIImage imageNamed:@"ToThirtySecond"];
-            break;
-            
-        case GameCardToZeroSecond:
-            returnImage = [UIImage imageNamed:@"DownToZeroSecond"];
-            break;
-            
-        case GameCardTradeHand:
-            returnImage = [UIImage imageNamed:@"TradeHand"];
-            break;
-            
-        default:
-            break;
-    }
-    
-    return  returnImage;
-}
-
--(UIImage *)getGameCardBackCoverImage
-{
-    return [UIImage imageNamed:@"BackCover"];
-}
-
-
 -(void)addGameCardIntoDiscardDeck:(AIGameCard *)cardObject
 {
     if (discardDeckArray)
@@ -592,7 +561,7 @@
     {
         if ([imageView isMemberOfClass:[AIGameCardImageView class]] && imageView.cardId == DISCARD_DECK_ID)
         {
-            imageView.image = [self getGameCardImageForGameCard:cardObject.cardName];
+            imageView.image = [AICommonUtils getGameCardImageForGameCard:cardObject.cardName];
         }
     }
 }
@@ -783,64 +752,8 @@
     
     [self assignCurrentPlayerHandArray:tempUserArray];
     
-    
-    if (tempGameCardObject.cardName == GameCardTradeHand)
-    {
-        int randomNumber = arc4random_uniform(2);
-        
-        //work till here
-        NSMutableArray *tempHandArray = [[NSMutableArray alloc]init];
-        
-        if (randomNumber == 0)
-        {
-            tempHandArray = [playerHandArray0 mutableCopy];
-            
-        }
-        else if (randomNumber == 1)
-        {
-            if (randomNumber == nextPlayerIDTurn)
-                tempHandArray = [playerHandArray2 mutableCopy];
-            else
-                tempHandArray = [playerHandArray1 mutableCopy];
-        }
-        else if (randomNumber == 2)
-        {
-            if (randomNumber == nextPlayerIDTurn)
-                tempHandArray = [playerHandArray3 mutableCopy];
-            else
-                tempHandArray = [playerHandArray2 mutableCopy];
-        }
-        
-        NSMutableArray *tempTradeArray = [[NSMutableArray alloc]init];
-        tempTradeArray = [tempUserArray mutableCopy];
-        
-        tempUserArray = [tempHandArray mutableCopy];
-        tempHandArray = [tempTradeArray mutableCopy];
-        
-        if (randomNumber == 0)
-        {
-            playerHandArray0 = [tempHandArray mutableCopy];
-            
-        }
-        else if (randomNumber == 1)
-        {
-            if (randomNumber == nextPlayerIDTurn)
-                playerHandArray2 = [tempHandArray mutableCopy];
-            else
-                playerHandArray1 = [tempHandArray mutableCopy];
-        }
-        else if (randomNumber == 2)
-        {
-            if (randomNumber == nextPlayerIDTurn)
-                playerHandArray3 = [tempHandArray mutableCopy];
-            else
-                playerHandArray2 = [tempHandArray mutableCopy];
-        }
-        
-        [self assignCurrentPlayerHandArray:tempUserArray];
-    }
-    else
-        [self cardSelectionValidation:tempGameCardObject];
+
+    [self cardSelectionValidation:tempGameCardObject];
     
     
 }
@@ -909,8 +822,8 @@
             break;
     }
     
-    if (nextPlayerIDTurn != 0)
-        [self rearrangePlayerCardView];
+    
+    [self rearrangePlayerCardView];
 }
 
 -(void)reshuffleDiscardDeckIntoDrawDeck
@@ -933,7 +846,9 @@
 
 -(void)rearrangePlayerCardView
 {
+    [self clearAllCardsFromView];
     
+    [self showCardsToScreen];
 }
 
 
@@ -990,19 +905,10 @@
 
 #pragma mark - Operations calculation
 
--(void)performPreOperation
-{
-    
-}
-
--(void)performSpecialOperation
-{
-    
-}
-
 -(void)performPostOperation:(AIGameCard *)cardObject
 {
     BOOL isPlayerSkip = NO;
+    BOOL hasDonePostOperation = YES;
     
     //check is number card
     if (cardObject.isNumberCard)
@@ -1056,10 +962,92 @@
         {
             timeCount = 0;
         }
+        else if (cardObject.cardName == GameCardTradeHand)
+        {
+            if (nextPlayerIDTurn == userID)
+            {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Trade Hand" message:@"Select a player to trade hand with the player" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Player 1", @"Player 2", @"Player 3", nil];
+                alert.tag = 2;
+                [alert show];
+                
+                hasDonePostOperation = NO;
+            }
+            else
+            {
+                NSMutableArray *tempUserArray = [[NSMutableArray alloc]init];
+                
+                tempUserArray = [self getCurrentPlayerHandArray];
+                
+                int randomNumber = arc4random_uniform(2);
+                
+                //work till here
+                NSMutableArray *tempHandArray = [[NSMutableArray alloc]init];
+                
+                if (randomNumber == 0)
+                {
+                    tempHandArray = [playerHandArray0 mutableCopy];
+                    
+                }
+                else if (randomNumber == 1)
+                {
+                    if (randomNumber == nextPlayerIDTurn)
+                        tempHandArray = [playerHandArray2 mutableCopy];
+                    else
+                        tempHandArray = [playerHandArray1 mutableCopy];
+                }
+                else if (randomNumber == 2)
+                {
+                    if (randomNumber == nextPlayerIDTurn)
+                        tempHandArray = [playerHandArray3 mutableCopy];
+                    else
+                        tempHandArray = [playerHandArray2 mutableCopy];
+                }
+                
+                NSMutableArray *tempTradeArray = [[NSMutableArray alloc]init];
+                tempTradeArray = [tempUserArray mutableCopy];
+                
+                tempUserArray = [tempHandArray mutableCopy];
+                tempHandArray = [tempTradeArray mutableCopy];
+                
+                if (randomNumber == 0)
+                {
+                    playerHandArray0 = [tempHandArray mutableCopy];
+                    
+                }
+                else if (randomNumber == 1)
+                {
+                    if (randomNumber == nextPlayerIDTurn)
+                        playerHandArray2 = [tempHandArray mutableCopy];
+                    else
+                        playerHandArray1 = [tempHandArray mutableCopy];
+                }
+                else if (randomNumber == 2)
+                {
+                    if (randomNumber == nextPlayerIDTurn)
+                        playerHandArray3 = [tempHandArray mutableCopy];
+                    else
+                        playerHandArray2 = [tempHandArray mutableCopy];
+                }
+                
+                [self assignCurrentPlayerHandArray:tempUserArray];
+            }
+        }
 
     }
     
     NSLog(@"Player %i discard %i, timecount at %i", nextPlayerIDTurn, cardObject.cardName, timeCount);
+    
+    if (hasDonePostOperation)
+    {
+        [self processPostOperation:isPlayerSkip];
+    }
+}
+
+-(void)processPostOperation:(BOOL)isPlayerSkip
+{
+    [self rearrangePlayerCardView];
+    
+    [self updateTimeCountAndLifeCount:NO];
     
     [self nextPlayerTurn:isPlayerSkip];
 }
@@ -1099,6 +1087,8 @@
     
     timeCount = 0;
     
+    [self updateTimeCountAndLifeCount:YES];
+    
     NSLog(@"playerLifeCount: %@", playerLifeCountDictionary);
     
     if (lifeCount == 0)
@@ -1137,10 +1127,60 @@
 {
     NSLog(@"index: %lu, selected %i", arrayIndex, cardName);
     
+    NSMutableArray *tempArray = [[NSMutableArray alloc]init];
+    for (int i = 0; i < [playerHandArray0 count]; i ++)
+    {
+        AIGameCard *tempGame = (AIGameCard *)[playerHandArray0 objectAtIndex:i];
+        [tempArray addObject:[NSString stringWithFormat:@"%i", tempGame.cardName]];
+    }
+    
+    NSLog(@"name: %@", tempArray);
+    
     selectedCardIndex = arrayIndex;
 }
 
+-(void)didLongPressAtGameCardImageViewForZoom:(UIImageView *)imageView cardId:(NSInteger)cardId cardName:(AIGameCardName)cardName
+{
+    if (!hasDisplayEnlargeView)
+    {
+        hasDisplayEnlargeView = YES;
+        
+        CGRect myFrame = self.view.frame;
+        GameCardEnlargeView = [[AIGameCardEnlargeView alloc]initWithFrame:CGRectMake(0, 0, myFrame.size.width, myFrame.size.height)];
+        GameCardEnlargeView.cardName = cardName;
+        GameCardEnlargeView.delegate = self;
+        GameCardEnlargeView.backgroundColor = [UIColor clearColor];
+        
+        [self.view addSubview:GameCardEnlargeView];
+    }
+}
 
+
+#pragma mark - AIGameCardEnlargeViewDelegate
+
+-(void)didDismissGameCardEnlargeView:(AIGameCardEnlargeView *)myEnlargeView
+{
+    [self dismissEnlargeView];
+
+}
+
+-(void)dismissEnlargeView
+{
+    CGRect myFrame = GameCardEnlargeView.frame;
+    UIImageView *cardImageView = (UIImageView *)[GameCardEnlargeView viewWithTag:1];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        cardImageView.frame = CGRectMake(myFrame.origin.x, self.view.frame.size.height, myFrame.size.width, myFrame.size.height);
+    }completion:^(BOOL finished){
+        [UIView animateWithDuration:0.5 animations:^{
+            GameCardEnlargeView.alpha = 0;
+        }completion:^(BOOL finished){
+            [GameCardEnlargeView removeFromSuperview];
+            GameCardEnlargeView = nil;
+            hasDisplayEnlargeView = NO;
+        }];
+    }];
+}
 
 #pragma mark - UIAlertViewDelegate
 
@@ -1158,7 +1198,7 @@
             
         }
     }
-    else if (alertView.tag == 2)
+    else if (alertView.tag == 2)  //player trade hand
     {
         NSMutableArray *tempArray = [[NSMutableArray alloc]init];
         tempArray = [playerHandArray0 mutableCopy];
@@ -1181,6 +1221,8 @@
         
         [self clearAllCardsFromView];
         [self showCardsToScreen];
+        
+        [self processPostOperation:NO];
     }
 }
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AICommonUtils.h"
 
-@interface AIGameSceneViewController : UIViewController <AIGameCardImageViewDelegate, UIAlertViewDelegate>
+@interface AIGameSceneViewController : UIViewController <AIGameCardImageViewDelegate, UIAlertViewDelegate, AIGameCardEnlargeViewDelegate>
 
 @property (nonatomic) BOOL isGameModeFull;
 
