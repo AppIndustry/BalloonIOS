@@ -11,7 +11,14 @@
 #import "AIEnumCollection.h"
 #import "AIGameCard.h"
 #import "AIGameCardImageView.h"
+#import "AIGameCardEnlargeView.h"
 
 @interface AICommonUtils : NSObject
+
+/// GET CARD IMAGE ///
+
++(UIImage *)getGameCardImageForGameCard:(AIGameCardName)cardName;
++(UIImage *)getGameCardBackCoverImage;
+
 
 @end
