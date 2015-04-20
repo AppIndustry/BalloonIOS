@@ -63,19 +63,74 @@ UIImageView *cardImageView;
         
     }];
     
-    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipe:)];
-    swipe.direction = UISwipeGestureRecognizerDirectionDown;
-    [cardImageView addGestureRecognizer:swipe];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(handlePan:)];
+    pan.maximumNumberOfTouches = 1;
+    [cardImageView addGestureRecognizer:pan];
     
 }
 
--(void)handleSwipe:(UISwipeGestureRecognizer *)swipeGesture
+-(void)handlePan:(UIPanGestureRecognizer *)recognizer
 {
-    if (swipeGesture.direction == UISwipeGestureRecognizerDirectionDown)
+    CGPoint velocity = [recognizer velocityInView:recognizer.view];
+    CGPoint translation = [recognizer translationInView:recognizer.view];
+    
+    // Down direction
+    if (velocity.y > 0)
     {
-        if ([self.delegate respondsToSelector:@selector(didDismissGameCardEnlargeView:)])
+        CGRect frame = recognizer.view.frame;
+        
+        if (frame.origin.y < 0)
+            recognizer.view.frame = CGRectMake(frame.origin.x, 0, frame.size.width, frame.size.height);
+        
+        if (recognizer.state == UIGestureRecognizerStateEnded)
         {
-            [self.delegate didDismissGameCardEnlargeView:self];
+            [UIView animateWithDuration:0.25 animations:^
+             {
+                 recognizer.view.frame = CGRectMake(frame.origin.x, self.superview.frame.size.height, frame.size.width, frame.size.height);
+                 self.alpha = 0;
+             } completion:^(BOOL finished) {
+                 
+                 [self removeFromSuperview];
+                 
+                 if ([self.delegate respondsToSelector:@selector(didDismissGameCardEnlargeView:)])
+                 {
+                     [self.delegate didDismissGameCardEnlargeView:self];
+                 }
+             }];
+        }
+        else
+        {
+            recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y + translation.y);
+            [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+        }
+    }
+    // Up direction
+    else
+    {
+        CGRect frame = recognizer.view.frame;
+        
+        if (frame.origin.y != 0)
+        {
+            if (recognizer.state == UIGestureRecognizerStateEnded)
+            {
+                [UIView animateWithDuration:0.25 animations:^
+                 {
+                     recognizer.view.frame = CGRectMake(frame.origin.x, 100, frame.size.width, frame.size.height);
+                 }];
+            }
+            else
+            {
+                if (frame.origin.y - translation.y < 0)
+                {
+                    recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y);
+                    [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+                }
+                else
+                {
+                    recognizer.view.center = CGPointMake(recognizer.view.center.x, recognizer.view.center.y + translation.y);
+                    [recognizer setTranslation:CGPointMake(0, 0) inView:recognizer.view];
+                }
+            }
         }
     }
 }
