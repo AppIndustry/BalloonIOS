@@ -1039,17 +1039,57 @@
     
     if (hasDonePostOperation)
     {
-        [self processPostOperation:isPlayerSkip];
+        [self processPostOperation:isPlayerSkip cardName:cardObject.cardName];
     }
 }
 
--(void)processPostOperation:(BOOL)isPlayerSkip
+-(void)processPostOperation:(BOOL)isPlayerSkip cardName:(AIGameCardName)cardName
 {
-    [self rearrangePlayerCardView];
+    [self animateDiscardGameCardAnimation:isPlayerSkip cardName:cardName];
+}
+
+-(void)animateDiscardGameCardAnimation:(BOOL)isPlayerSkip cardName:(AIGameCardName)cardName
+{
+    CGRect discardDeckFrame = CGRectMake(0, 100, 100, 200);
     
-    [self updateTimeCountAndLifeCount:NO];
+    CGRect playerHandFrame;
     
-    [self nextPlayerTurn:isPlayerSkip];
+    switch (nextPlayerIDTurn)
+    {
+        case 0:
+            playerHandFrame = CGRectMake(0, self.view.frame.size.height - 300, 100, 200);
+            break;
+            
+        case 1:
+            playerHandFrame = CGRectMake(-100, self.view.frame.size.height/2 - 100, 100, 200);
+            break;
+            
+        case 2:
+            playerHandFrame = CGRectMake(self.view.frame.size.width/2 - 50, -200, 100, 200);
+            break;
+            
+        case 3:
+            playerHandFrame = CGRectMake(self.view.frame.size.width, self.view.frame.size.height/2 - 100, 100, 200);
+            break;
+    }
+    
+    UIImageView *tempImageView = [[UIImageView alloc]initWithFrame:playerHandFrame];
+    tempImageView.image = [AICommonUtils getGameCardImageForGameCard:cardName];
+    
+    [self.view addSubview:tempImageView];
+    
+    [UIView animateWithDuration:0.75 animations:^{
+        tempImageView.frame = discardDeckFrame;
+    }completion:^(BOOL finished)
+    {
+        [tempImageView removeFromSuperview];
+        
+        [self rearrangePlayerCardView];
+        
+        [self updateTimeCountAndLifeCount:NO];
+        
+        [self nextPlayerTurn:isPlayerSkip];
+    }];
 }
 
 -(void)checkIfTimeCountExceedLimit
@@ -1160,26 +1200,8 @@
 
 -(void)didDismissGameCardEnlargeView:(AIGameCardEnlargeView *)myEnlargeView
 {
-    [self dismissEnlargeView];
-
-}
-
--(void)dismissEnlargeView
-{
-    CGRect myFrame = GameCardEnlargeView.frame;
-    UIImageView *cardImageView = (UIImageView *)[GameCardEnlargeView viewWithTag:1];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        cardImageView.frame = CGRectMake(myFrame.origin.x, self.view.frame.size.height, myFrame.size.width, myFrame.size.height);
-    }completion:^(BOOL finished){
-        [UIView animateWithDuration:0.5 animations:^{
-            GameCardEnlargeView.alpha = 0;
-        }completion:^(BOOL finished){
-            [GameCardEnlargeView removeFromSuperview];
-            GameCardEnlargeView = nil;
-            hasDisplayEnlargeView = NO;
-        }];
-    }];
+    GameCardEnlargeView = nil;
+    hasDisplayEnlargeView = NO;
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -1222,7 +1244,7 @@
         [self clearAllCardsFromView];
         [self showCardsToScreen];
         
-        [self processPostOperation:NO];
+        [self processPostOperation:NO cardName:GameCardTradeHand];
     }
 }
 
