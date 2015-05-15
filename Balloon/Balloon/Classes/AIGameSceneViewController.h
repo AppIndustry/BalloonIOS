@@ -13,6 +13,9 @@
 
 @property (nonatomic) BOOL isGameModeFull;
 
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
+
+
 - (IBAction)SubmitCardSelection:(id)sender;
 
 @end
