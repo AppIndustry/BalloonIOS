@@ -17,23 +17,14 @@
 
 @implementation AIGameMenuViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.navigationController.navigationBarHidden = YES;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
--(void)viewDidLayoutSubviews
-{
-    self.navigationController.navigationBarHidden = YES;
 }
 
 
@@ -65,13 +56,13 @@
     {
         if (buttonIndex == 0)
         {
-            //NSLog(@"long");
+            NSLog(@"long");
             isGameModeFull = YES;
             [self performSegueWithIdentifier:@"NextToGame" sender:self];
         }
         else if (buttonIndex == 1)
         {
-            //NSLog(@"short");
+            NSLog(@"short");
             isGameModeFull = NO;
             [self performSegueWithIdentifier:@"NextToGame" sender:self];
         }
