@@ -32,6 +32,9 @@
     //YES for complete, NO for not yet
     BOOL hasCompleteDoublePlay;
     
+    //Warning flag for double play
+    BOOL hasGivenWarningForDoublePlay;
+    
     NSMutableDictionary *playerLifeCountDictionary;
     
     int nextPlayerIDTurn, timeCount, userID;
@@ -104,6 +107,9 @@
     
     //set double play flag
     hasCompleteDoublePlay = YES;
+    
+    //set flag for giving warning to player when selecting double play
+    hasGivenWarningForDoublePlay = NO;
     
     //initialize player hand array
     playerHandArray0 = [[NSMutableArray alloc]init];
@@ -424,6 +430,13 @@
             break;
     }
     
+    for (int i = 0; i < 4; i++)
+    {
+        if ([self checkPlayerHasLostAllLifeForPlayerId:i])
+        {
+            [self discardAllPlayerHandCardsIfPlayerHasLostAllLifeForPlayerId:i];
+        }
+    }
     
     [self rearrangePlayerCardView];
     
@@ -492,28 +505,25 @@
     }
     else
     {
-        int tempPlayerID = nextPlayerIDTurn;
-        
         for (int i = 0; i < 4; i++)
         {
-            nextPlayerIDTurn = i;
+            NSMutableArray *tempArray = [self getCurrentPlayerHandArrayForPlayerId:i];
             
-            NSMutableArray *tempArray = [self getCurrentPlayerHandArray];
-            
-            while ([tempArray count] < 7)
+            if (![self checkPlayerHasLostAllLifeForPlayerId:i])
             {
-                AIGameCard *tempGameCard = [[AIGameCard alloc]init];
-                tempGameCard = (AIGameCard *)[drawDeckArray objectAtIndex:0];
-                
-                [tempArray addObject:tempGameCard];
-                
-                [drawDeckArray removeObjectAtIndex:0];
+                while ([tempArray count] < 7)
+                {
+                    AIGameCard *tempGameCard = [[AIGameCard alloc]init];
+                    tempGameCard = (AIGameCard *)[drawDeckArray objectAtIndex:0];
+                    
+                    [tempArray addObject:tempGameCard];
+                    
+                    [drawDeckArray removeObjectAtIndex:0];
+                }
             }
             
-            [self assignCurrentPlayerHandArray:tempArray];
+            [self assignCurrentPlayerHandArray:tempArray forPlayerId:i];
         }
-        
-        nextPlayerIDTurn = tempPlayerID;
         
         [self rearrangePlayerCardView];
         
@@ -901,13 +911,24 @@
                         }
                         else
                         {
-                            if (tempGameCardObject.cardName == GameCardAddFiveSecond || tempGameCardObject.cardName == GameCardAddTenSecond || tempGameCardObject.cardName == GameCardToSixtySecond || tempGameCardObject.cardName == GameCardToThirtySecond || tempGameCardObject.cardName == GameCardToZeroSecond)
+                            if (hasGivenWarningForDoublePlay)
                             {
-                                isPassed = NO;
-                                
-                                NSLog(@"First card of double play should affect the time count");
-                                
-                                [self setSubmitButtonEnabled:YES];
+                                isPassed = YES;
+                            }
+                            else
+                            {
+                                if (tempGameCardObject.cardName != GameCardAddFiveSecond && tempGameCardObject.cardName != GameCardAddTenSecond && tempGameCardObject.cardName != GameCardToSixtySecond && tempGameCardObject.cardName != GameCardToThirtySecond && tempGameCardObject.cardName != GameCardToZeroSecond)
+                                {
+                                    isPassed = NO;
+                                    
+                                    hasGivenWarningForDoublePlay = YES;
+                                    
+                                    NSLog(@"First card of double play should affect the time count");
+                                    
+                                    [self setSubmitButtonEnabled:YES];
+                                }
+                                else
+                                    isPassed = YES;
                             }
                         }
                     }
@@ -1021,6 +1042,14 @@
             
             if (nextPlayerIDTurn == 4)
                 nextPlayerIDTurn = 0;
+            
+            if ([self checkPlayerHasLostAllLifeForPlayerId:nextPlayerIDTurn])
+            {
+                nextPlayerIDTurn += 1;
+                
+                if (nextPlayerIDTurn == 4)
+                    nextPlayerIDTurn = 0;
+            }
         }
         else
         {
@@ -1028,6 +1057,14 @@
             
             if (nextPlayerIDTurn == -1)
                 nextPlayerIDTurn = 3;
+            
+            if ([self checkPlayerHasLostAllLifeForPlayerId:nextPlayerIDTurn])
+            {
+                nextPlayerIDTurn -= 1;
+                
+                if (nextPlayerIDTurn == -1)
+                    nextPlayerIDTurn = 3;
+            }
         }
     }
     
@@ -1050,18 +1087,28 @@
     }
     
     
-    if (nextPlayerIDTurn == userID)
+    
+    if (![self checkPlayerHasLostAllLifeForPlayerId:nextPlayerIDTurn])
     {
-        //UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Player's turn" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        //alert.tag = 4;
-        //[alert show];
-        
-        [self setSubmitButtonEnabled:YES];
+        if (nextPlayerIDTurn == userID)
+        {
+            //UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Player's turn" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            //alert.tag = 4;
+            //[alert show];
+            
+            [self setSubmitButtonEnabled:YES];
+        }
+        else
+        {
+            [self automateAIPlayer];
+        }
     }
     else
     {
-        [self automateAIPlayer];
+        [self nextPlayerTurn:NO];
     }
+    
+    
 }
 
 
@@ -1416,9 +1463,58 @@
     return tempUserArray;
 }
 
+-(NSMutableArray *)getCurrentPlayerHandArrayForPlayerId:(int)playerId
+{
+    NSMutableArray *tempUserArray = [[NSMutableArray alloc]init];
+    
+    switch (playerId)
+    {
+        case 0:
+            tempUserArray = [playerHandArray0 mutableCopy];
+            break;
+            
+        case 1:
+            tempUserArray = [playerHandArray1 mutableCopy];
+            break;
+            
+        case 2:
+            tempUserArray = [playerHandArray2 mutableCopy];
+            break;
+            
+        case 3:
+            tempUserArray = [playerHandArray3 mutableCopy];
+            break;
+    }
+    
+    return tempUserArray;
+}
+
+
 -(void)assignCurrentPlayerHandArray:(NSMutableArray *)tempUserArray
 {
     switch (nextPlayerIDTurn)
+    {
+        case 0:
+            playerHandArray0 = [tempUserArray mutableCopy];
+            break;
+            
+        case 1:
+            playerHandArray1 = [tempUserArray mutableCopy];
+            break;
+            
+        case 2:
+            playerHandArray2 = [tempUserArray mutableCopy];
+            break;
+            
+        case 3:
+            playerHandArray3 = [tempUserArray mutableCopy];
+            break;
+    }
+}
+
+-(void)assignCurrentPlayerHandArray:(NSMutableArray *)tempUserArray forPlayerId:(int)playerId
+{
+    switch (playerId)
     {
         case 0:
             playerHandArray0 = [tempUserArray mutableCopy];
@@ -1496,14 +1592,18 @@
         {
             isDoublePlayNeeded = YES;
             hasCompleteDoublePlay = NO;
+            
+            hasGivenWarningForDoublePlay = NO;
         }
         else if (cardObject.cardName == GameCardDrawOne)
         {
-            [self drawCardsToOtherThreePlayers:1];
+            if (!hasPopped)
+                [self drawCardsToOtherThreePlayers:1];
         }
         else if (cardObject.cardName == GameCardDrawTwo)
         {
-            [self drawCardsToOtherThreePlayers:2];
+            if (!hasPopped)
+                [self drawCardsToOtherThreePlayers:2];
         }
         else if (cardObject.cardName == GameCardPop)
         {
@@ -1545,10 +1645,20 @@
                 {
                     if ([playerHandArray0 count] > 0)
                     {
-                        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Trade Hand" message:@"Select a player to trade hand with the player" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Player 1", @"Player 2", @"Player 3", nil];
+                        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Trade Hand" message:@"Select a player to trade hand with the player" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
                         alert.tag = 2;
-                        [alert show];
                         
+                        for (int i = 1; i <= 3; i++)
+                        {
+                            if (![self checkPlayerHasLostAllLifeForPlayerId:i])
+                            {
+                                NSString *tempString = [NSString stringWithFormat:@"Player %i", i];
+                                
+                                [alert addButtonWithTitle:tempString];
+                            }
+                        }
+                        
+                        [alert show];
                         hasDonePostOperation = NO;
                     }
                     else
@@ -1564,10 +1674,18 @@
                     
                     if ([tempUserArray count] > 0)
                     {
-                        int randomNumber = arc4random_uniform(2);
+                        int randomNumber = arc4random_uniform(4);
+                        
+                        while (randomNumber == nextPlayerIDTurn || [self checkPlayerHasLostAllLifeForPlayerId:randomNumber])
+                        {
+                            randomNumber = arc4random_uniform(4);
+                        }
                         
                         NSMutableArray *tempHandArray = [[NSMutableArray alloc]init];
                         
+                        tempHandArray = [self getCurrentPlayerHandArrayForPlayerId:randomNumber];
+                        
+                        /*
                         if (randomNumber == 0)
                         {
                             tempHandArray = [playerHandArray0 mutableCopy];
@@ -1575,18 +1693,23 @@
                         }
                         else if (randomNumber == 1)
                         {
-                            if (randomNumber == nextPlayerIDTurn)
-                                tempHandArray = [playerHandArray2 mutableCopy];
-                            else
+//                            if (randomNumber == nextPlayerIDTurn)
+//                                tempHandArray = [playerHandArray2 mutableCopy];
+//                            else
                                 tempHandArray = [playerHandArray1 mutableCopy];
                         }
                         else if (randomNumber == 2)
                         {
-                            if (randomNumber == nextPlayerIDTurn)
-                                tempHandArray = [playerHandArray3 mutableCopy];
-                            else
+//                            if (randomNumber == nextPlayerIDTurn)
+//                                tempHandArray = [playerHandArray3 mutableCopy];
+//                            else
                                 tempHandArray = [playerHandArray2 mutableCopy];
                         }
+                        else if (randomNumber == 3)
+                        {
+                            tempHandArray = [playerHandArray3 mutableCopy];
+                        }
+                        
                         
                         NSMutableArray *tempTradeArray = [[NSMutableArray alloc]init];
                         tempTradeArray = [tempUserArray mutableCopy];
@@ -1613,6 +1736,17 @@
                             else
                                 playerHandArray2 = [tempHandArray mutableCopy];
                         }
+                        */
+                        
+                        NSMutableArray *tempMediumArray  = [[NSMutableArray alloc]init];
+                        tempMediumArray = [tempUserArray mutableCopy];
+                        
+                        tempUserArray = [tempHandArray mutableCopy];
+                        
+                        tempHandArray = [tempMediumArray mutableCopy];
+                        
+                        [self assignCurrentPlayerHandArray:tempUserArray forPlayerId:nextPlayerIDTurn];
+                        [self assignCurrentPlayerHandArray:tempHandArray forPlayerId:randomNumber];
                         
                         [self assignCurrentPlayerHandArray:tempUserArray];
                     }
@@ -1680,11 +1814,24 @@
         if (hasPopped || [self checkIfTimeCountExceedLimit])
         {
             [self deductPlayerLifeCountByOne];
+            
+            if ([self checkPlayerHasLostAllLifeForPlayerId:nextPlayerIDTurn])
+            {
+                [self discardAllPlayerHandCardsIfPlayerHasLostAllLifeForPlayerId:nextPlayerIDTurn];
+            }
         }
         
         if ([self checkIfPlayerIsOutOfCards:YES])
         {
             [self deductOtherPlayersLifeCountByOne];
+            
+            for (int i = 0; i < 4; i++)
+            {
+                if ([self checkPlayerHasLostAllLifeForPlayerId:i])
+                {
+                    [self discardAllPlayerHandCardsIfPlayerHasLostAllLifeForPlayerId:i];
+                }
+            }
         }
         
         if (hasPopped || [self checkIfTimeCountExceedLimit] || [self checkIfPlayerIsOutOfCards:NO])
@@ -1771,6 +1918,9 @@
     NSString *tempCount = [playerLifeCountDictionary objectForKey:[NSString stringWithFormat:@"player%i", nextPlayerIDTurn]];
     int lifeCount = [tempCount intValue] - 1;
     
+    if (lifeCount < 0)
+        lifeCount = 0;
+    
     [playerLifeCountDictionary setObject:[NSString stringWithFormat:@"%i", lifeCount] forKey:[NSString stringWithFormat:@"player%i", nextPlayerIDTurn]];
     
     NSLog(@"player %i LifeCount deducted: %@", nextPlayerIDTurn, playerLifeCountDictionary);
@@ -1785,6 +1935,9 @@
     {
         NSString *tempCount = [playerLifeCountDictionary objectForKey:[NSString stringWithFormat:@"player%i", i]];
         int lifeCount = [tempCount intValue] - 1;
+        
+        if (lifeCount < 0)
+            lifeCount = 0;
         
         [playerLifeCountDictionary setObject:[NSString stringWithFormat:@"%i", lifeCount] forKey:[NSString stringWithFormat:@"player%i", i]];
     }
@@ -1812,6 +1965,36 @@
     alert.tag = 3;
     [alert show];
 }
+
+
+/******* ACTIONS FOR PLAYER LOSING ALL LIFE *********/
+
+
+-(BOOL)checkPlayerHasLostAllLifeForPlayerId:(int)playerId
+{
+    BOOL hasLostAllLife = NO;
+    
+    NSString *tempCount = [playerLifeCountDictionary objectForKey:[NSString stringWithFormat:@"player%i", playerId]];
+    
+    int lifeCount = [tempCount intValue];
+    
+    if (lifeCount <= 0)
+        hasLostAllLife = YES;
+    
+    return hasLostAllLife;
+}
+
+-(void)discardAllPlayerHandCardsIfPlayerHasLostAllLifeForPlayerId:(int)playerId
+{
+    NSMutableArray *tempArray = [self getCurrentPlayerHandArrayForPlayerId:playerId];
+    
+    [discardDeckArray addObjectsFromArray:tempArray];
+    
+    tempArray = [[NSMutableArray alloc]init];
+    
+    [self assignCurrentPlayerHandArray:tempArray forPlayerId:playerId];
+}
+
 
 
 /******* ACTIONS FOR GAME OVER *********/
@@ -1998,20 +2181,26 @@
     }
     else if (alertView.tag == 2)  //player trade hand
     {
+        NSString *tempString = [alertView buttonTitleAtIndex:buttonIndex];
+        
+        tempString = [tempString substringToIndex:tempString.length - 1];
+        
+        int tempPlayerId = [tempString intValue];
+        
         NSMutableArray *tempArray = [[NSMutableArray alloc]init];
         tempArray = [playerHandArray0 mutableCopy];
         
-        if (buttonIndex == 0)
+        if (tempPlayerId == 1)
         {
             playerHandArray0 = [playerHandArray1 mutableCopy];
             playerHandArray1 = [tempArray mutableCopy];
         }
-        else if (buttonIndex == 1)
+        else if (tempPlayerId == 2)
         {
             playerHandArray0 = [playerHandArray2 mutableCopy];
             playerHandArray2 = [tempArray mutableCopy];
         }
-        else if (buttonIndex == 2)
+        else if (tempPlayerId == 3)
         {
             playerHandArray0 = [playerHandArray3 mutableCopy];
             playerHandArray3 = [tempArray mutableCopy];
@@ -2025,10 +2214,6 @@
     else if (alertView.tag == 3) //player life lost message
     {
         [self completeOneProcessOperation:NO];
-    }
-    else if (alertView.tag == 4) //set submit button enabled when its players turn
-    {
-        [self setSubmitButtonEnabled:YES];
     }
     else if (alertView.tag == 5) //set start game flow
     {
