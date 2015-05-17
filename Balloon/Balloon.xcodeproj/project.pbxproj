@@ -36,6 +36,7 @@
 		28BA8DD61ACC407D00CB91D1 /* AICommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DCE1ACC407D00CB91D1 /* AICommonUtils.m */; };
 		28BA8DD71ACC407D00CB91D1 /* AIGameCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DD11ACC407D00CB91D1 /* AIGameCard.m */; };
 		28BA8DD81ACC407D00CB91D1 /* AIGameCardImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DD31ACC407D00CB91D1 /* AIGameCardImageView.m */; };
+		28D0F3531B0850DC00603401 /* AISinglePlayerSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D0F3521B0850DC00603401 /* AISinglePlayerSelectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,8 @@
 		28BA8DD11ACC407D00CB91D1 /* AIGameCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameCard.m; sourceTree = "<group>"; };
 		28BA8DD21ACC407D00CB91D1 /* AIGameCardImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIGameCardImageView.h; sourceTree = "<group>"; };
 		28BA8DD31ACC407D00CB91D1 /* AIGameCardImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameCardImageView.m; sourceTree = "<group>"; };
+		28D0F3511B0850DC00603401 /* AISinglePlayerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISinglePlayerSelectionViewController.h; sourceTree = "<group>"; };
+		28D0F3521B0850DC00603401 /* AISinglePlayerSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AISinglePlayerSelectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,13 +135,13 @@
 		28BA8D7F1ACC3F3500CB91D1 /* Balloon */ = {
 			isa = PBXGroup;
 			children = (
-				28BA8DC71ACC407D00CB91D1 /* Classes */,
-				28BA8DCC1ACC407D00CB91D1 /* CommonUtils */,
 				28BA8D841ACC3F3500CB91D1 /* AppDelegate.h */,
 				28BA8D851ACC3F3500CB91D1 /* AppDelegate.m */,
 				28BA8D871ACC3F3500CB91D1 /* ViewController.h */,
 				28BA8D881ACC3F3500CB91D1 /* ViewController.m */,
 				28BA8D8A1ACC3F3500CB91D1 /* Main.storyboard */,
+				28BA8DC71ACC407D00CB91D1 /* Classes */,
+				28BA8DCC1ACC407D00CB91D1 /* CommonUtils */,
 				28BA8D8D1ACC3F3500CB91D1 /* Images.xcassets */,
 				28BA8D8F1ACC3F3500CB91D1 /* LaunchScreen.xib */,
 				28BA8D801ACC3F3500CB91D1 /* Supporting Files */,
@@ -203,6 +206,8 @@
 				28BA8DC91ACC407D00CB91D1 /* AIGameMenuViewController.m */,
 				28BA8DCA1ACC407D00CB91D1 /* AIGameSceneViewController.h */,
 				28BA8DCB1ACC407D00CB91D1 /* AIGameSceneViewController.m */,
+				28D0F3511B0850DC00603401 /* AISinglePlayerSelectionViewController.h */,
+				28D0F3521B0850DC00603401 /* AISinglePlayerSelectionViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -339,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28D0F3531B0850DC00603401 /* AISinglePlayerSelectionViewController.m in Sources */,
 				28BA8DD71ACC407D00CB91D1 /* AIGameCard.m in Sources */,
 				28BA8D891ACC3F3500CB91D1 /* ViewController.m in Sources */,
 				28BA8DD41ACC407D00CB91D1 /* AIGameMenuViewController.m in Sources */,

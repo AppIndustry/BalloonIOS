@@ -32,52 +32,19 @@
                     <view key="view" contentMode="scaleToFill" id="D2i-qZ-EgG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BackCover.png" translatesAutoresizingMaskIntoConstraints="NO" id="abZ-P4-fV8">
-                                <rect key="frame" x="77" y="136" width="100" height="200"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BalloonLife.png" translatesAutoresizingMaskIntoConstraints="NO" id="L6E-hD-Qz9">
-                                <rect key="frame" x="198" y="136" width="100" height="200"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Balloon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ZB-OY-bX2">
-                                <rect key="frame" x="39" y="395" width="296" height="44"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdj-dz-bMn">
-                                <rect key="frame" x="16" y="483" width="160" height="50"/>
-                                <color key="backgroundColor" red="0.11764705882352941" green="0.21176470588235294" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Single Player">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="SinglePlayerMode:" destination="USe-GH-NWY" eventType="touchUpInside" id="XDx-U9-wke"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNZ-Gm-wip">
-                                <rect key="frame" x="199" y="483" width="160" height="50"/>
-                                <color key="backgroundColor" red="0.1176470588" green="0.21176470589999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <state key="normal" title="Multiplayer">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.11764705882352941" green="0.21176470588235294" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="kPw-YC-8EI"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <segue destination="aE7-GQ-bYF" kind="show" identifier="NextToGame" id="bki-zz-V9D"/>
+                        <segue destination="Hkg-cy-Jyu" kind="show" identifier="singlePlayerSelection" id="qB6-vo-k5b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r2G-oJ-pi6" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="575.5" y="202.5"/>
+            <point key="canvasLocation" x="571.5" y="118.5"/>
         </scene>
         <!--Game-->
         <scene sceneID="Lxo-yS-zNX">
@@ -88,7 +55,7 @@
                         <viewControllerLayoutGuide type="bottom" id="0WV-HI-IJT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dos-GW-11w">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iig-em-hpL">
@@ -104,9 +71,10 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.1176470588" green="0.21176470589999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Game" id="Dfd-Lv-kgQ"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="submitButton" destination="Iig-em-hpL" id="ozZ-ha-gZK"/>
@@ -114,11 +82,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yt4-H6-WjB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103.5" y="202.5"/>
+            <point key="canvasLocation" x="1477.5" y="218.5"/>
+        </scene>
+        <!--Single Player Selection View Controller-->
+        <scene sceneID="eCc-Cv-fFp">
+            <objects>
+                <viewController storyboardIdentifier="AISinglePlayerSelectionViewController" id="Hkg-cy-Jyu" customClass="AISinglePlayerSelectionViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rU2-qb-WMh"/>
+                        <viewControllerLayoutGuide type="bottom" id="zip-JE-jwT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zlg-TE-DAc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.1176470588" green="0.21176470589999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="aE7-GQ-bYF" kind="show" identifier="NextToSinglePlayerGame" id="hYg-ls-rIf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="veW-pT-E3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="974" y="712"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="BackCover.png" width="236" height="306"/>
-        <image name="BalloonLife.png" width="236" height="306"/>
-    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="hYg-ls-rIf"/>
+    </inferredMetricsTieBreakers>
 </document>
