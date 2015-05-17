@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface AIGameMenuViewController : UIViewController <UIActionSheetDelegate>
+{
+    UIButton *singlePlayerButton, *multiplayerButton;
+    
+    UILabel *titleLabel, *descriptionLabel;
+    
+    UIImageView *coverImageView;
+}
 
 - (IBAction)SinglePlayerMode:(id)sender;
-
+- (IBAction)MultiplayerMode:(id)sender;
 
 @end

@@ -23,6 +23,12 @@
     // Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = YES;
+    
+    [self createView];
+    
+    [self setInitialDesign];
+    
+    [self runAnimation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,11 +42,100 @@
     self.navigationController.navigationBarHidden = YES;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBarHidden = YES;
+}
+
+
+
+-(void)createView
+{
+    singlePlayerButton = [[UIButton alloc]initWithFrame:CGRectMake(20, 940, (self.view.frame.size.width / 2) - 40, 50)];
+    [singlePlayerButton setTitle:@"SINGLE PLAYER" forState:UIControlStateNormal];
+    [singlePlayerButton setTitleColor:[AICommonUtils getAIColorWithRGB228:1.0] forState:UIControlStateHighlighted];
+    [singlePlayerButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+    [singlePlayerButton addTarget:self action:@selector(SinglePlayerMode:) forControlEvents:UIControlEventTouchUpInside];
+    
+    multiplayerButton = [[UIButton alloc]initWithFrame:CGRectMake((self.view.frame.size.width / 2) + 20, 940, (self.view.frame.size.width / 2) - 40, 50)];
+    [multiplayerButton setTitle:@"MULTI PLAYER" forState:UIControlStateNormal];
+    [multiplayerButton setTitleColor:[AICommonUtils getAIColorWithRGB228:1.0] forState:UIControlStateHighlighted];
+    [multiplayerButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+    [multiplayerButton addTarget:self action:@selector(MultiplayerMode:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:singlePlayerButton];
+    [self.view addSubview:multiplayerButton];
+    
+    
+    coverImageView = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width / 2) - 50, 740, 100, 150)];
+    coverImageView.image = [UIImage imageNamed:@"BalloonLife"];
+    
+    [self.view addSubview:coverImageView];
+    
+    titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, (self.view.frame.size.height / 2) - 100, self.view.frame.size.width - 40, 44)];
+    titleLabel.text = @"Balloon";
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [AICommonUtils getAIColorWithRGB228:1.0];
+    
+    descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, titleLabel.frame.origin.y + titleLabel.frame.size.height + 10, self.view.frame.size.width - 40, 44)];
+    descriptionLabel.textColor = [AICommonUtils getAIColorWithRGB228:1.0];
+    descriptionLabel.textAlignment = NSTextAlignmentCenter;
+    descriptionLabel.text = @"Pop the balloon whenever you are\nanytime, anywhere";
+    descriptionLabel.numberOfLines = 2;
+    
+    [self.view addSubview:titleLabel];
+    [self.view addSubview:descriptionLabel];
+}
+
+-(void)setInitialDesign
+{
+    titleLabel.font = [AICommonUtils getCustomTypeface:fontZapfino ofSize:24];
+    titleLabel.attributedText = [AICommonUtils createStringWithSpacing:titleLabel.text spacngValue:4.0 withUnderLine:NO];
+    
+    descriptionLabel.font = [AICommonUtils getCustomTypeface:fontAvenirNextUltraLight ofSize:12.0];
+    descriptionLabel.attributedText = [AICommonUtils createStringWithSpacing:descriptionLabel.text spacngValue:4.0 withUnderLine:NO];
+    
+    singlePlayerButton.titleLabel.font = [AICommonUtils getCustomTypeface:fontCourier ofSize:12.0];
+    singlePlayerButton.titleLabel.attributedText = [AICommonUtils createStringWithSpacing:singlePlayerButton.titleLabel.text spacngValue:4.0 withUnderLine:NO];
+    [singlePlayerButton.layer addSublayer:[AICommonUtils createOneSidedBorderForUIView:singlePlayerButton Side:BorderBottom]];
+    
+    multiplayerButton.titleLabel.font = [AICommonUtils getCustomTypeface:fontCourier ofSize:12.0];
+    multiplayerButton.titleLabel.attributedText = [AICommonUtils createStringWithSpacing:multiplayerButton.titleLabel.text spacngValue:4.0 withUnderLine:NO];
+    [multiplayerButton.layer addSublayer:[AICommonUtils createOneSidedBorderForUIView:multiplayerButton Side:BorderBottom]];
+}
+
+-(void)runAnimation
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        titleLabel.frame = CGRectMake(titleLabel.frame.origin.x, 80, titleLabel.frame.size.width, titleLabel.frame.size.height);
+        
+        descriptionLabel.frame = CGRectMake(descriptionLabel.frame.origin.x, titleLabel.frame.origin.y + titleLabel.frame.size.height + 10, descriptionLabel.frame.size.width, descriptionLabel.frame.size.height);
+        
+    }completion:^(BOOL finished){
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            multiplayerButton.frame = CGRectMake(multiplayerButton.frame.origin.x, self.view.frame.size.height - 100, multiplayerButton.frame.size.width, multiplayerButton.frame.size.height);
+            
+            singlePlayerButton.frame = CGRectMake(singlePlayerButton.frame.origin.x, self.view.frame.size.height - 100, singlePlayerButton.frame.size.width, singlePlayerButton.frame.size.height);
+            
+            coverImageView.frame = CGRectMake(coverImageView.frame.origin.x, (self.view.frame.size.height / 2) - 80, coverImageView.frame.size.width, coverImageView.frame.size.height);
+            
+        }completion:^(BOOL finished){
+            
+        }];
+    }];
+}
+
+
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
@@ -56,7 +151,14 @@
 {
     UIActionSheet *action = [[UIActionSheet alloc]initWithTitle:@"Select Game Play" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Full Game Play", @"Short Game Play", nil];
     action.tag = 1;
-    [action showInView:self.view];
+    //[action showInView:self.view];
+    
+    [self performSegueWithIdentifier:@"singlePlayerSelection" sender:self];
+}
+
+- (IBAction)MultiplayerMode:(id)sender
+{
+    
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
