@@ -24,3 +24,20 @@ typedef enum
     GameCardPop //12
     
 } AIGameCardName;
+
+typedef enum {
+    fontZapfino,
+    fontCourier,
+    fontAvenirNextItalic,
+    fontAvenirNextUltraLight,
+    fontAvenirNextUltraLightItalic,
+    fontAvenirBook,
+    fontAvenirLight
+}AIFontFamily;
+
+typedef enum {
+    BorderBottom,
+    BorderTop,
+    BorderLeft,
+    BorderRight
+} BorderSide;

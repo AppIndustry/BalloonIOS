@@ -21,4 +21,28 @@
 +(UIImage *)getGameCardBackCoverImage;
 
 
+/// CREATE CUSTOM STRING WITH LETTING SPACING ///
+
++(NSMutableAttributedString *)createStringWithSpacing:(NSString *)string spacngValue:(float)spacing withUnderLine:(BOOL)isUnderLine;
+
++(NSMutableAttributedString *)addUnderLineToMutableAttributedString:(NSMutableAttributedString *)attributeString;
+
+
+/// SETTING OF UIFONT FROM UIFONT FAMILY ///
+
++ (UIFont *)getCustomTypeface:(AIFontFamily)typeface ofSize:(CGFloat)size;
++(void)getAllFontFamilyWithNames;
+
+
+/// CREATE ONE SIDED BORDER VIEW ///
+
++(CALayer *)createOneSidedBorderForUIView:(UIView *)myView Side:(BorderSide)Side;
+
++(float)getBorderWidthAccordingToDisplay;
+
+
+/// GET UICOLOR ///
+
++(UIColor *)getAIColorWithRGB228:(CGFloat)alpha;
+
 @end
