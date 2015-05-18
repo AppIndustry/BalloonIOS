@@ -49,6 +49,8 @@
     
     UIView *computerCardView1, *computerCardView2, *computerCardView3;
     
+    UIView *computerLifeView1, *computerLifeView2, *computerLifeView3, *playerLifeView;
+    
     NSString *gameOverMessage, *playerLifeLostMessage;
 }
 
@@ -135,6 +137,9 @@
     
     //add lifeCount and timeCount labels to screen
     [self addLifeCountAndTimeCountLabel];
+    
+    //show life count view
+    [self showPlayerLifeView];
 
     //distribute card to players
     [self distributeCardsToPlayers:YES];
@@ -636,7 +641,7 @@
     for (int i = 1; i <= 7; i++)
     {
         UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(6, yPosition, 8, 8)];
-        circleView.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:32.0/255.0 blue:44.0/255.0 alpha:1.0];
+        circleView.backgroundColor = [AICommonUtils getAIColorWithRGB192];
         circleView.layer.cornerRadius = circleView.frame.size.height / 2;
         circleView.clipsToBounds = YES;
         circleView.tag = i;
@@ -651,7 +656,7 @@
     for (int i = 1; i <= 7; i++)
     {
         UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(6, yPosition, 8, 8)];
-        circleView.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:32.0/255.0 blue:44.0/255.0 alpha:1.0];
+        circleView.backgroundColor = [AICommonUtils getAIColorWithRGB192];
         circleView.layer.cornerRadius = circleView.frame.size.height / 2;
         circleView.clipsToBounds = YES;
         circleView.tag = i;
@@ -666,7 +671,7 @@
     for (int i = 1; i <= 7; i++)
     {
         UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(yPosition, 6, 8, 8)];
-        circleView.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:32.0/255.0 blue:44.0/255.0 alpha:1.0];
+        circleView.backgroundColor = [AICommonUtils getAIColorWithRGB192];
         circleView.layer.cornerRadius = circleView.frame.size.height / 2;
         circleView.clipsToBounds = YES;
         circleView.tag = i;
@@ -785,7 +790,7 @@
                 lastFrame.origin.x += 15;
             
             UIView *circleView = [[UIView alloc]initWithFrame:lastFrame];
-            circleView.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:32.0/255.0 blue:44.0/255.0 alpha:1.0];
+            circleView.backgroundColor = [AICommonUtils getAIColorWithRGB192];;
             circleView.layer.cornerRadius = circleView.frame.size.height / 2;
             circleView.clipsToBounds = YES;
             circleView.tag = numberOfCardsInView + j;
@@ -814,6 +819,147 @@
     }
 }
 
+
+
+/*** ACTIONS TO SHOW LIFE VIEW FOR ALL PLAYERS ***/
+
+-(void)showPlayerLifeView
+{
+    UIColor *bgColor = [UIColor clearColor];
+    
+    computerLifeView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 220, 20, 200)];
+    computerLifeView1.backgroundColor = bgColor;
+    
+    computerLifeView2 = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width / 2 + 20 , 64, 200, 20)];
+    computerLifeView2.backgroundColor = bgColor;
+    
+    computerLifeView3 = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 20, 220, 20, 200)];
+    computerLifeView3.backgroundColor = bgColor;
+    
+    playerLifeView = [[UIView alloc]initWithFrame:CGRectMake(50, self.view.frame.size.height - 330, 100, 20)];
+    playerLifeView.backgroundColor = bgColor;
+    
+    [self.view addSubview:computerLifeView1];
+    [self.view addSubview:computerLifeView2];
+    [self.view addSubview:computerLifeView3];
+    [self.view addSubview:playerLifeView];
+    
+    CGFloat yPosition = 15;
+    
+    for (int i = 1; i <= 3; i++)
+    {
+        UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(6, yPosition, 8, 8)];
+        circleView.backgroundColor = [UIColor redColor];
+        circleView.layer.cornerRadius = circleView.frame.size.height / 2;
+        circleView.clipsToBounds = YES;
+        circleView.tag = i;
+        
+        [computerLifeView1 addSubview:circleView];
+        
+        yPosition += 15;
+    }
+    
+    yPosition = 15;
+    
+    for (int i = 1; i <= 3; i++)
+    {
+        UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(6, yPosition, 8, 8)];
+        circleView.backgroundColor = [UIColor redColor];
+        circleView.layer.cornerRadius = circleView.frame.size.height / 2;
+        circleView.clipsToBounds = YES;
+        circleView.tag = i;
+        
+        [computerLifeView3 addSubview:circleView];
+        
+        yPosition += 15;
+    }
+    
+    yPosition = 15;
+    
+    for (int i = 1; i <= 3; i++)
+    {
+        UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(yPosition, 6, 8, 8)];
+        circleView.backgroundColor = [UIColor redColor];
+        circleView.layer.cornerRadius = circleView.frame.size.height / 2;
+        circleView.clipsToBounds = YES;
+        circleView.tag = i;
+        
+        [computerLifeView2 addSubview:circleView];
+        
+        yPosition += 15;
+    }
+    
+    yPosition = 15;
+    
+    for (int i = 1; i <= 3; i++)
+    {
+        UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(yPosition, 6, 8, 8)];
+        circleView.backgroundColor = [UIColor redColor];
+        circleView.layer.cornerRadius = circleView.frame.size.height / 2;
+        circleView.clipsToBounds = YES;
+        circleView.tag = i;
+        
+        [playerLifeView addSubview:circleView];
+        
+        yPosition += 15;
+    }
+}
+
+-(void)deductPlayerLifeViewForPlayerID:(int)playerID
+{
+    if (playerID == 0)
+    {
+        int life = [[playerLifeCountDictionary objectForKey:@"player0"] intValue];
+        
+        for (UIView *view in playerLifeView.subviews)
+        {
+            if (view.tag == life + 1)
+            {
+                [view removeFromSuperview];
+                break;
+            }
+        }
+    }
+    else if (playerID == 1)
+    {
+        int life = [[playerLifeCountDictionary objectForKey:@"player1"] intValue];
+        
+        for (UIView *view in computerLifeView1.subviews)
+        {
+            if (view.tag == life + 1)
+            {
+                [view removeFromSuperview];
+                break;
+            }
+        }
+    }
+    else if (playerID == 2)
+    {
+        int life = [[playerLifeCountDictionary objectForKey:@"player2"] intValue];
+        
+        for (UIView *view in computerLifeView2.subviews)
+        {
+            if (view.tag == life + 1)
+            {
+                [view removeFromSuperview];
+                break;
+            }
+        }
+    }
+    else if (playerID == 3)
+    {
+        int life = [[playerLifeCountDictionary objectForKey:@"player3"] intValue];
+        
+        for (UIView *view in computerLifeView3.subviews)
+        {
+            if (view.tag == life + 1)
+            {
+                [view removeFromSuperview];
+                break;
+            }
+        }
+    }
+}
 
 
 /*** clear all player cards from view ***/
@@ -850,10 +996,10 @@
     timeCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 100, 100, 150, height)];
     
     //[self.view addSubview:timeCountLabel];
-    [self.view addSubview:lifeCountPlayer0];
-    [self.view addSubview:lifeCountPlayer1];
-    [self.view addSubview:lifeCountPlayer2];
-    [self.view addSubview:lifeCountPlayer3];
+//    [self.view addSubview:lifeCountPlayer0];
+//    [self.view addSubview:lifeCountPlayer1];
+//    [self.view addSubview:lifeCountPlayer2];
+//    [self.view addSubview:lifeCountPlayer3];
     
     [self updateTimeCountAndLifeCount:YES];
 }
@@ -863,14 +1009,14 @@
     timeCountLabel.text = [NSString stringWithFormat:@"Time: %i", timeCount];
     
     self.navigationItem.title = [NSString stringWithFormat:@"Time: %i", timeCount];
-    
+    /*
     if (updateLifeCount)
     {
         lifeCountPlayer0.text = [NSString stringWithFormat:@"Player: %@", [playerLifeCountDictionary objectForKey:@"player0"]];
         lifeCountPlayer1.text = [NSString stringWithFormat:@"Computer1: %@", [playerLifeCountDictionary objectForKey:@"player1"]];
         lifeCountPlayer2.text = [NSString stringWithFormat:@"Computer2: %@", [playerLifeCountDictionary objectForKey:@"player2"]];
         lifeCountPlayer3.text = [NSString stringWithFormat:@"Computer3: %@", [playerLifeCountDictionary objectForKey:@"player3"]];
-    }
+    }*/
 }
 
 
@@ -1815,6 +1961,8 @@
         {
             [self deductPlayerLifeCountByOne];
             
+            [self deductPlayerLifeViewForPlayerID:nextPlayerIDTurn];
+            
             if ([self checkPlayerHasLostAllLifeForPlayerId:nextPlayerIDTurn])
             {
                 [self discardAllPlayerHandCardsIfPlayerHasLostAllLifeForPlayerId:nextPlayerIDTurn];
@@ -1824,6 +1972,12 @@
         if ([self checkIfPlayerIsOutOfCards:YES])
         {
             [self deductOtherPlayersLifeCountByOne];
+            
+            for (int i = 0; i < 4; i++)
+            {
+                if (i != nextPlayerIDTurn)
+                    [self deductPlayerLifeViewForPlayerID:i];
+            }
             
             for (int i = 0; i < 4; i++)
             {
@@ -2064,6 +2218,23 @@
         {
             NSString *userName;
             
+            NSMutableArray *tempArray = [[NSMutableArray alloc]init];
+            [tempArray addObject:[NSString stringWithFormat:@"%i", tempA]];
+            [tempArray addObject:[NSString stringWithFormat:@"%i", tempB]];
+            [tempArray addObject:[NSString stringWithFormat:@"%i", tempC]];
+            [tempArray addObject:[NSString stringWithFormat:@"%i", tempD]];
+            
+            int tempLargest = tempA;
+            int index = 0;
+            for (int i = 1; i < [tempArray count]; i++)
+            {
+                if ([[tempArray objectAtIndex:i] intValue] > tempLargest)
+                {
+                    tempLargest = [[tempArray objectAtIndex:i] intValue];
+                    index = i;
+                }
+            }
+            
             if (tempA == 0)
             {
                 userName = @"You ";
@@ -2081,7 +2252,12 @@
                 userName = @"Computer 3 ";
             }
             
-            gameOverMessage = [NSString stringWithFormat:@"%@has lost. The game has ended", userName];
+            if (index == 0)
+                userName = [NSString stringWithFormat:@"Player 0"];
+            else
+                userName = [NSString stringWithFormat:@"Computer %i", index];
+            
+            gameOverMessage = [NSString stringWithFormat:@"%@ has won. The game has ended", userName];
             
             gameOver = YES;
         }
