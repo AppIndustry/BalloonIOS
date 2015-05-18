@@ -44,5 +44,5 @@
 /// GET UICOLOR ///
 
 +(UIColor *)getAIColorWithRGB228:(CGFloat)alpha;
-
++(UIColor *)getAIColorWithRGB192;
 @end

@@ -236,4 +236,9 @@
 {
     return [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:alpha];
 }
+
++(UIColor *)getAIColorWithRGB192
+{
+    return [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0];
+}
 @end
