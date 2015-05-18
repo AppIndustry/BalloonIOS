@@ -58,9 +58,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iig-em-hpL">
-                                <rect key="frame" x="249" y="617" width="126" height="50"/>
-                                <color key="backgroundColor" red="0.1176470588" green="0.21176470589999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iig-em-hpL">
+                                <rect key="frame" x="0.0" y="553" width="375" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hUo-rE-7BP"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,6 +75,11 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1176470588" green="0.21176470589999999" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Iig-em-hpL" firstAttribute="leading" secondItem="dos-GW-11w" secondAttribute="leading" id="gFY-ne-Zkm"/>
+                            <constraint firstAttribute="trailing" secondItem="Iig-em-hpL" secondAttribute="trailing" id="jGh-Ci-M3X"/>
+                            <constraint firstAttribute="bottom" secondItem="Iig-em-hpL" secondAttribute="bottom" id="z3f-aS-UXz"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Game" id="Dfd-Lv-kgQ"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
