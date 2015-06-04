@@ -25,6 +25,7 @@
     
     if (self)
     {
+        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleCardTap)];
         tap.numberOfTapsRequired = 1;
         [self addGestureRecognizer:tap];
@@ -52,5 +53,6 @@
         [self.delegate didLongPressAtGameCardImageViewForZoom:self cardId:self.cardId cardName:self.cardName];
     }
 }
+
 
 @end

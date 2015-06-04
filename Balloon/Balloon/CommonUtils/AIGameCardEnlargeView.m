@@ -47,13 +47,21 @@ UIImageView *cardImageView;
     tempBackgroundView.backgroundColor = [UIColor colorWithRed:4.0/255.0 green:54.0/255.0 blue:66.0/255.0 alpha:1];
     tempBackgroundView.alpha = 0.7;
     
-    cardImageView = [[UIImageView alloc]initWithFrame:CGRectMake(30, 100, myWidth - 60, (myWidth - 60) * 1.5)];
+    cardImageView = [[UIImageView alloc]initWithFrame:CGRectMake(myWidth / 2 - ((myHeight - 100) / 1.5 / 2), 20, (myHeight - 100) / 1.5, myHeight - 100)];
     cardImageView.image = [AICommonUtils getGameCardImageForGameCard:self.cardName];
     cardImageView.userInteractionEnabled = YES;
     cardImageView.tag = 1;
     
+    UILabel *instructionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, cardImageView.frame.size.height + cardImageView.frame.origin.y + 20, myWidth - 40, 30)];
+    instructionLabel.textAlignment = NSTextAlignmentCenter;
+    instructionLabel.textColor = [AICommonUtils getAIColorWithRGB228:1.0];
+    instructionLabel.font = [AICommonUtils getCustomTypeface:fontAvenirNextItalic ofSize:12];
+    instructionLabel.text = @"Swipe down to dismiss";
+    instructionLabel.attributedText = [AICommonUtils createStringWithSpacing:instructionLabel.text spacngValue:4.0 withUnderLine:YES];
+    
     [enlargeView addSubview:tempBackgroundView];
     [enlargeView addSubview:cardImageView];
+    [enlargeView addSubview:instructionLabel];
     
     [self addSubview:enlargeView];
     

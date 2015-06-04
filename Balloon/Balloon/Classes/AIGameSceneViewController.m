@@ -39,6 +39,9 @@
     
     int nextPlayerIDTurn, timeCount, userID;
     NSInteger selectedCardIndex;
+    NSInteger previousCardId;
+    
+    CGFloat cardWidth, cardHeight;
     
     AIGameCard *GameCardObject;
     AIGameCardImageView *GameCardImageView;
@@ -113,6 +116,9 @@
     //set flag for giving warning to player when selecting double play
     hasGivenWarningForDoublePlay = NO;
     
+    //set previous card id for selection color to default 0
+    previousCardId = 0;
+    
     //initialize player hand array
     playerHandArray0 = [[NSMutableArray alloc]init];
     playerHandArray1 = [[NSMutableArray alloc]init];
@@ -131,6 +137,9 @@
     nextPlayerIDTurn = 0;
     timeCount = 0;
     userID = 0;
+    
+    //calculate card frame size before drawing any cards to screen
+    [self calculateCardSize];
     
     //set button attribute
     [self setSubmitButtonAttritbute];
@@ -153,6 +162,16 @@
     //display opponent number card view and their number of cards indicator
     [self showOpponentsCardView];
 
+}
+
+-(void)calculateCardSize
+{
+    CGFloat viewHeight = self.view.frame.size.height - 64;
+    
+    cardHeight = (viewHeight - 20 - self.submitButton.frame.size.height) / 2;
+    cardHeight -= 40;
+    
+    cardWidth = cardHeight / 1.5;
 }
 
 -(NSMutableArray *)createFullDeck
@@ -547,10 +566,11 @@
 -(void)showCardsToScreen
 {
     CGFloat xCoordinate = 20;
+    CGFloat cardDistance = (self.view.frame.size.width - 40 - cardWidth/2) / 7;
     
     for (int i = 0; i < [playerHandArray0 count]; i++)
     {
-        GameCardImageView = [[AIGameCardImageView alloc]initWithFrame:CGRectMake(xCoordinate, self.view.frame.size.height - 300, 100, 200)];
+        GameCardImageView = [[AIGameCardImageView alloc]initWithFrame:CGRectMake(xCoordinate, self.view.frame.size.height - self.submitButton.frame.size.height - 20 - cardHeight, cardWidth, cardHeight)];
         
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject = (AIGameCard *)[playerHandArray0 objectAtIndex:i];
@@ -564,7 +584,7 @@
         
         [self.view addSubview:GameCardImageView];
         
-        xCoordinate += 40;
+        xCoordinate += cardDistance;
     }
 }
 
@@ -572,11 +592,12 @@
 {
     if (isStartingDistribute)
     {
-        CGFloat xCoordinate = 50;
+        CGFloat xCoordinate = (self.view.frame.size.width - 40 - (cardWidth * 2)) / 3;
+        xCoordinate += 20;
         
         for (int i = 0; i < 2; i++)
         {
-            GameCardImageView = [[AIGameCardImageView alloc]initWithFrame:CGRectMake(xCoordinate, 100, 100, 200)];
+            GameCardImageView = [[AIGameCardImageView alloc]initWithFrame:CGRectMake(xCoordinate, 104, cardWidth, cardHeight)];
             GameCardImageView.image = nil;
             
             
@@ -592,7 +613,7 @@
             
             [self.view addSubview:GameCardImageView];
             
-            xCoordinate += 150;
+            xCoordinate = ((self.view.frame.size.width - 40 - (cardWidth * 2)) / 3) + xCoordinate + cardWidth;
             
         }
     }
@@ -836,7 +857,7 @@
     computerLifeView3 = [[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 20, 220, 20, 200)];
     computerLifeView3.backgroundColor = bgColor;
     
-    playerLifeView = [[UIView alloc]initWithFrame:CGRectMake(50, self.view.frame.size.height - 330, 100, 20)];
+    playerLifeView = [[UIView alloc]initWithFrame:CGRectMake(50, self.view.frame.size.height - self.submitButton.frame.size.height - 20 - cardHeight - 30, 100, 20)];
     playerLifeView.backgroundColor = bgColor;
     
     [self.view addSubview:computerLifeView1];
@@ -1327,11 +1348,13 @@
 
 -(void)setSubmitButtonAttritbute
 {
-    [self.submitButton setTitle:@"Your turn" forState:UIControlStateNormal];
+    [self.submitButton setTitle:@"Your turn (Tap here to confirm selection)" forState:UIControlStateNormal];
     [self.submitButton setTitle:@"Waiting" forState:UIControlStateDisabled];
     
     [self.submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.submitButton setTitleColor:[UIColor cyanColor] forState:UIControlStateDisabled];
+    
+    self.submitButton.titleLabel.font = [AICommonUtils getCustomTypeface:fontCourier ofSize:12];
     
     [self setSubmitButtonEnabled:NO];
 }
@@ -1919,26 +1942,29 @@
 
 -(void)animateDiscardGameCardAnimation:(BOOL)isPlayerSkip cardName:(AIGameCardName)cardName hasPopped:(BOOL)hasPopped
 {
-    CGRect discardDeckFrame = CGRectMake(50, 100, 100, 200);
+    CGFloat x = (self.view.frame.size.width - 40 - (cardWidth * 2)) / 3;
+    x += 20;
+    
+    CGRect discardDeckFrame = CGRectMake(x, 104, cardWidth, cardHeight);
     
     CGRect playerHandFrame;
     
     switch (nextPlayerIDTurn)
     {
         case 0:
-            playerHandFrame = CGRectMake(30, self.view.frame.size.height - 300, 100, 200);
+            playerHandFrame = CGRectMake(30, self.view.frame.size.height - 300, cardWidth, cardHeight);
             break;
             
         case 1:
-            playerHandFrame = CGRectMake(-100, self.view.frame.size.height/2 - 100, 100, 200);
+            playerHandFrame = CGRectMake(-100, self.view.frame.size.height/2 - 100, cardWidth, cardHeight);
             break;
             
         case 2:
-            playerHandFrame = CGRectMake(self.view.frame.size.width/2 - 50, -200, 100, 200);
+            playerHandFrame = CGRectMake(self.view.frame.size.width/2 - 50, -200, cardWidth, cardHeight);
             break;
             
         case 3:
-            playerHandFrame = CGRectMake(self.view.frame.size.width, self.view.frame.size.height/2 - 100, 100, 200);
+            playerHandFrame = CGRectMake(self.view.frame.size.width, self.view.frame.size.height/2 - 100, cardWidth, cardHeight);
             break;
     }
     
@@ -1946,6 +1972,14 @@
     tempImageView.image = [AICommonUtils getGameCardImageForGameCard:cardName];
     
     [self.view addSubview:tempImageView];
+    
+    BOOL timeCountExceedLimit = [self checkIfTimeCountExceedLimit];
+    
+    if ([self checkIfPlayerIsOutOfCards:NO])
+    {
+        hasPopped = NO;
+        timeCountExceedLimit = NO;
+    }
     
     [UIView animateWithDuration:1 animations:^{
         tempImageView.frame = discardDeckFrame;
@@ -1956,8 +1990,8 @@
         [self showDiscardAndDrawDeck:NO];
         
         [self updateTimeCountAndLifeCount:NO];
-            
-        if (hasPopped || [self checkIfTimeCountExceedLimit])
+        
+        if (hasPopped || timeCountExceedLimit)
         {
             [self deductPlayerLifeCountByOne];
             
@@ -1988,14 +2022,14 @@
             }
         }
         
-        if (hasPopped || [self checkIfTimeCountExceedLimit] || [self checkIfPlayerIsOutOfCards:NO])
+        if (hasPopped || timeCountExceedLimit || [self checkIfPlayerIsOutOfCards:NO])
         {
             [self updateTimeCountAndLifeCount:YES];
         }
         
         if (![self checkIfGameIsOver])
         {
-            if (hasPopped || [self checkIfTimeCountExceedLimit] || [self checkIfPlayerIsOutOfCards:NO])
+            if (hasPopped || timeCountExceedLimit || [self checkIfPlayerIsOutOfCards:NO])
             {
                 [self resetDoublePlayFlag];
                 
@@ -2300,16 +2334,24 @@
 
 -(void)tapAtGameCardForId:(NSInteger)cardId arrayIndex:(NSInteger)arrayIndex cardName:(AIGameCardName)cardName
 {
-    NSLog(@"index: %lu, selected %@", arrayIndex, [self getCardNameInString:cardName]);
+    NSLog(@"index: %lu, selected %@", (long)arrayIndex, [self getCardNameInString:cardName]);
     
-    NSMutableArray *tempArray = [[NSMutableArray alloc]init];
-    for (int i = 0; i < [playerHandArray0 count]; i ++)
+    for (AIGameCardImageView *card in self.view.subviews)
     {
-        AIGameCard *tempGame = (AIGameCard *)[playerHandArray0 objectAtIndex:i];
-        [tempArray addObject:[NSString stringWithFormat:@"%i", tempGame.cardName]];
+        if ([card isMemberOfClass:[AIGameCardImageView class]] && card.cardId == previousCardId)
+        {
+            card.frame = CGRectMake(card.frame.origin.x, card.frame.origin.y + 10, card.frame.size.width, card.frame.size.height);
+        }
     }
     
-    //NSLog(@"name: %@", tempArray);
+    for (AIGameCardImageView *card in self.view.subviews)
+    {
+        if ([card isMemberOfClass:[AIGameCardImageView class]] && card.cardId == cardId)
+        {
+            previousCardId = cardId;
+            card.frame = CGRectMake(card.frame.origin.x, card.frame.origin.y - 10, card.frame.size.width, card.frame.size.height);
+        }
+    }
     
     selectedCardIndex = arrayIndex;
 }
@@ -2321,7 +2363,8 @@
         hasDisplayEnlargeView = YES;
         
         CGRect myFrame = self.view.frame;
-        GameCardEnlargeView = [[AIGameCardEnlargeView alloc]initWithFrame:CGRectMake(0, 0, myFrame.size.width, myFrame.size.height)];
+        myFrame.size.height -= 64;
+        GameCardEnlargeView = [[AIGameCardEnlargeView alloc]initWithFrame:CGRectMake(0, 64, myFrame.size.width, myFrame.size.height)];
         GameCardEnlargeView.cardName = cardName;
         GameCardEnlargeView.delegate = self;
         GameCardEnlargeView.backgroundColor = [UIColor clearColor];

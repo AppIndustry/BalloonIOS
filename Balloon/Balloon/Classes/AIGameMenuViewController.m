@@ -12,6 +12,7 @@
 @interface AIGameMenuViewController ()
 {
     BOOL isGameModeFull;
+    int numberIndex;
 }
 @end
 
@@ -58,21 +59,17 @@
     [singlePlayerButton setTitleColor:[AICommonUtils getAIColorWithRGB228:1.0] forState:UIControlStateHighlighted];
     [singlePlayerButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
     [singlePlayerButton addTarget:self action:@selector(SinglePlayerMode:) forControlEvents:UIControlEventTouchUpInside];
+    singlePlayerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     multiplayerButton = [[UIButton alloc]initWithFrame:CGRectMake((self.view.frame.size.width / 2) + 20, 940, (self.view.frame.size.width / 2) - 40, 50)];
     [multiplayerButton setTitle:@"MULTI PLAYER" forState:UIControlStateNormal];
     [multiplayerButton setTitleColor:[AICommonUtils getAIColorWithRGB228:1.0] forState:UIControlStateHighlighted];
     [multiplayerButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
     [multiplayerButton addTarget:self action:@selector(MultiplayerMode:) forControlEvents:UIControlEventTouchUpInside];
+    multiplayerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     [self.view addSubview:singlePlayerButton];
     [self.view addSubview:multiplayerButton];
-    
-    
-    coverImageView = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width / 2) - 50, 740, 100, 150)];
-    coverImageView.image = [UIImage imageNamed:@"BalloonLife"];
-    
-    [self.view addSubview:coverImageView];
     
     titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, (self.view.frame.size.height / 2) - 100, self.view.frame.size.width - 40, 44)];
     titleLabel.text = @"Balloon";
@@ -87,6 +84,13 @@
     
     [self.view addSubview:titleLabel];
     [self.view addSubview:descriptionLabel];
+    
+    CGFloat difference = (self.view.frame.size.height - 100) - (80 + 44 + 10 + 44);//(descriptionLabel.frame.origin.y + descriptionLabel.frame.size.height);
+
+    coverImageView = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width / 2) - (((difference - 100) / 1.5) / 2), self.view.frame.size.height, (difference - 100) / 1.5, difference - 100)];
+    coverImageView.image = [UIImage imageNamed:@"BalloonLife"];
+    
+    [self.view addSubview:coverImageView];
 }
 
 -(void)setInitialDesign
@@ -121,14 +125,44 @@
             
             singlePlayerButton.frame = CGRectMake(singlePlayerButton.frame.origin.x, self.view.frame.size.height - 100, singlePlayerButton.frame.size.width, singlePlayerButton.frame.size.height);
             
-            coverImageView.frame = CGRectMake(coverImageView.frame.origin.x, (self.view.frame.size.height / 2) - 80, coverImageView.frame.size.width, coverImageView.frame.size.height);
+            coverImageView.frame = CGRectMake(coverImageView.frame.origin.x, descriptionLabel.frame.origin.y + descriptionLabel.frame.size.height + 50, coverImageView.frame.size.width, coverImageView.frame.size.height);
             
         }completion:^(BOOL finished){
-            
+
+            numberIndex = 0;
+            [self runCardSwitchingAnimation];
         }];
     }];
 }
 
+-(void)runCardSwitchingAnimation
+{
+        UIImage *tempImage = [UIImage imageNamed:@"BalloonLife"];
+        if (numberIndex < 13)
+        {
+            AIGameCardName name = numberIndex;
+            tempImage = [AICommonUtils getGameCardImageForGameCard:name];
+        }
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            coverImageView.alpha = 0;
+            
+        }completion:^(BOOL finished){
+            [UIView animateWithDuration:0.5 animations:^{
+                coverImageView.image = tempImage;
+                coverImageView.alpha = 1;
+            }completion:^(BOOL finished){
+                
+            }];
+        }];
+        
+        numberIndex++;
+        
+        if (numberIndex == 13)
+            numberIndex = 0;
+    
+    [self performSelector:@selector(runCardSwitchingAnimation) withObject:nil afterDelay:1];
+}
 
 
 #pragma mark - Navigation

@@ -72,6 +72,7 @@
     [fullGameButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
     [fullGameButton.layer addSublayer:[AICommonUtils createOneSidedBorderForUIView:fullGameButton Side:BorderBottom]];
     [fullGameButton addTarget:self action:@selector(fullGameMode:) forControlEvents:UIControlEventTouchUpInside];
+    fullGameButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     shortGameButton = [[UIButton alloc]initWithFrame:CGRectMake(60, (self.view.frame.size.height / 4) * 2, self.view.frame.size.width - 120, 44)];
     [shortGameButton setTintColor:[UIColor clearColor]];
@@ -80,6 +81,7 @@
     [shortGameButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
     [shortGameButton.layer addSublayer:[AICommonUtils createOneSidedBorderForUIView:shortGameButton Side:BorderBottom]];
     [shortGameButton addTarget:self action:@selector(shortGameMode:) forControlEvents:UIControlEventTouchUpInside];
+    shortGameButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     [self.view addSubview:fullGameButton];
     [self.view addSubview:shortGameButton];
@@ -117,6 +119,8 @@
     
     [fullGameDescriptionLabel sizeToFit];
     [shortGameDescriptionLabel sizeToFit];
+    
+    fullGameDescriptionLabel.frame = CGRectMake((self.view.frame.size.width - fullGameDescriptionLabel.frame.size.width) /2, fullGameDescriptionLabel.frame.origin.y, fullGameDescriptionLabel.frame.size.width, fullGameDescriptionLabel.frame.size.height);
 }
 
 
