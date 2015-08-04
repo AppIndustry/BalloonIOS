@@ -45,4 +45,6 @@
 
 +(UIColor *)getAIColorWithRGB228:(CGFloat)alpha;
 +(UIColor *)getAIColorWithRGB192;
++(UIColor *)getFlatUIColorForColor:(FlatUIColor)color forAlpha:(CGFloat)userAlpha;
+
 @end

@@ -8,10 +8,11 @@
 
 #import "AIGameMenuViewController.h"
 #import "AIGameSceneViewController.h"
+#import "AppDelegate.h"
 
 @interface AIGameMenuViewController ()
 {
-    BOOL isGameModeFull;
+    BOOL isGameModeFull, isLocalPlayerAuthenticated;
     int numberIndex;
 }
 @end
@@ -30,6 +31,8 @@
     [self setInitialDesign];
     
     [self runAnimation];
+    
+    [self autheticatePlayer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -183,17 +186,77 @@
 
 - (IBAction)SinglePlayerMode:(id)sender
 {
-    UIActionSheet *action = [[UIActionSheet alloc]initWithTitle:@"Select Game Play" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Full Game Play", @"Short Game Play", nil];
-    action.tag = 1;
-    //[action showInView:self.view];
-    
-    [self performSegueWithIdentifier:@"singlePlayerSelection" sender:self];
+    if (isLocalPlayerAuthenticated)
+    {
+        [self performSegueWithIdentifier:@"singlePlayerSelection" sender:self];
+    }
+    else
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Unauthenticated" message:@"You are not login to the Game Center" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *login = [UIAlertAction actionWithTitle:@"Login" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            [self autheticatePlayer];
+        }];
+        
+        [alert addAction:login];
+        [alert addAction:cancel];
+        
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 - (IBAction)MultiplayerMode:(id)sender
 {
     
 }
+
+
+
+-(void)autheticatePlayer
+{
+    __weak typeof(self) weakSelf = self; // removes retain cycle error
+    
+    localPlayer = [GKLocalPlayer localPlayer]; // localPlayer is the public GKLocalPlayer
+    __weak GKLocalPlayer *weakPlayer = localPlayer; // removes retain cycle error
+    
+    weakPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error)
+    {
+        if (viewController != nil)
+        {
+            [weakSelf showAuthenticationDialogWhenReasonable:viewController];
+        }
+        else if (weakPlayer.isAuthenticated)
+        {
+            [weakSelf authenticatedPlayer:weakPlayer];
+        }
+        else
+        {
+            NSLog(@"error: %@", error);
+            
+            [weakSelf disableGameCenter];
+        }
+    };
+}
+
+-(void)showAuthenticationDialogWhenReasonable:(UIViewController *)controller
+{
+    [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentViewController:controller animated:YES completion:nil];
+}
+
+-(void)authenticatedPlayer:(GKLocalPlayer *)player
+{
+    NSLog(@"authenticated");
+    isLocalPlayerAuthenticated = YES;
+    localPlayer = player;
+}
+
+-(void)disableGameCenter
+{
+    
+}
+
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {

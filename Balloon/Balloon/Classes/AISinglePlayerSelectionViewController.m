@@ -29,7 +29,7 @@
     
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"Single Player";
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     
     [self createView];
     

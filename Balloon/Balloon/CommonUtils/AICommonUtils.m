@@ -119,6 +119,37 @@
             fontName = @"Zapfino";
             break;
             
+        case fontTrebuchetMS:
+            fontName = @"TrebuchetMS";
+            break;
+            
+        case fontTrebuchetMSBold:
+            fontName = @"TrebuchetMS-Bold";
+            break;
+            
+        case fontTrebuchetMSBoldItalic:
+            fontName = @"Trebuchet-BoldItalic";
+            break;
+            
+        case fontTrebuchetMSItalic:
+            fontName = @"TrebuchetMS-Italic";
+            break;
+            
+        case fontHelveticaNeue:
+            fontName = @"HelveticaNeue";
+            break;
+            
+        case fontHelveticaNeueItalic:
+            fontName = @"HelveticaNeue-Italic";
+            break;
+            
+        case fontHelveticaNeueLight:
+            fontName = @"HelveticaNeue-Light";
+            break;
+            
+        case fontHelveticaNeueThin:
+            fontName = @"HelveticaNeue-Thin";
+            break;
             
         default:
             break;
@@ -241,4 +272,182 @@
 {
     return [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0];
 }
+
++(UIColor *)getFlatUIColorForColor:(FlatUIColor)color forAlpha:(CGFloat)userAlpha
+{
+    UIColor *selectedColorRGB;
+    
+    CGFloat red = 0;
+    CGFloat green = 0;
+    CGFloat blue = 0;
+    CGFloat alpha = userAlpha;
+    
+    switch (color)
+    {
+        case flatUIColorTurqoise:
+        {
+            red = 26.0;
+            green = 188.0;
+            blue = 156.0;
+        }
+            break;
+            
+        case flatUIColorGreenSea:
+        {
+            red = 22.0;
+            green = 160.0;
+            blue = 133.0;
+        }
+            break;
+            
+        case flatUIColorSunFlower:
+        {
+            red = 241.0;
+            green = 196.0;
+            blue = 15.0;
+        }
+            break;
+            
+        case flatUIColorOrange:
+        {
+            red = 243.0;
+            green = 156.0;
+            blue = 18.0;
+        }
+            break;
+            
+        case flatUIColorEmerald:
+        {
+            red = 46.0;
+            green = 204.0;
+            blue = 113.0;
+        }
+            break;
+            
+        case flatUIColorNephritis:
+        {
+            red = 39.0;
+            green = 174.0;
+            blue = 96.0;
+        }
+            break;
+            
+        case flatUIColorCarrot:
+        {
+            red = 230.0;
+            green = 126.0;
+            blue = 34.0;
+        }
+            break;
+            
+        case flatUIColorPumpkin:
+        {
+            red = 211.0;
+            green = 84.0;
+            blue = 0.0;
+        }
+            break;
+            
+        case flatUIColorPeterRiver:
+        {
+            red = 52.0;
+            green = 152.0;
+            blue = 219.0;
+        }
+            break;
+            
+        case flatUIColorBelizeHole:
+        {
+            red = 41.0;
+            green = 128.0;
+            blue = 185.0;
+        }
+            break;
+            
+        case flatUIColorAlizarin:
+        {
+            red = 231.0;
+            green = 76.0;
+            blue = 60.0;
+        }
+            break;
+            
+        case flatUIColorPomegranate:
+        {
+            red = 192.0;
+            green = 57.0;
+            blue = 43.0;
+        }
+            break;
+            
+        case flatUIColorAmethyst:
+        {
+            red = 155.0;
+            green = 89.0;
+            blue = 182.0;
+        }
+            break;
+            
+        case flatUIColorWisteria:
+        {
+            red = 142.0;
+            green = 68.0;
+            blue = 173.0;
+        }
+            break;
+            
+        case flatUIColorClouds:
+        {
+            red = 236.0;
+            green = 240.0;
+            blue = 241.0;
+        }
+            break;
+            
+        case flatUIColorSilver:
+        {
+            red = 189.0;
+            green = 195.0;
+            blue = 199.0;
+        }
+            break;
+            
+        case flatUIColorWetAsphalt:
+        {
+            red = 52.0;
+            green = 73.0;
+            blue = 94.0;
+        }
+            break;
+            
+        case flatUIColorMidnightBlue:
+        {
+            red = 44.0;
+            green = 62.0;
+            blue = 80.0;
+        }
+            break;
+            
+        case flatUIColorConcrete:
+        {
+            red = 149.0;
+            green = 165.0;
+            blue = 166.0;
+        }
+            break;
+            
+        case flatUIColorAsbestos:
+        {
+            red = 127.0;
+            green = 140.0;
+            blue = 141.0;
+        }
+            break;
+    }
+    
+    selectedColorRGB = [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:alpha];
+    
+    return selectedColorRGB;
+}
+
 @end

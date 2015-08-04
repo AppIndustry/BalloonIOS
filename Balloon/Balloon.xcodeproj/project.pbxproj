@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2881376F1B31AF0200870331 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2881376E1B31AF0200870331 /* GameKit.framework */; };
 		289B26801AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289B267F1AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m */; };
 		28BA8D831ACC3F3500CB91D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8D821ACC3F3500CB91D1 /* main.m */; };
 		28BA8D861ACC3F3500CB91D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8D851ACC3F3500CB91D1 /* AppDelegate.m */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2881376E1B31AF0200870331 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		289B267E1AE3C5BC00FF5F4A /* AIGameCardEnlargeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIGameCardEnlargeView.h; sourceTree = "<group>"; };
 		289B267F1AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameCardEnlargeView.m; sourceTree = "<group>"; };
 		28BA8D7D1ACC3F3500CB91D1 /* Balloon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balloon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2881376F1B31AF0200870331 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +117,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28659C3E1B31B00A00BE2B71 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				2881376E1B31AF0200870331 /* GameKit.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
 		28BA8D741ACC3F3500CB91D1 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +163,7 @@
 		28BA8D801ACC3F3500CB91D1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28659C3E1B31B00A00BE2B71 /* Framework */,
 				28BA8DA61ACC3FB700CB91D1 /* BalloonPopperCardImage */,
 				28BA8D811ACC3F3500CB91D1 /* Info.plist */,
 				28BA8D821ACC3F3500CB91D1 /* main.m */,
@@ -278,6 +290,11 @@
 					28BA8D7C1ACC3F3500CB91D1 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 9RLDP4WJTW;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					28BA8D951ACC3F3500CB91D1 = {
 						CreatedOnToolsVersion = 6.2;
@@ -481,7 +498,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a79371cb-bce6-405c-8ff0-8338f9039fce";
+				PROVISIONING_PROFILE = "8606f225-85da-4770-8fae-f5f9c392a98f";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -495,7 +512,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a79371cb-bce6-405c-8ff0-8338f9039fce";
+				PROVISIONING_PROFILE = "8606f225-85da-4770-8fae-f5f9c392a98f";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -32,7 +32,15 @@ typedef enum {
     fontAvenirNextUltraLight,
     fontAvenirNextUltraLightItalic,
     fontAvenirBook,
-    fontAvenirLight
+    fontAvenirLight,
+    fontTrebuchetMS,
+    fontTrebuchetMSBoldItalic,
+    fontTrebuchetMSBold,
+    fontTrebuchetMSItalic,
+    fontHelveticaNeue,
+    fontHelveticaNeueItalic,
+    fontHelveticaNeueLight,
+    fontHelveticaNeueThin
 }AIFontFamily;
 
 typedef enum {
@@ -41,3 +49,26 @@ typedef enum {
     BorderLeft,
     BorderRight
 } BorderSide;
+
+typedef enum {
+    flatUIColorTurqoise,
+    flatUIColorGreenSea,
+    flatUIColorSunFlower,
+    flatUIColorOrange,
+    flatUIColorEmerald,
+    flatUIColorNephritis,
+    flatUIColorCarrot,
+    flatUIColorPumpkin,
+    flatUIColorPeterRiver,
+    flatUIColorBelizeHole,
+    flatUIColorAlizarin,
+    flatUIColorPomegranate,
+    flatUIColorAmethyst,
+    flatUIColorWisteria,
+    flatUIColorClouds,
+    flatUIColorSilver,
+    flatUIColorWetAsphalt,
+    flatUIColorMidnightBlue,
+    flatUIColorConcrete,
+    flatUIColorAsbestos
+} FlatUIColor;

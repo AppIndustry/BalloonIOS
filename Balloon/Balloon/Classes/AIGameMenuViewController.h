@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GameKit/GameKit.h>
 
 @interface AIGameMenuViewController : UIViewController <UIActionSheetDelegate>
 {
@@ -15,6 +16,8 @@
     UILabel *titleLabel, *descriptionLabel;
     
     UIImageView *coverImageView;
+    
+    GKLocalPlayer *localPlayer;
 }
 
 - (IBAction)SinglePlayerMode:(id)sender;

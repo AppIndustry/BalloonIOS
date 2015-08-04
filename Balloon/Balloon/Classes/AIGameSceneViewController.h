@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AICommonUtils.h"
+#import <GameKit/GameKit.h>
 
 @interface AIGameSceneViewController : UIViewController <AIGameCardImageViewDelegate, UIAlertViewDelegate, AIGameCardEnlargeViewDelegate>
 

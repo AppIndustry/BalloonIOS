@@ -1262,8 +1262,13 @@
             //UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Player's turn" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             //alert.tag = 4;
             //[alert show];
-            
+
             [self setSubmitButtonEnabled:YES];
+            [GKNotificationBanner showBannerWithTitle:@"Player's turn" message:@"Select a card and tap the confirm selection button" duration:1 completionHandler:^{
+                
+            }];
+            
+            
         }
         else
         {
@@ -2402,7 +2407,7 @@
     {
         NSString *tempString = [alertView buttonTitleAtIndex:buttonIndex];
         
-        tempString = [tempString substringToIndex:tempString.length - 1];
+        tempString = [tempString substringFromIndex:tempString.length - 1];
         
         int tempPlayerId = [tempString intValue];
         
