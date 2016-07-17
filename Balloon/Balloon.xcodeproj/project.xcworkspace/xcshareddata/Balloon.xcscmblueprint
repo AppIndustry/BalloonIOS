@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B00F2262D3FB0948335149552840024CAE043234",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B00F2262D3FB0948335149552840024CAE043234" : 0,
+    "321DC0B5A33B956F5DFA37E67A242DF7DDA3263A" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2E6EF27A-F827-4267-B5D3-1D0F421272B1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B00F2262D3FB0948335149552840024CAE043234" : "BalloonIOS\/",
+    "321DC0B5A33B956F5DFA37E67A242DF7DDA3263A" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Balloon",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Balloon\/Balloon.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AppIndustry\/Balloon.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "321DC0B5A33B956F5DFA37E67A242DF7DDA3263A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AppIndustry\/BalloonIOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B00F2262D3FB0948335149552840024CAE043234"
+    }
+  ]
+}

@@ -1016,12 +1016,6 @@
     
     timeCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 100, 100, 150, height)];
     
-    //[self.view addSubview:timeCountLabel];
-//    [self.view addSubview:lifeCountPlayer0];
-//    [self.view addSubview:lifeCountPlayer1];
-//    [self.view addSubview:lifeCountPlayer2];
-//    [self.view addSubview:lifeCountPlayer3];
-    
     [self updateTimeCountAndLifeCount:YES];
 }
 
@@ -1030,14 +1024,7 @@
     timeCountLabel.text = [NSString stringWithFormat:@"Time: %i", timeCount];
     
     self.navigationItem.title = [NSString stringWithFormat:@"Time: %i", timeCount];
-    /*
-    if (updateLifeCount)
-    {
-        lifeCountPlayer0.text = [NSString stringWithFormat:@"Player: %@", [playerLifeCountDictionary objectForKey:@"player0"]];
-        lifeCountPlayer1.text = [NSString stringWithFormat:@"Computer1: %@", [playerLifeCountDictionary objectForKey:@"player1"]];
-        lifeCountPlayer2.text = [NSString stringWithFormat:@"Computer2: %@", [playerLifeCountDictionary objectForKey:@"player2"]];
-        lifeCountPlayer3.text = [NSString stringWithFormat:@"Computer3: %@", [playerLifeCountDictionary objectForKey:@"player3"]];
-    }*/
+
 }
 
 
