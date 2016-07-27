@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2881376F1B31AF0200870331 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2881376E1B31AF0200870331 /* GameKit.framework */; };
-		289B26801AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289B267F1AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m */; };
 		28BA8D831ACC3F3500CB91D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8D821ACC3F3500CB91D1 /* main.m */; };
 		28BA8D861ACC3F3500CB91D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8D851ACC3F3500CB91D1 /* AppDelegate.m */; };
 		28BA8D8C1ACC3F3500CB91D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8D8A1ACC3F3500CB91D1 /* Main.storyboard */; };
@@ -34,9 +33,10 @@
 		28BA8DD41ACC407D00CB91D1 /* AIGameMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DC91ACC407D00CB91D1 /* AIGameMenuViewController.m */; };
 		28BA8DD51ACC407D00CB91D1 /* AIGameSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DCB1ACC407D00CB91D1 /* AIGameSceneViewController.m */; };
 		28BA8DD61ACC407D00CB91D1 /* AICommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DCE1ACC407D00CB91D1 /* AICommonUtils.m */; };
-		28BA8DD71ACC407D00CB91D1 /* AIGameCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DD11ACC407D00CB91D1 /* AIGameCard.m */; };
-		28BA8DD81ACC407D00CB91D1 /* AIGameCardImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8DD31ACC407D00CB91D1 /* AIGameCardImageView.m */; };
 		28D0F3531B0850DC00603401 /* AISinglePlayerSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D0F3521B0850DC00603401 /* AISinglePlayerSelectionViewController.m */; };
+		BC1DD1291D48758E00B618B5 /* AIGameCard.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1241D48758E00B618B5 /* AIGameCard.m */; };
+		BC1DD12A1D48758E00B618B5 /* AIGameCardEnlargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1261D48758E00B618B5 /* AIGameCardEnlargeView.m */; };
+		BC1DD12B1D48758E00B618B5 /* AIGameCardImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1281D48758E00B618B5 /* AIGameCardImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,8 +51,6 @@
 
 /* Begin PBXFileReference section */
 		2881376E1B31AF0200870331 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		289B267E1AE3C5BC00FF5F4A /* AIGameCardEnlargeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIGameCardEnlargeView.h; sourceTree = "<group>"; };
-		289B267F1AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameCardEnlargeView.m; sourceTree = "<group>"; };
 		28BA8D7D1ACC3F3500CB91D1 /* Balloon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balloon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28BA8D811ACC3F3500CB91D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28BA8D821ACC3F3500CB91D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -87,12 +85,14 @@
 		28BA8DCD1ACC407D00CB91D1 /* AICommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AICommonUtils.h; sourceTree = "<group>"; };
 		28BA8DCE1ACC407D00CB91D1 /* AICommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AICommonUtils.m; sourceTree = "<group>"; };
 		28BA8DCF1ACC407D00CB91D1 /* AIEnumCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIEnumCollection.h; sourceTree = "<group>"; };
-		28BA8DD01ACC407D00CB91D1 /* AIGameCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIGameCard.h; sourceTree = "<group>"; };
-		28BA8DD11ACC407D00CB91D1 /* AIGameCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameCard.m; sourceTree = "<group>"; };
-		28BA8DD21ACC407D00CB91D1 /* AIGameCardImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIGameCardImageView.h; sourceTree = "<group>"; };
-		28BA8DD31ACC407D00CB91D1 /* AIGameCardImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIGameCardImageView.m; sourceTree = "<group>"; };
 		28D0F3511B0850DC00603401 /* AISinglePlayerSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AISinglePlayerSelectionViewController.h; sourceTree = "<group>"; };
 		28D0F3521B0850DC00603401 /* AISinglePlayerSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AISinglePlayerSelectionViewController.m; sourceTree = "<group>"; };
+		BC1DD1231D48758E00B618B5 /* AIGameCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGameCard.h; path = Common/Object/AIGameCard.h; sourceTree = "<group>"; };
+		BC1DD1241D48758E00B618B5 /* AIGameCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AIGameCard.m; path = Common/Object/AIGameCard.m; sourceTree = "<group>"; };
+		BC1DD1251D48758E00B618B5 /* AIGameCardEnlargeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGameCardEnlargeView.h; path = Common/Object/AIGameCardEnlargeView.h; sourceTree = "<group>"; };
+		BC1DD1261D48758E00B618B5 /* AIGameCardEnlargeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AIGameCardEnlargeView.m; path = Common/Object/AIGameCardEnlargeView.m; sourceTree = "<group>"; };
+		BC1DD1271D48758E00B618B5 /* AIGameCardImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGameCardImageView.h; path = Common/Object/AIGameCardImageView.h; sourceTree = "<group>"; };
+		BC1DD1281D48758E00B618B5 /* AIGameCardImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AIGameCardImageView.m; path = Common/Object/AIGameCardImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +146,7 @@
 				28BA8D841ACC3F3500CB91D1 /* AppDelegate.h */,
 				28BA8D851ACC3F3500CB91D1 /* AppDelegate.m */,
 				28BA8D8A1ACC3F3500CB91D1 /* Main.storyboard */,
+				BC1DD1211D48752E00B618B5 /* Common */,
 				28BA8DC71ACC407D00CB91D1 /* Classes */,
 				28BA8DCC1ACC407D00CB91D1 /* CommonUtils */,
 				28BA8D8D1ACC3F3500CB91D1 /* Images.xcassets */,
@@ -211,10 +212,10 @@
 			children = (
 				28BA8DC81ACC407D00CB91D1 /* AIGameMenuViewController.h */,
 				28BA8DC91ACC407D00CB91D1 /* AIGameMenuViewController.m */,
-				28BA8DCA1ACC407D00CB91D1 /* AIGameSceneViewController.h */,
-				28BA8DCB1ACC407D00CB91D1 /* AIGameSceneViewController.m */,
 				28D0F3511B0850DC00603401 /* AISinglePlayerSelectionViewController.h */,
 				28D0F3521B0850DC00603401 /* AISinglePlayerSelectionViewController.m */,
+				28BA8DCA1ACC407D00CB91D1 /* AIGameSceneViewController.h */,
+				28BA8DCB1ACC407D00CB91D1 /* AIGameSceneViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -225,14 +226,53 @@
 				28BA8DCD1ACC407D00CB91D1 /* AICommonUtils.h */,
 				28BA8DCE1ACC407D00CB91D1 /* AICommonUtils.m */,
 				28BA8DCF1ACC407D00CB91D1 /* AIEnumCollection.h */,
-				28BA8DD01ACC407D00CB91D1 /* AIGameCard.h */,
-				28BA8DD11ACC407D00CB91D1 /* AIGameCard.m */,
-				28BA8DD21ACC407D00CB91D1 /* AIGameCardImageView.h */,
-				28BA8DD31ACC407D00CB91D1 /* AIGameCardImageView.m */,
-				289B267E1AE3C5BC00FF5F4A /* AIGameCardEnlargeView.h */,
-				289B267F1AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m */,
 			);
 			path = CommonUtils;
+			sourceTree = "<group>";
+		};
+		BC1DD1211D48752E00B618B5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BC1DD12C1D48766500B618B5 /* Game */,
+				BC1DD1221D48753400B618B5 /* Object */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		BC1DD1221D48753400B618B5 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				BC1DD1231D48758E00B618B5 /* AIGameCard.h */,
+				BC1DD1241D48758E00B618B5 /* AIGameCard.m */,
+				BC1DD1251D48758E00B618B5 /* AIGameCardEnlargeView.h */,
+				BC1DD1261D48758E00B618B5 /* AIGameCardEnlargeView.m */,
+				BC1DD1271D48758E00B618B5 /* AIGameCardImageView.h */,
+				BC1DD1281D48758E00B618B5 /* AIGameCardImageView.m */,
+			);
+			name = Object;
+			sourceTree = "<group>";
+		};
+		BC1DD12C1D48766500B618B5 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				BC1DD12D1D48770800B618B5 /* GamePlay */,
+				BC1DD12E1D48771200B618B5 /* GameMechanics */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		BC1DD12D1D48770800B618B5 /* GamePlay */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = GamePlay;
+			sourceTree = "<group>";
+		};
+		BC1DD12E1D48771200B618B5 /* GameMechanics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = GameMechanics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,15 +397,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC1DD1291D48758E00B618B5 /* AIGameCard.m in Sources */,
+				BC1DD12A1D48758E00B618B5 /* AIGameCardEnlargeView.m in Sources */,
 				28D0F3531B0850DC00603401 /* AISinglePlayerSelectionViewController.m in Sources */,
-				28BA8DD71ACC407D00CB91D1 /* AIGameCard.m in Sources */,
 				28BA8DD41ACC407D00CB91D1 /* AIGameMenuViewController.m in Sources */,
 				28BA8D861ACC3F3500CB91D1 /* AppDelegate.m in Sources */,
-				28BA8DD81ACC407D00CB91D1 /* AIGameCardImageView.m in Sources */,
-				289B26801AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m in Sources */,
 				28BA8DD51ACC407D00CB91D1 /* AIGameSceneViewController.m in Sources */,
 				28BA8DD61ACC407D00CB91D1 /* AICommonUtils.m in Sources */,
 				28BA8D831ACC3F3500CB91D1 /* main.m in Sources */,
+				BC1DD12B1D48758E00B618B5 /* AIGameCardImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,8 +22,6 @@
 @end
 
 
-
-
 @protocol AIGameCardEnlargeViewDelegate <NSObject>
 
 @required
