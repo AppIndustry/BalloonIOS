@@ -29,7 +29,7 @@
     //return yes when a player discard a double play command card
     BOOL isDoublePlayNeeded;
     
-    //YES for complete, NO for not yet
+    //Completed flag for double play
     BOOL hasCompleteDoublePlay;
     
     //Warning flag for double play
@@ -159,6 +159,7 @@
 
 }
 
+//UIView
 - (void)calculateCardSize {
     CGFloat viewHeight = self.view.frame.size.height - 64;
     
@@ -168,6 +169,7 @@
     cardWidth = cardHeight / 1.5;
 }
 
+//Mechanics
 - (NSMutableArray *)createFullDeck {
     NSMutableArray *tempArray = [[NSMutableArray alloc]init];
     
@@ -340,6 +342,7 @@
     return tempArray;
 }
 
+//Mechanics
 - (NSMutableArray *)shuffleDrawDeck:(NSMutableArray *)tempFullDeck {
     
     NSMutableArray *tempArray = [[NSMutableArray alloc]init];
@@ -363,7 +366,7 @@
     return tempArray;
 }
 
-
+//GamePlay
 - (void)drawCardsToOtherThreePlayers:(NSInteger)numberOfDrawCard {
     NSMutableArray *tempA1 = [[NSMutableArray alloc]init];
     NSMutableArray *tempA2 = [[NSMutableArray alloc]init];
@@ -433,6 +436,7 @@
     [self rearrangeOpponentCardNumberAndViewForPlayerID:nextPlayerIDTurn isRearrangeAllPlayer:YES];
 }
 
+//GamePlay
 - (void)reshuffleDiscardDeckIntoDrawDeck {
     [drawDeckArray addObjectsFromArray:discardDeckArray];
     
@@ -449,13 +453,14 @@
     drawDeckArray = [self shuffleDrawDeck:drawDeckArray];
 }
 
-
+//UIView
 - (void)rearrangePlayerCardView {
     [self clearAllCardsFromView];
     
     [self showCardsToScreen];
 }
 
+//GamePlay
 - (void)distributeCardsToPlayers:(BOOL)isStartingDistribute {
     if (isStartingDistribute)
     {
@@ -519,10 +524,9 @@
 }
 
 
+#pragma mark - display cards onto screen
 
-
-/*** display cards onto screen ***/
-
+//UIView
 - (void)showCardsToScreen {
     CGFloat xCoordinate = 20;
     CGFloat cardDistance = (self.view.frame.size.width - 40 - cardWidth/2) / 7;
@@ -547,6 +551,7 @@
     }
 }
 
+//UIView
 - (void)showDiscardAndDrawDeck:(BOOL)isStartingDistribute {
     if (isStartingDistribute)
     {
@@ -594,10 +599,9 @@
 }
 
 
+#pragma mark - ACTIONS TO SHOW OPPONENTS CARDS VIEW AND NUMBER
 
-
-/***** ACTIONS TO SHOW OPPONENTS CARDS VIEW AND NUMBER *****/
-
+//UIView
 - (void)showOpponentsCardView {
     UIColor *bgColor = [UIColor clearColor];
     
@@ -660,6 +664,7 @@
     }
 }
 
+//UIView
 - (void)rearrangeOpponentCardNumberAndViewForPlayerID:(int)playerID isRearrangeAllPlayer:(BOOL)isRearrangeAllPlayer {
     int tempCurrentPlayerID = nextPlayerIDTurn;
     
@@ -679,6 +684,7 @@
     nextPlayerIDTurn = tempCurrentPlayerID;
 }
 
+//UIView
 - (void)processRearrangeOpponentsCardView:(int)playerID {
     nextPlayerIDTurn = playerID;
     NSMutableArray *tempArray = [self getCurrentPlayerHandArray];
@@ -796,9 +802,9 @@
 }
 
 
+#pragma mark - ACTIONS TO SHOW LIFE VIEW FOR ALL PLAYERS
 
-/*** ACTIONS TO SHOW LIFE VIEW FOR ALL PLAYERS ***/
-
+//UIView
 - (void)showPlayerLifeView {
     UIColor *bgColor = [UIColor clearColor];
     
@@ -880,6 +886,7 @@
     }
 }
 
+//UIView
 - (void)deductPlayerLifeViewForPlayerID:(int)playerID {
     if (playerID == 0)
     {
@@ -936,8 +943,9 @@
 }
 
 
-/*** clear all player cards from view ***/
+#pragma mark - clear all player cards from view
 
+//UIView
 - (void)clearAllCardsFromView {
     for (AIGameCardImageView *cardView in self.view.subviews)
     {
@@ -952,8 +960,9 @@
 }
 
 
-/*** update labels ***/
+#pragma mark - update labels
 
+//UIView
 - (void)addLifeCountAndTimeCountLabel {
     CGFloat height = 17;
     CGFloat width = 150;
@@ -969,6 +978,7 @@
     [self updateTimeCountAndLifeCount:YES];
 }
 
+//UIView
 - (void)updateTimeCountAndLifeCount:(BOOL)updateLifeCount {
     timeCountLabel.text = [NSString stringWithFormat:@"Time: %i", timeCount];
     
@@ -977,18 +987,9 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark - IBAction by UIButton
 
+//UIView + Action
 - (IBAction)SubmitCardSelection:(id)sender {
     if (nextPlayerIDTurn == userID && selectedCardIndex > 0)
     {
@@ -1065,6 +1066,7 @@
 
 #pragma mark - Game Play
 
+//GamePlay
 - (void)startGame {
     int randomNumber = arc4random_uniform(4);
 
@@ -1109,6 +1111,7 @@
 
 #pragma mark - Helper Methods
 
+//GamePlay
 - (void)addGameCardIntoDiscardDeck:(AIGameCard *)cardObject {
     if (discardDeckArray)
         [discardDeckArray addObject:cardObject];
@@ -1122,6 +1125,7 @@
 //    }
 }
 
+//GamePlay
 - (void)nextPlayerTurn:(BOOL)isPlayerSkip {
     int numberAdd = 1;
     
@@ -1210,6 +1214,7 @@
     
 }
 
+//Utils
 - (NSString *)getCardNameInString:(AIGameCardName)cardName {
     NSString *tempString;
     
@@ -1271,8 +1276,9 @@
 }
 
 
-/******* ACTIONS FOR SETTING BUTTON ATTRIBUTES *********/
+#pragma mark - ACTIONS FOR SETTING BUTTON ATTRIBUTES
 
+//UIView
 - (void)setSubmitButtonAttritbute {
     [self.submitButton setTitle:@"Your turn (Tap here to confirm selection)" forState:UIControlStateNormal];
     [self.submitButton setTitle:@"Waiting" forState:UIControlStateDisabled];
@@ -1285,13 +1291,15 @@
     [self setSubmitButtonEnabled:NO];
 }
 
+//UIView
 - (void)setSubmitButtonEnabled:(BOOL)enabled {
     [self.submitButton setEnabled:enabled];
 }
 
 
-/******* ACTIONS FOR AUTOMATING AI PLAYERS *********/
+#pragma mark - ACTIONS FOR AUTOMATING AI PLAYERS
 
+//Mechanics
 - (void)automateAIPlayer {
     if (nextPlayerIDTurn != userID)
     {
@@ -1505,6 +1513,7 @@
     }
 }
 
+//Mechanics
 - (void)automateAIPlayerDiscardCard:(NSMutableArray *)tempUserArray selectedCardIndex:(NSInteger)tempSelectedCardIndex {
     AIGameCard *tempGameCardObject = [[AIGameCard alloc]init];
     tempGameCardObject = (AIGameCard *)[tempUserArray objectAtIndex:tempSelectedCardIndex];
@@ -1523,8 +1532,9 @@
 }
 
 
-/******* ACTIONS FOR GETTING AND ASSIGNING PLAYER HAND ARRAY *********/
+#pragma mark - ACTIONS FOR GETTING AND ASSIGNING PLAYER HAND ARRAY
 
+//GamePlay
 - (NSMutableArray *)getCurrentPlayerHandArray {
     NSMutableArray *tempUserArray = [[NSMutableArray alloc]init];
     
@@ -1550,6 +1560,7 @@
     return tempUserArray;
 }
 
+//GamePlay
 - (NSMutableArray *)getCurrentPlayerHandArrayForPlayerId:(int)playerId {
     NSMutableArray *tempUserArray = [[NSMutableArray alloc]init];
     
@@ -1575,6 +1586,7 @@
     return tempUserArray;
 }
 
+//GamePlay
 - (void)assignCurrentPlayerHandArray:(NSMutableArray *)tempUserArray {
     switch (nextPlayerIDTurn)
     {
@@ -1596,6 +1608,7 @@
     }
 }
 
+//GamePlay
 - (void)assignCurrentPlayerHandArray:(NSMutableArray *)tempUserArray forPlayerId:(int)playerId {
     switch (playerId)
     {
@@ -1618,8 +1631,9 @@
 }
 
 
-/******* ACTIONS FOR OPERATIONS CALCULATION *********/
+#pragma mark - ACTIONS FOR OPERATIONS CALCULATION
 
+//GamePlay
 - (void)cardSelectionValidation:(AIGameCard *)selectedCardObject {
     BOOL hasPopped = NO;
     
@@ -1655,6 +1669,7 @@
     
 }
 
+//GamePlay
 - (void)performPostOperation:(AIGameCard *)cardObject hasPopped:(BOOL)hasPopped {
     BOOL isPlayerSkip = NO;
     BOOL hasDonePostOperation = YES;
@@ -1844,10 +1859,12 @@
     }
 }
 
+//GamePlay
 - (void)processPostOperation:(BOOL)isPlayerSkip cardName:(AIGameCardName)cardName hasPopped:(BOOL)hasPopped {
     [self animateDiscardGameCardAnimation:isPlayerSkip cardName:cardName hasPopped:hasPopped];
 }
 
+//UIView
 - (void)animateDiscardGameCardAnimation:(BOOL)isPlayerSkip cardName:(AIGameCardName)cardName hasPopped:(BOOL)hasPopped {
     CGFloat x = (self.view.frame.size.width - 40 - (cardWidth * 2)) / 3;
     x += 20;
@@ -1962,6 +1979,7 @@
     }];
 }
 
+//GamePlay
 - (void)completeOneProcessOperation:(BOOL)isPlayerSkip {
     [self rearrangePlayerCardView];
     
@@ -1969,16 +1987,18 @@
 }
 
 
-/******* ACTIONS FOR DOUBLE PLAY CONTROLS *********/
+#pragma mark - ACTIONS FOR DOUBLE PLAY CONTROLS
 
+//GamePlay
 - (void)resetDoublePlayFlag {
     hasCompleteDoublePlay = YES;
     isDoublePlayNeeded = NO;
 }
 
 
-/******* ACTIONS FOR DEDUCTING LIFE COUNT *********/
+#pragma mark - ACTIONS FOR DEDUCTING LIFE COUNT
 
+//Mechanics
 - (BOOL)checkIfTimeCountExceedLimit {
     if (timeCount > 60)
         return YES;
@@ -1986,6 +2006,7 @@
         return NO;
 }
 
+//Mechanics
 - (BOOL)checkIfPlayerIsOutOfCards:(BOOL)showLogMessage {
     BOOL playerIsOutOfCards = NO;
     
@@ -2002,6 +2023,7 @@
     return playerIsOutOfCards;
 }
 
+//GamePlay
 - (void)deductPlayerLifeCountByOne {
     NSString *tempCount = [playerLifeCountDictionary objectForKey:[NSString stringWithFormat:@"player%i", nextPlayerIDTurn]];
     int lifeCount = [tempCount intValue] - 1;
@@ -2017,6 +2039,7 @@
     NSLog(@"%@", playerLifeLostMessage);
 }
 
+//GamePlay
 - (void)deductOtherPlayersLifeCountByOne {
     for (int i = 0; i < 4; i++)
     {
@@ -2040,11 +2063,13 @@
     NSLog(@"%@", playerLifeLostMessage);
 }
 
+//GamePlay
 - (void)resetTimeCountAndIsBalloonPopFlag {
     timeCount = 0;
     isBalloonPop = NO;
 }
 
+//UIView
 - (void)showPlayerLifeLostPopupMessage {
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Popped!" message:playerLifeLostMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     alert.tag = 3;
@@ -2052,8 +2077,9 @@
 }
 
 
-/******* ACTIONS FOR PLAYER LOSING ALL LIFE *********/
+#pragma mark - ACTIONS FOR PLAYER LOSING ALL LIFE
 
+//GamePlay
 - (BOOL)checkPlayerHasLostAllLifeForPlayerId:(int)playerId {
     BOOL hasLostAllLife = NO;
     
@@ -2067,6 +2093,7 @@
     return hasLostAllLife;
 }
 
+//GamePlay
 - (void)discardAllPlayerHandCardsIfPlayerHasLostAllLifeForPlayerId:(int)playerId {
     NSMutableArray *tempArray = [self getCurrentPlayerHandArrayForPlayerId:playerId];
     
@@ -2078,9 +2105,11 @@
 }
 
 
-/******* ACTIONS FOR GAME OVER *********/
+#pragma mark - ACTIONS FOR GAME OVER
 
+//GamePlay
 - (BOOL)checkIfGameIsOver {
+    
     BOOL gameOver = NO;
     
     int tempA, tempB, tempC, tempD;
@@ -2192,6 +2221,7 @@
     return gameOver;
 }
 
+//GamePlay
 - (void)showGameOverPopupMessage {
     UIAlertView *alert;
     
@@ -2257,6 +2287,7 @@
     GameCardEnlargeView = nil;
     hasDisplayEnlargeView = NO;
 }
+
 
 #pragma mark - UIAlertViewDelegate
 

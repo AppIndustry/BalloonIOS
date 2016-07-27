@@ -37,6 +37,10 @@
 		BC1DD1291D48758E00B618B5 /* AIGameCard.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1241D48758E00B618B5 /* AIGameCard.m */; };
 		BC1DD12A1D48758E00B618B5 /* AIGameCardEnlargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1261D48758E00B618B5 /* AIGameCardEnlargeView.m */; };
 		BC1DD12B1D48758E00B618B5 /* AIGameCardImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1281D48758E00B618B5 /* AIGameCardImageView.m */; };
+		BC1DD1371D488C9900B618B5 /* GamePlay.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1361D488C9900B618B5 /* GamePlay.m */; };
+		BC1DD13A1D488F0900B618B5 /* GameMechanics.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1391D488F0900B618B5 /* GameMechanics.m */; };
+		BC1DD13E1D48979000B618B5 /* GamePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD13D1D48979000B618B5 /* GamePlayer.m */; };
+		BC1DD1411D48A1D600B618B5 /* GameCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1401D48A1D600B618B5 /* GameCardDeck.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +97,14 @@
 		BC1DD1261D48758E00B618B5 /* AIGameCardEnlargeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AIGameCardEnlargeView.m; path = Common/Object/AIGameCardEnlargeView.m; sourceTree = "<group>"; };
 		BC1DD1271D48758E00B618B5 /* AIGameCardImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AIGameCardImageView.h; path = Common/Object/AIGameCardImageView.h; sourceTree = "<group>"; };
 		BC1DD1281D48758E00B618B5 /* AIGameCardImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AIGameCardImageView.m; path = Common/Object/AIGameCardImageView.m; sourceTree = "<group>"; };
+		BC1DD1351D488C9900B618B5 /* GamePlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlay.h; path = Common/GameEngine/GamePlay/GamePlay.h; sourceTree = "<group>"; };
+		BC1DD1361D488C9900B618B5 /* GamePlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GamePlay.m; path = Common/GameEngine/GamePlay/GamePlay.m; sourceTree = "<group>"; };
+		BC1DD1381D488F0900B618B5 /* GameMechanics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameMechanics.h; path = Common/GameEngine/GameMechanics/GameMechanics.h; sourceTree = "<group>"; };
+		BC1DD1391D488F0900B618B5 /* GameMechanics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameMechanics.m; path = Common/GameEngine/GameMechanics/GameMechanics.m; sourceTree = "<group>"; };
+		BC1DD13C1D48979000B618B5 /* GamePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GamePlayer.h; path = Common/GameEngine/GameObject/GamePlayer.h; sourceTree = "<group>"; };
+		BC1DD13D1D48979000B618B5 /* GamePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GamePlayer.m; path = Common/GameEngine/GameObject/GamePlayer.m; sourceTree = "<group>"; };
+		BC1DD13F1D48A1D600B618B5 /* GameCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameCardDeck.h; path = Common/GameEngine/GameObject/GameCardDeck.h; sourceTree = "<group>"; };
+		BC1DD1401D48A1D600B618B5 /* GameCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameCardDeck.m; path = Common/GameEngine/GameObject/GameCardDeck.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +245,7 @@
 		BC1DD1211D48752E00B618B5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				BC1DD12C1D48766500B618B5 /* Game */,
+				BC1DD12C1D48766500B618B5 /* GameEngine */,
 				BC1DD1221D48753400B618B5 /* Object */,
 			);
 			name = Common;
@@ -252,18 +264,21 @@
 			name = Object;
 			sourceTree = "<group>";
 		};
-		BC1DD12C1D48766500B618B5 /* Game */ = {
+		BC1DD12C1D48766500B618B5 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				BC1DD13B1D48977200B618B5 /* GameObject */,
 				BC1DD12D1D48770800B618B5 /* GamePlay */,
 				BC1DD12E1D48771200B618B5 /* GameMechanics */,
 			);
-			name = Game;
+			name = GameEngine;
 			sourceTree = "<group>";
 		};
 		BC1DD12D1D48770800B618B5 /* GamePlay */ = {
 			isa = PBXGroup;
 			children = (
+				BC1DD1351D488C9900B618B5 /* GamePlay.h */,
+				BC1DD1361D488C9900B618B5 /* GamePlay.m */,
 			);
 			name = GamePlay;
 			sourceTree = "<group>";
@@ -271,8 +286,21 @@
 		BC1DD12E1D48771200B618B5 /* GameMechanics */ = {
 			isa = PBXGroup;
 			children = (
+				BC1DD1381D488F0900B618B5 /* GameMechanics.h */,
+				BC1DD1391D488F0900B618B5 /* GameMechanics.m */,
 			);
 			name = GameMechanics;
+			sourceTree = "<group>";
+		};
+		BC1DD13B1D48977200B618B5 /* GameObject */ = {
+			isa = PBXGroup;
+			children = (
+				BC1DD13C1D48979000B618B5 /* GamePlayer.h */,
+				BC1DD13D1D48979000B618B5 /* GamePlayer.m */,
+				BC1DD13F1D48A1D600B618B5 /* GameCardDeck.h */,
+				BC1DD1401D48A1D600B618B5 /* GameCardDeck.m */,
+			);
+			name = GameObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,9 +426,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC1DD1291D48758E00B618B5 /* AIGameCard.m in Sources */,
+				BC1DD1411D48A1D600B618B5 /* GameCardDeck.m in Sources */,
+				BC1DD1371D488C9900B618B5 /* GamePlay.m in Sources */,
+				BC1DD13E1D48979000B618B5 /* GamePlayer.m in Sources */,
 				BC1DD12A1D48758E00B618B5 /* AIGameCardEnlargeView.m in Sources */,
 				28D0F3531B0850DC00603401 /* AISinglePlayerSelectionViewController.m in Sources */,
 				28BA8DD41ACC407D00CB91D1 /* AIGameMenuViewController.m in Sources */,
+				BC1DD13A1D488F0900B618B5 /* GameMechanics.m in Sources */,
 				28BA8D861ACC3F3500CB91D1 /* AppDelegate.m in Sources */,
 				28BA8DD51ACC407D00CB91D1 /* AIGameSceneViewController.m in Sources */,
 				28BA8DD61ACC407D00CB91D1 /* AICommonUtils.m in Sources */,
