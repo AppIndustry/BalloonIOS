@@ -15,36 +15,91 @@
 
 @interface AICommonUtils : NSObject
 
-/// GET CARD IMAGE ///
+#pragma mark - GET CARD IMAGE
 
-+(UIImage *)getGameCardImageForGameCard:(AIGameCardName)cardName;
-+(UIImage *)getGameCardBackCoverImage;
+/**
+    returns the UIImage of a specific Card Type
+ */
 
-
-/// CREATE CUSTOM STRING WITH LETTING SPACING ///
-
-+(NSMutableAttributedString *)createStringWithSpacing:(NSString *)string spacngValue:(float)spacing withUnderLine:(BOOL)isUnderLine;
-
-+(NSMutableAttributedString *)addUnderLineToMutableAttributedString:(NSMutableAttributedString *)attributeString;
++ (UIImage *)getGameCardImageForGameCard:(AIGameCardName)cardName;
 
 
-/// SETTING OF UIFONT FROM UIFONT FAMILY ///
+/**
+    returns the back cover UIImage of Game card
+*/
+
++ (UIImage *)getGameCardBackCoverImage;
+
+
+#pragma mark - CREATE CUSTOM STRING WITH LETTING SPACING
+
+/**
+    returns a NSMutableAttributedString, with spacing and underline
+    @optional spacing value, underline
+ */
+
++ (NSMutableAttributedString *)createStringWithSpacing:(NSString *)string spacingValue:(float)spacing withUnderLine:(BOOL)isUnderLine;
+
+
+/**
+    returns a NSMutableAttributedString with underline
+ */
+
++ (NSMutableAttributedString *)addUnderLineToMutableAttributedString:(NSMutableAttributedString *)attributeString;
+
+
+#pragma mark - SETTING OF UIFONT FROM UIFONT FAMILY
+
+/**
+    returns a custom Typeface with Font Size
+ */
 
 + (UIFont *)getCustomTypeface:(AIFontFamily)typeface ofSize:(CGFloat)size;
-+(void)getAllFontFamilyWithNames;
 
 
-/// CREATE ONE SIDED BORDER VIEW ///
+/**
+    NSLog all available Font Family with their Names
+ */
 
-+(CALayer *)createOneSidedBorderForUIView:(UIView *)myView Side:(BorderSide)Side;
-
-+(float)getBorderWidthAccordingToDisplay;
++ (void)getAllFontFamilyWithNames;
 
 
-/// GET UICOLOR ///
+#pragma mark - CREATE ONE SIDED BORDER VIEW
 
-+(UIColor *)getAIColorWithRGB228:(CGFloat)alpha;
-+(UIColor *)getAIColorWithRGB192;
-+(UIColor *)getFlatUIColorForColor:(FlatUIColor)color forAlpha:(CGFloat)userAlpha;
+/**
+    returns a border view in form of CALayer
+    @params BorderSide
+ */
+
++ (CALayer *)createOneSidedBorderForUIView:(UIView *)myView Side:(BorderSide)Side;
+
+
+/**
+    returns a standard BorderWidth according to Resolution of Screen
+ */
+
++ (float)getBorderWidthAccordingToDisplay;
+
+
+#pragma mark - GET UICOLOR
+
+/**
+    returns a white like UIColor
+ */
+
++ (UIColor *)getAIColorWithRGB228:(CGFloat)alpha;
+
+
+/**
+    returns a Silver like UIColor
+ */
+
++ (UIColor *)getAIColorWithRGB192;
+
+/**
+    returns a Flat UIColor
+ */
+
++ (UIColor *)getFlatUIColorForColor:(FlatUIColor)color forAlpha:(CGFloat)userAlpha;
 
 @end

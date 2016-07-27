@@ -18,9 +18,7 @@
 
 }
 
-
--(id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     if (self)
@@ -38,16 +36,14 @@
     return self;
 }
 
--(void)handleCardTap
-{
+- (void)handleCardTap {
     if ([self.delegate respondsToSelector:@selector(tapAtGameCardForId:arrayIndex:cardName:)])
     {
         [self.delegate tapAtGameCardForId:self.cardId arrayIndex:self.arrayIndex cardName:self.cardName];
     }
 }
 
--(void)handleCardLongPress
-{
+- (void)handleCardLongPress{
     if ([self.delegate respondsToSelector:@selector(didLongPressAtGameCardImageViewForZoom:cardId:cardName:)])
     {
         [self.delegate didLongPressAtGameCardImageViewForZoom:self cardId:self.cardId cardName:self.cardName];

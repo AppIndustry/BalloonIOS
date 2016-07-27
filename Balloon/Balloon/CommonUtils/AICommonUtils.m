@@ -10,8 +10,9 @@
 
 @implementation AICommonUtils
 
-+(UIImage *)getGameCardImageForGameCard:(AIGameCardName)cardName
-{
+#pragma mark - GET CARD IMAGE
+
++ (UIImage *)getGameCardImageForGameCard:(AIGameCardName)cardName {
     UIImage *returnImage;
     
     switch (cardName)
@@ -75,19 +76,49 @@
     return  returnImage;
 }
 
-+(UIImage *)getGameCardBackCoverImage
-{
++ (UIImage *)getGameCardBackCoverImage {
     return [UIImage imageNamed:@"BackCover"];
 }
 
 
-+ (UIFont *)getCustomTypeface:(AIFontFamily)typeface ofSize:(CGFloat)size
-{
+#pragma mark - CREATE CUSTOM STRING WITH LETTING SPACING
+
++ (NSMutableAttributedString *)createStringWithSpacing:(NSString *)string spacingValue:(float)spacing withUnderLine:(BOOL)isUnderLine {
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc]initWithString:string];
+    
+    [attributeString addAttribute:NSKernAttributeName value:@(spacing) range:NSMakeRange(0, string.length)];
+    
+    if (isUnderLine)
+        attributeString = [self addUnderLineToMutableAttributedString:attributeString];
+    
+    return attributeString;
+}
+
++ (NSMutableAttributedString *)addUnderLineToMutableAttributedString:(NSMutableAttributedString *)attributeString {
+    [attributeString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:NSMakeRange(0, attributeString.length)];
+    
+    return attributeString;
+}
+
+
+#pragma mark - SETTING OF UIFONT FROM UIFONT FAMILY
+
++ (UIFont *)getCustomTypeface:(AIFontFamily)typeface ofSize:(CGFloat)size {
     return [UIFont fontWithName:[self getTypefaceName:typeface] size:size];
 }
 
-+ (NSString *)getTypefaceName:(AIFontFamily)typeface
-{
++ (void)getAllFontFamilyWithNames {
+    NSArray *fontFamilies = [UIFont familyNames];
+    
+    for (int i = 0; i < [fontFamilies count]; i++)
+    {
+        NSString *fontFamily = [fontFamilies objectAtIndex:i];
+        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
+        NSLog (@"%@: %@", fontFamily, fontNames);
+    }
+}
+
++ (NSString *)getTypefaceName:(AIFontFamily)typeface {
     NSString *fontName = @"Courier";
     
     switch (typeface) {
@@ -159,42 +190,9 @@
 }
 
 
+#pragma mark - CREATE ONE SIDED BORDER VIEW
 
-+(NSMutableAttributedString *)createStringWithSpacing:(NSString *)string spacngValue:(float)spacing withUnderLine:(BOOL)isUnderLine
-{
-    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc]initWithString:string];
-    
-    [attributeString addAttribute:NSKernAttributeName value:@(spacing) range:NSMakeRange(0, string.length)];
-    
-    if (isUnderLine)
-        attributeString = [self addUnderLineToMutableAttributedString:attributeString];
-    
-    return attributeString;
-}
-
-+(void)getAllFontFamilyWithNames
-{
-    NSArray *fontFamilies = [UIFont familyNames];
-    
-    for (int i = 0; i < [fontFamilies count]; i++)
-    {
-        NSString *fontFamily = [fontFamilies objectAtIndex:i];
-        NSArray *fontNames = [UIFont fontNamesForFamilyName:[fontFamilies objectAtIndex:i]];
-        NSLog (@"%@: %@", fontFamily, fontNames);
-    }
-}
-
-+(NSMutableAttributedString *)addUnderLineToMutableAttributedString:(NSMutableAttributedString *)attributeString
-{
-    [attributeString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSUnderlineStyleSingle] range:NSMakeRange(0, attributeString.length)];
-    
-    return attributeString;
-}
-
-
-
-+(CALayer *)createOneSidedBorderForUIView:(UIView *)myView Side:(BorderSide)Side
-{
++ (CALayer *)createOneSidedBorderForUIView:(UIView *)myView Side:(BorderSide)Side {
     CGRect myFrame = myView.frame;
     CGFloat x, y, width, height;
     
@@ -249,8 +247,7 @@
     return newLayer;
 }
 
-+(float)getBorderWidthAccordingToDisplay
-{
++ (float)getBorderWidthAccordingToDisplay {
     float width = 0;
     
     if ([UIScreen mainScreen].scale >= 2)
@@ -262,19 +259,17 @@
 }
 
 
+#pragma mark - GET UICOLOR
 
-+(UIColor *)getAIColorWithRGB228:(CGFloat)alpha
-{
++ (UIColor *)getAIColorWithRGB228:(CGFloat)alpha {
     return [UIColor colorWithRed:228.0/255.0 green:228.0/255.0 blue:228.0/255.0 alpha:alpha];
 }
 
-+(UIColor *)getAIColorWithRGB192
-{
++ (UIColor *)getAIColorWithRGB192 {
     return [UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0];
 }
 
-+(UIColor *)getFlatUIColorForColor:(FlatUIColor)color forAlpha:(CGFloat)userAlpha
-{
++ (UIColor *)getFlatUIColorForColor:(FlatUIColor)color forAlpha:(CGFloat)userAlpha {
     UIColor *selectedColorRGB;
     
     CGFloat red = 0;

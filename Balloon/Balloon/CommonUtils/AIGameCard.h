@@ -15,6 +15,7 @@
 @property (nonatomic) BOOL isNumberCard; // else is command card
 @property (nonatomic) NSInteger cardId;
 @property (nonatomic) NSInteger cardValue; //command card is one
+
 //@property (nonatomic) NSInteger prioritySequence; //smallest number of 0, the smaller the number, the higher the priority
 
 

@@ -22,8 +22,7 @@ UIImageView *cardImageView;
     [self createEnlargeView];
 }
 
--(id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     
     if (self)
@@ -34,8 +33,7 @@ UIImageView *cardImageView;
     return self;
 }
 
--(void)createEnlargeView
-{
+- (void)createEnlargeView {
     CGFloat myWidth = self.frame.size.width;
     CGFloat myHeight = self.frame.size.height;
     
@@ -57,7 +55,7 @@ UIImageView *cardImageView;
     instructionLabel.textColor = [AICommonUtils getAIColorWithRGB228:1.0];
     instructionLabel.font = [AICommonUtils getCustomTypeface:fontAvenirNextItalic ofSize:12];
     instructionLabel.text = @"Swipe down to dismiss";
-    instructionLabel.attributedText = [AICommonUtils createStringWithSpacing:instructionLabel.text spacngValue:4.0 withUnderLine:YES];
+    instructionLabel.attributedText = [AICommonUtils createStringWithSpacing:instructionLabel.text spacingValue:4.0 withUnderLine:YES];
     
     [enlargeView addSubview:tempBackgroundView];
     [enlargeView addSubview:cardImageView];
@@ -77,8 +75,7 @@ UIImageView *cardImageView;
     
 }
 
--(void)handlePan:(UIPanGestureRecognizer *)recognizer
-{
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     CGPoint velocity = [recognizer velocityInView:recognizer.view];
     CGPoint translation = [recognizer translationInView:recognizer.view];
     

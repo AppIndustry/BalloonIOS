@@ -22,8 +22,7 @@
 
 @implementation AISinglePlayerSelectionViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -36,14 +35,12 @@
     [self setInitialDesign];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidLayoutSubviews
-{
+- (void)viewDidLayoutSubviews {
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -63,8 +60,9 @@
 }
 
 
--(void)createView
-{
+#pragma mark - Initialize View
+
+- (void)createView {
     fullGameButton = [[UIButton alloc]initWithFrame:CGRectMake(60, self.view.frame.size.height / 4, self.view.frame.size.width - 120, 44)];
     [fullGameButton setTintColor:[UIColor clearColor]];
     [fullGameButton setTitle:@"FULL GAME MODE" forState:UIControlStateNormal];
@@ -101,21 +99,20 @@
     [self.view addSubview:fullGameDescriptionLabel];
 }
 
--(void)setInitialDesign
-{
+- (void)setInitialDesign {
     fullGameButton.titleLabel.font = [AICommonUtils getCustomTypeface:fontCourier ofSize:12];
-    fullGameButton.titleLabel.attributedText = [AICommonUtils createStringWithSpacing:fullGameButton.titleLabel.text spacngValue:4.0 withUnderLine:NO];
+    fullGameButton.titleLabel.attributedText = [AICommonUtils createStringWithSpacing:fullGameButton.titleLabel.text spacingValue:4.0 withUnderLine:NO];
     
     shortGameButton.titleLabel.font = [AICommonUtils getCustomTypeface:fontCourier ofSize:12];
-    shortGameButton.titleLabel.attributedText = [AICommonUtils createStringWithSpacing:shortGameButton.titleLabel.text spacngValue:4.0 withUnderLine:NO];
+    shortGameButton.titleLabel.attributedText = [AICommonUtils createStringWithSpacing:shortGameButton.titleLabel.text spacingValue:4.0 withUnderLine:NO];
     
     fullGameDescriptionLabel.font = [AICommonUtils getCustomTypeface:fontAvenirLight ofSize:12.0];
     fullGameDescriptionLabel.text = @"Player wins when all other players have lost all remaining life balloon.";
-    fullGameDescriptionLabel.attributedText = [AICommonUtils createStringWithSpacing:fullGameDescriptionLabel.text spacngValue:2.0 withUnderLine:NO];
+    fullGameDescriptionLabel.attributedText = [AICommonUtils createStringWithSpacing:fullGameDescriptionLabel.text spacingValue:2.0 withUnderLine:NO];
     
     shortGameDescriptionLabel.font = [AICommonUtils getCustomTypeface:fontAvenirLight ofSize:12.0];
     shortGameDescriptionLabel.text = @"When a player losses all his remaining life balloon, other player with the most number of remaining life balloon win.\n\nIf in any situation two (2) players have the same amount of remaining life balloon, player with the least cumulative card value in his hand wins.";
-    shortGameDescriptionLabel.attributedText = [AICommonUtils createStringWithSpacing:shortGameDescriptionLabel.text spacngValue:2.0 withUnderLine:NO];
+    shortGameDescriptionLabel.attributedText = [AICommonUtils createStringWithSpacing:shortGameDescriptionLabel.text spacingValue:2.0 withUnderLine:NO];
     
     [fullGameDescriptionLabel sizeToFit];
     [shortGameDescriptionLabel sizeToFit];
@@ -124,17 +121,16 @@
 }
 
 
--(void)fullGameMode:(UIButton *)button
-{
+- (void)fullGameMode:(UIButton *)button {
     isGameModeFull = YES;
     
     [self performSegueWithIdentifier:@"NextToSinglePlayerGame" sender:self];
 }
 
--(void)shortGameMode:(UIButton *)button
-{
+- (void)shortGameMode:(UIButton *)button {
     isGameModeFull = NO;
     
     [self performSegueWithIdentifier:@"NextToSinglePlayerGame" sender:self];
 }
+
 @end

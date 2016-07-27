@@ -11,7 +11,6 @@
 		289B26801AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289B267F1AE3C5BC00FF5F4A /* AIGameCardEnlargeView.m */; };
 		28BA8D831ACC3F3500CB91D1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8D821ACC3F3500CB91D1 /* main.m */; };
 		28BA8D861ACC3F3500CB91D1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8D851ACC3F3500CB91D1 /* AppDelegate.m */; };
-		28BA8D891ACC3F3500CB91D1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA8D881ACC3F3500CB91D1 /* ViewController.m */; };
 		28BA8D8C1ACC3F3500CB91D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8D8A1ACC3F3500CB91D1 /* Main.storyboard */; };
 		28BA8D8E1ACC3F3500CB91D1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8D8D1ACC3F3500CB91D1 /* Images.xcassets */; };
 		28BA8D911ACC3F3500CB91D1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BA8D8F1ACC3F3500CB91D1 /* LaunchScreen.xib */; };
@@ -59,8 +58,6 @@
 		28BA8D821ACC3F3500CB91D1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28BA8D841ACC3F3500CB91D1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		28BA8D851ACC3F3500CB91D1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		28BA8D871ACC3F3500CB91D1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		28BA8D881ACC3F3500CB91D1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		28BA8D8B1ACC3F3500CB91D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		28BA8D8D1ACC3F3500CB91D1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		28BA8D901ACC3F3500CB91D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -148,8 +145,6 @@
 			children = (
 				28BA8D841ACC3F3500CB91D1 /* AppDelegate.h */,
 				28BA8D851ACC3F3500CB91D1 /* AppDelegate.m */,
-				28BA8D871ACC3F3500CB91D1 /* ViewController.h */,
-				28BA8D881ACC3F3500CB91D1 /* ViewController.m */,
 				28BA8D8A1ACC3F3500CB91D1 /* Main.storyboard */,
 				28BA8DC71ACC407D00CB91D1 /* Classes */,
 				28BA8DCC1ACC407D00CB91D1 /* CommonUtils */,
@@ -284,7 +279,7 @@
 		28BA8D751ACC3F3500CB91D1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = myAppIndustry;
 				TargetAttributes = {
 					28BA8D7C1ACC3F3500CB91D1 = {
@@ -364,7 +359,6 @@
 			files = (
 				28D0F3531B0850DC00603401 /* AISinglePlayerSelectionViewController.m in Sources */,
 				28BA8DD71ACC407D00CB91D1 /* AIGameCard.m in Sources */,
-				28BA8D891ACC3F3500CB91D1 /* ViewController.m in Sources */,
 				28BA8DD41ACC407D00CB91D1 /* AIGameMenuViewController.m in Sources */,
 				28BA8D861ACC3F3500CB91D1 /* AppDelegate.m in Sources */,
 				28BA8DD81ACC407D00CB91D1 /* AIGameCardImageView.m in Sources */,
@@ -433,6 +427,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -493,12 +488,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mun Fai Leong (GGVZ769AND)";
 				INFOPLIST_FILE = Balloon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.munfai.Balloon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8606f225-85da-4770-8fae-f5f9c392a98f";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -507,12 +503,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mun Fai Leong (GGVZ769AND)";
 				INFOPLIST_FILE = Balloon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.munfai.Balloon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8606f225-85da-4770-8fae-f5f9c392a98f";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -531,6 +528,7 @@
 				);
 				INFOPLIST_FILE = BalloonTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.myappindustry.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balloon.app/Balloon";
 			};
@@ -546,6 +544,7 @@
 				);
 				INFOPLIST_FILE = BalloonTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.myappindustry.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Balloon.app/Balloon";
 			};

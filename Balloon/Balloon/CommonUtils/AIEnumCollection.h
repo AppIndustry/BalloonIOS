@@ -41,7 +41,7 @@ typedef enum {
     fontHelveticaNeueItalic,
     fontHelveticaNeueLight,
     fontHelveticaNeueThin
-}AIFontFamily;
+} AIFontFamily;
 
 typedef enum {
     BorderBottom,

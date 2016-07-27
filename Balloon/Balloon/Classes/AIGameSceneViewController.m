@@ -63,8 +63,7 @@
 
 #pragma mark - ViewDidLoad and etc
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
@@ -75,23 +74,19 @@
     [self startGame];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidLayoutSubviews
-{
+- (void)viewDidLayoutSubviews {
     self.navigationController.navigationBarHidden = NO;
 }
 
 
-
 #pragma mark - Initialize variables before start Game
 
--(void)initializeStartingVariable
-{
+- (void)initializeStartingVariable {
     //create first draw deck and shuffle them
     drawDeckArray = [[self shuffleDrawDeck:[self createFullDeck]] mutableCopy];
     
@@ -164,8 +159,7 @@
 
 }
 
--(void)calculateCardSize
-{
+- (void)calculateCardSize {
     CGFloat viewHeight = self.view.frame.size.height - 64;
     
     cardHeight = (viewHeight - 20 - self.submitButton.frame.size.height) / 2;
@@ -174,14 +168,13 @@
     cardWidth = cardHeight / 1.5;
 }
 
--(NSMutableArray *)createFullDeck
-{
+- (NSMutableArray *)createFullDeck {
     NSMutableArray *tempArray = [[NSMutableArray alloc]init];
     
     NSInteger cardId = 0;
     
-    for (int i = 0; i < 10; i++)
-    {
+    for (int i = 0; i < 10; i++) {
+        
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardCut;
         GameCardObject.cardId = cardId;
@@ -194,8 +187,8 @@
         
     }
     
-    for (int i = 0; i < 20; i++)
-    {
+    for (int i = 0; i < 20; i++) {
+        
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardAddFiveSecond;
         GameCardObject.cardId = cardId;
@@ -208,8 +201,8 @@
         
     }
     
-    for (int i = 0; i < 20; i++)
-    {
+    for (int i = 0; i < 20; i++) {
+        
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardAddTenSecond;
         GameCardObject.cardId = cardId;
@@ -219,11 +212,10 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 6; i++)
-    {
+    for (int i = 0; i < 6; i++) {
+        
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardReverse;
         GameCardObject.cardId = cardId;
@@ -233,11 +225,10 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 6; i++)
-    {
+    for (int i = 0; i < 6; i++) {
+        
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardSkip;
         GameCardObject.cardId = cardId;
@@ -247,11 +238,10 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 4; i++)
-    {
+    for (int i = 0; i < 4; i++) {
+        
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardToSixtySecond;
         GameCardObject.cardId = cardId;
@@ -261,11 +251,9 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 4; i++)
-    {
+    for (int i = 0; i < 4; i++) {
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardToThirtySecond;
         GameCardObject.cardId = cardId;
@@ -275,11 +263,9 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 3; i++)
-    {
+    for (int i = 0; i < 3; i++) {
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardToZeroSecond;
         GameCardObject.cardId = cardId;
@@ -289,11 +275,9 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 2; i++)
-    {
+    for (int i = 0; i < 2; i++) {
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardDrawOne;
         GameCardObject.cardId = cardId;
@@ -303,11 +287,9 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 2; i++)
-    {
+    for (int i = 0; i < 2; i++) {
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardDrawTwo;
         GameCardObject.cardId = cardId;
@@ -317,11 +299,9 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 2; i++)
-    {
+    for (int i = 0; i < 2; i++) {
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardTradeHand;
         GameCardObject.cardId = cardId;
@@ -331,11 +311,9 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 2; i++)
-    {
+    for (int i = 0; i < 2; i++) {
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardDoublePlay;
         GameCardObject.cardId = cardId;
@@ -345,11 +323,9 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
-    for (int i = 0; i < 3; i++)
-    {
+    for (int i = 0; i < 3; i++) {
         GameCardObject = [[AIGameCard alloc]init];
         GameCardObject.cardName = GameCardPop;
         GameCardObject.cardId = cardId;
@@ -359,23 +335,21 @@
         [tempArray addObject:GameCardObject];
         
         cardId += 1;
-        
     }
     
     return tempArray;
 }
 
--(NSMutableArray *)shuffleDrawDeck:(NSMutableArray *)tempFullDeck
-{
+- (NSMutableArray *)shuffleDrawDeck:(NSMutableArray *)tempFullDeck {
+    
     NSMutableArray *tempArray = [[NSMutableArray alloc]init];
 
-    
-    for (int i = 0; i < [tempFullDeck count]; i++)
-    {
+    for (int i = 0; i < [tempFullDeck count]; i++) {
+        
         int randomIndex = arc4random_uniform((int)[tempFullDeck count]);
         
-        if (randomIndex < [tempFullDeck count])
-        {
+        if (randomIndex < [tempFullDeck count]) {
+            
             GameCardObject = [[AIGameCard alloc]init];
             GameCardObject = (AIGameCard *)[tempFullDeck objectAtIndex:randomIndex];
             [tempArray addObject:GameCardObject];
@@ -390,19 +364,16 @@
 }
 
 
--(void)drawCardsToOtherThreePlayers:(NSInteger)numberOfDrawCard
-{
+- (void)drawCardsToOtherThreePlayers:(NSInteger)numberOfDrawCard {
     NSMutableArray *tempA1 = [[NSMutableArray alloc]init];
     NSMutableArray *tempA2 = [[NSMutableArray alloc]init];
     NSMutableArray *tempA3 = [[NSMutableArray alloc]init];
     
-    if ([drawDeckArray count] < (3 * numberOfDrawCard))
-    {
+    if ([drawDeckArray count] < (3 * numberOfDrawCard)) {
         [self reshuffleDiscardDeckIntoDrawDeck];
     }
     
-    for (int i = 0; i < numberOfDrawCard; i++)
-    {
+    for (int i = 0; i < numberOfDrawCard; i++) {
         GameCardObject = [[AIGameCard alloc]init];
         
         GameCardObject = (AIGameCard *)[drawDeckArray objectAtIndex:0];
@@ -419,34 +390,30 @@
         [drawDeckArray removeObjectAtIndex:0];
     }
     
-    switch (nextPlayerIDTurn)
-    {
-        case 0:
-        {
+    switch (nextPlayerIDTurn) {
+        
+        case 0: {
             [playerHandArray1 addObjectsFromArray:tempA1];
             [playerHandArray2 addObjectsFromArray:tempA2];
             [playerHandArray3 addObjectsFromArray:tempA3];
         }
             break;
             
-        case 1:
-        {
+        case 1: {
             [playerHandArray0 addObjectsFromArray:tempA1];
             [playerHandArray2 addObjectsFromArray:tempA2];
             [playerHandArray3 addObjectsFromArray:tempA3];
         }
             break;
             
-        case 2:
-        {
+        case 2: {
             [playerHandArray0 addObjectsFromArray:tempA1];
             [playerHandArray1 addObjectsFromArray:tempA2];
             [playerHandArray3 addObjectsFromArray:tempA3];
         }
             break;
             
-        case 3:
-        {
+        case 3: {
             [playerHandArray0 addObjectsFromArray:tempA1];
             [playerHandArray1 addObjectsFromArray:tempA2];
             [playerHandArray2 addObjectsFromArray:tempA3];
@@ -454,10 +421,9 @@
             break;
     }
     
-    for (int i = 0; i < 4; i++)
-    {
-        if ([self checkPlayerHasLostAllLifeForPlayerId:i])
-        {
+    for (int i = 0; i < 4; i++) {
+        
+        if ([self checkPlayerHasLostAllLifeForPlayerId:i]) {
             [self discardAllPlayerHandCardsIfPlayerHasLostAllLifeForPlayerId:i];
         }
     }
@@ -467,8 +433,7 @@
     [self rearrangeOpponentCardNumberAndViewForPlayerID:nextPlayerIDTurn isRearrangeAllPlayer:YES];
 }
 
--(void)reshuffleDiscardDeckIntoDrawDeck
-{
+- (void)reshuffleDiscardDeckIntoDrawDeck {
     [drawDeckArray addObjectsFromArray:discardDeckArray];
     
     discardDeckArray = [[NSMutableArray alloc]init];
@@ -485,15 +450,13 @@
 }
 
 
--(void)rearrangePlayerCardView
-{
+- (void)rearrangePlayerCardView {
     [self clearAllCardsFromView];
     
     [self showCardsToScreen];
 }
 
--(void)distributeCardsToPlayers:(BOOL)isStartingDistribute
-{
+- (void)distributeCardsToPlayers:(BOOL)isStartingDistribute {
     if (isStartingDistribute)
     {
         for (int i = 0; i < 7; i++)
@@ -558,13 +521,9 @@
 
 
 
-
-
-
 /*** display cards onto screen ***/
 
--(void)showCardsToScreen
-{
+- (void)showCardsToScreen {
     CGFloat xCoordinate = 20;
     CGFloat cardDistance = (self.view.frame.size.width - 40 - cardWidth/2) / 7;
     
@@ -588,8 +547,7 @@
     }
 }
 
--(void)showDiscardAndDrawDeck:(BOOL)isStartingDistribute
-{
+- (void)showDiscardAndDrawDeck:(BOOL)isStartingDistribute {
     if (isStartingDistribute)
     {
         CGFloat xCoordinate = (self.view.frame.size.width - 40 - (cardWidth * 2)) / 3;
@@ -640,8 +598,7 @@
 
 /***** ACTIONS TO SHOW OPPONENTS CARDS VIEW AND NUMBER *****/
 
--(void)showOpponentsCardView
-{
+- (void)showOpponentsCardView {
     UIColor *bgColor = [UIColor clearColor];
     
     computerCardView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 104, 20, 200)];
@@ -703,8 +660,7 @@
     }
 }
 
--(void)rearrangeOpponentCardNumberAndViewForPlayerID:(int)playerID isRearrangeAllPlayer:(BOOL)isRearrangeAllPlayer
-{
+- (void)rearrangeOpponentCardNumberAndViewForPlayerID:(int)playerID isRearrangeAllPlayer:(BOOL)isRearrangeAllPlayer {
     int tempCurrentPlayerID = nextPlayerIDTurn;
     
     if (isRearrangeAllPlayer)
@@ -723,8 +679,7 @@
     nextPlayerIDTurn = tempCurrentPlayerID;
 }
 
--(void)processRearrangeOpponentsCardView:(int)playerID
-{
+- (void)processRearrangeOpponentsCardView:(int)playerID {
     nextPlayerIDTurn = playerID;
     NSMutableArray *tempArray = [self getCurrentPlayerHandArray];
     
@@ -844,8 +799,7 @@
 
 /*** ACTIONS TO SHOW LIFE VIEW FOR ALL PLAYERS ***/
 
--(void)showPlayerLifeView
-{
+- (void)showPlayerLifeView {
     UIColor *bgColor = [UIColor clearColor];
     
     computerLifeView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 220, 20, 200)];
@@ -926,8 +880,7 @@
     }
 }
 
--(void)deductPlayerLifeViewForPlayerID:(int)playerID
-{
+- (void)deductPlayerLifeViewForPlayerID:(int)playerID {
     if (playerID == 0)
     {
         int life = [[playerLifeCountDictionary objectForKey:@"player0"] intValue];
@@ -985,8 +938,7 @@
 
 /*** clear all player cards from view ***/
 
--(void)clearAllCardsFromView
-{
+- (void)clearAllCardsFromView {
     for (AIGameCardImageView *cardView in self.view.subviews)
     {
         if ([cardView isMemberOfClass:[AIGameCardImageView class]])
@@ -1000,11 +952,9 @@
 }
 
 
-
 /*** update labels ***/
 
--(void)addLifeCountAndTimeCountLabel
-{
+- (void)addLifeCountAndTimeCountLabel {
     CGFloat height = 17;
     CGFloat width = 150;
     CGFloat frameHeight = self.view.frame.size.height;
@@ -1019,8 +969,7 @@
     [self updateTimeCountAndLifeCount:YES];
 }
 
--(void)updateTimeCountAndLifeCount:(BOOL)updateLifeCount
-{
+- (void)updateTimeCountAndLifeCount:(BOOL)updateLifeCount {
     timeCountLabel.text = [NSString stringWithFormat:@"Time: %i", timeCount];
     
     self.navigationItem.title = [NSString stringWithFormat:@"Time: %i", timeCount];
@@ -1040,8 +989,7 @@
 
 #pragma mark - IBAction by UIButton
 
-- (IBAction)SubmitCardSelection:(id)sender
-{
+- (IBAction)SubmitCardSelection:(id)sender {
     if (nextPlayerIDTurn == userID && selectedCardIndex > 0)
     {
         [self setSubmitButtonEnabled:NO];
@@ -1115,12 +1063,9 @@
 }
 
 
-
-
 #pragma mark - Game Play
 
--(void)startGame
-{
+- (void)startGame {
     int randomNumber = arc4random_uniform(4);
 
     nextPlayerIDTurn = randomNumber;
@@ -1162,12 +1107,9 @@
 }
 
 
-
-
 #pragma mark - Helper Methods
 
--(void)addGameCardIntoDiscardDeck:(AIGameCard *)cardObject
-{
+- (void)addGameCardIntoDiscardDeck:(AIGameCard *)cardObject {
     if (discardDeckArray)
         [discardDeckArray addObject:cardObject];
     
@@ -1180,9 +1122,7 @@
 //    }
 }
 
-
--(void)nextPlayerTurn:(BOOL)isPlayerSkip
-{
+- (void)nextPlayerTurn:(BOOL)isPlayerSkip {
     int numberAdd = 1;
     
     if (isPlayerSkip)
@@ -1270,9 +1210,7 @@
     
 }
 
-
--(NSString *)getCardNameInString:(AIGameCardName)cardName
-{
+- (NSString *)getCardNameInString:(AIGameCardName)cardName {
     NSString *tempString;
     
     switch (cardName) {
@@ -1333,13 +1271,9 @@
 }
 
 
-
-
 /******* ACTIONS FOR SETTING BUTTON ATTRIBUTES *********/
 
-
--(void)setSubmitButtonAttritbute
-{
+- (void)setSubmitButtonAttritbute {
     [self.submitButton setTitle:@"Your turn (Tap here to confirm selection)" forState:UIControlStateNormal];
     [self.submitButton setTitle:@"Waiting" forState:UIControlStateDisabled];
     
@@ -1351,18 +1285,14 @@
     [self setSubmitButtonEnabled:NO];
 }
 
--(void)setSubmitButtonEnabled:(BOOL)enabled
-{
+- (void)setSubmitButtonEnabled:(BOOL)enabled {
     [self.submitButton setEnabled:enabled];
 }
 
 
-
 /******* ACTIONS FOR AUTOMATING AI PLAYERS *********/
 
-
--(void)automateAIPlayer
-{
+- (void)automateAIPlayer {
     if (nextPlayerIDTurn != userID)
     {
         NSMutableArray *tempUserArray = [[NSMutableArray alloc]init];
@@ -1575,8 +1505,7 @@
     }
 }
 
--(void)automateAIPlayerDiscardCard:(NSMutableArray *)tempUserArray selectedCardIndex:(NSInteger)tempSelectedCardIndex
-{
+- (void)automateAIPlayerDiscardCard:(NSMutableArray *)tempUserArray selectedCardIndex:(NSInteger)tempSelectedCardIndex {
     AIGameCard *tempGameCardObject = [[AIGameCard alloc]init];
     tempGameCardObject = (AIGameCard *)[tempUserArray objectAtIndex:tempSelectedCardIndex];
     
@@ -1594,12 +1523,9 @@
 }
 
 
-
-
 /******* ACTIONS FOR GETTING AND ASSIGNING PLAYER HAND ARRAY *********/
 
--(NSMutableArray *)getCurrentPlayerHandArray
-{
+- (NSMutableArray *)getCurrentPlayerHandArray {
     NSMutableArray *tempUserArray = [[NSMutableArray alloc]init];
     
     switch (nextPlayerIDTurn)
@@ -1624,8 +1550,7 @@
     return tempUserArray;
 }
 
--(NSMutableArray *)getCurrentPlayerHandArrayForPlayerId:(int)playerId
-{
+- (NSMutableArray *)getCurrentPlayerHandArrayForPlayerId:(int)playerId {
     NSMutableArray *tempUserArray = [[NSMutableArray alloc]init];
     
     switch (playerId)
@@ -1650,9 +1575,7 @@
     return tempUserArray;
 }
 
-
--(void)assignCurrentPlayerHandArray:(NSMutableArray *)tempUserArray
-{
+- (void)assignCurrentPlayerHandArray:(NSMutableArray *)tempUserArray {
     switch (nextPlayerIDTurn)
     {
         case 0:
@@ -1673,8 +1596,7 @@
     }
 }
 
--(void)assignCurrentPlayerHandArray:(NSMutableArray *)tempUserArray forPlayerId:(int)playerId
-{
+- (void)assignCurrentPlayerHandArray:(NSMutableArray *)tempUserArray forPlayerId:(int)playerId {
     switch (playerId)
     {
         case 0:
@@ -1694,15 +1616,11 @@
             break;
     }
 }
-
-
 
 
 /******* ACTIONS FOR OPERATIONS CALCULATION *********/
 
-
--(void)cardSelectionValidation:(AIGameCard *)selectedCardObject
-{
+- (void)cardSelectionValidation:(AIGameCard *)selectedCardObject {
     BOOL hasPopped = NO;
     
     //validation first before post operation
@@ -1737,8 +1655,7 @@
     
 }
 
--(void)performPostOperation:(AIGameCard *)cardObject hasPopped:(BOOL)hasPopped
-{
+- (void)performPostOperation:(AIGameCard *)cardObject hasPopped:(BOOL)hasPopped {
     BOOL isPlayerSkip = NO;
     BOOL hasDonePostOperation = YES;
     
@@ -1927,19 +1844,17 @@
     }
 }
 
--(void)processPostOperation:(BOOL)isPlayerSkip cardName:(AIGameCardName)cardName hasPopped:(BOOL)hasPopped
-{
+- (void)processPostOperation:(BOOL)isPlayerSkip cardName:(AIGameCardName)cardName hasPopped:(BOOL)hasPopped {
     [self animateDiscardGameCardAnimation:isPlayerSkip cardName:cardName hasPopped:hasPopped];
 }
 
--(void)animateDiscardGameCardAnimation:(BOOL)isPlayerSkip cardName:(AIGameCardName)cardName hasPopped:(BOOL)hasPopped
-{
+- (void)animateDiscardGameCardAnimation:(BOOL)isPlayerSkip cardName:(AIGameCardName)cardName hasPopped:(BOOL)hasPopped {
     CGFloat x = (self.view.frame.size.width - 40 - (cardWidth * 2)) / 3;
     x += 20;
     
     CGRect discardDeckFrame = CGRectMake(x, 104, cardWidth, cardHeight);
     
-    CGRect playerHandFrame;
+    CGRect playerHandFrame = CGRectZero;
     
     switch (nextPlayerIDTurn)
     {
@@ -2047,8 +1962,7 @@
     }];
 }
 
--(void)completeOneProcessOperation:(BOOL)isPlayerSkip
-{
+- (void)completeOneProcessOperation:(BOOL)isPlayerSkip {
     [self rearrangePlayerCardView];
     
     [self nextPlayerTurn:isPlayerSkip];
@@ -2057,27 +1971,22 @@
 
 /******* ACTIONS FOR DOUBLE PLAY CONTROLS *********/
 
--(void)resetDoublePlayFlag
-{
+- (void)resetDoublePlayFlag {
     hasCompleteDoublePlay = YES;
     isDoublePlayNeeded = NO;
 }
 
 
-
 /******* ACTIONS FOR DEDUCTING LIFE COUNT *********/
 
-
--(BOOL)checkIfTimeCountExceedLimit
-{
+- (BOOL)checkIfTimeCountExceedLimit {
     if (timeCount > 60)
         return YES;
     else
         return NO;
 }
 
--(BOOL)checkIfPlayerIsOutOfCards:(BOOL)showLogMessage
-{
+- (BOOL)checkIfPlayerIsOutOfCards:(BOOL)showLogMessage {
     BOOL playerIsOutOfCards = NO;
     
     NSMutableArray *tempArray = [self getCurrentPlayerHandArray];
@@ -2093,8 +2002,7 @@
     return playerIsOutOfCards;
 }
 
--(void)deductPlayerLifeCountByOne
-{
+- (void)deductPlayerLifeCountByOne {
     NSString *tempCount = [playerLifeCountDictionary objectForKey:[NSString stringWithFormat:@"player%i", nextPlayerIDTurn]];
     int lifeCount = [tempCount intValue] - 1;
     
@@ -2109,8 +2017,7 @@
     NSLog(@"%@", playerLifeLostMessage);
 }
 
--(void)deductOtherPlayersLifeCountByOne
-{
+- (void)deductOtherPlayersLifeCountByOne {
     for (int i = 0; i < 4; i++)
     {
         NSString *tempCount = [playerLifeCountDictionary objectForKey:[NSString stringWithFormat:@"player%i", i]];
@@ -2133,14 +2040,12 @@
     NSLog(@"%@", playerLifeLostMessage);
 }
 
--(void)resetTimeCountAndIsBalloonPopFlag
-{
+- (void)resetTimeCountAndIsBalloonPopFlag {
     timeCount = 0;
     isBalloonPop = NO;
 }
 
--(void)showPlayerLifeLostPopupMessage
-{
+- (void)showPlayerLifeLostPopupMessage {
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Popped!" message:playerLifeLostMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     alert.tag = 3;
     [alert show];
@@ -2149,9 +2054,7 @@
 
 /******* ACTIONS FOR PLAYER LOSING ALL LIFE *********/
 
-
--(BOOL)checkPlayerHasLostAllLifeForPlayerId:(int)playerId
-{
+- (BOOL)checkPlayerHasLostAllLifeForPlayerId:(int)playerId {
     BOOL hasLostAllLife = NO;
     
     NSString *tempCount = [playerLifeCountDictionary objectForKey:[NSString stringWithFormat:@"player%i", playerId]];
@@ -2164,8 +2067,7 @@
     return hasLostAllLife;
 }
 
--(void)discardAllPlayerHandCardsIfPlayerHasLostAllLifeForPlayerId:(int)playerId
-{
+- (void)discardAllPlayerHandCardsIfPlayerHasLostAllLifeForPlayerId:(int)playerId {
     NSMutableArray *tempArray = [self getCurrentPlayerHandArrayForPlayerId:playerId];
     
     [discardDeckArray addObjectsFromArray:tempArray];
@@ -2176,11 +2078,9 @@
 }
 
 
-
 /******* ACTIONS FOR GAME OVER *********/
 
--(BOOL)checkIfGameIsOver
-{
+- (BOOL)checkIfGameIsOver {
     BOOL gameOver = NO;
     
     int tempA, tempB, tempC, tempD;
@@ -2292,8 +2192,7 @@
     return gameOver;
 }
 
--(void)showGameOverPopupMessage
-{
+- (void)showGameOverPopupMessage {
     UIAlertView *alert;
     
     if (self.isGameModeFull)
@@ -2310,22 +2209,9 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 #pragma mark - AIGameCardImageViewDelegate
 
--(void)tapAtGameCardForId:(NSInteger)cardId arrayIndex:(NSInteger)arrayIndex cardName:(AIGameCardName)cardName
-{
+- (void)tapAtGameCardForId:(NSInteger)cardId arrayIndex:(NSInteger)arrayIndex cardName:(AIGameCardName)cardName {
     NSLog(@"index: %lu, selected %@", (long)arrayIndex, [self getCardNameInString:cardName]);
     
     for (AIGameCardImageView *card in self.view.subviews)
@@ -2348,8 +2234,7 @@
     selectedCardIndex = arrayIndex;
 }
 
--(void)didLongPressAtGameCardImageViewForZoom:(UIImageView *)imageView cardId:(NSInteger)cardId cardName:(AIGameCardName)cardName
-{
+- (void)didLongPressAtGameCardImageViewForZoom:(UIImageView *)imageView cardId:(NSInteger)cardId cardName:(AIGameCardName)cardName {
     if (!hasDisplayEnlargeView)
     {
         hasDisplayEnlargeView = YES;
@@ -2368,16 +2253,14 @@
 
 #pragma mark - AIGameCardEnlargeViewDelegate
 
--(void)didDismissGameCardEnlargeView:(AIGameCardEnlargeView *)myEnlargeView
-{
+- (void)didDismissGameCardEnlargeView:(AIGameCardEnlargeView *)myEnlargeView {
     GameCardEnlargeView = nil;
     hasDisplayEnlargeView = NO;
 }
 
 #pragma mark - UIAlertViewDelegate
 
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     //game over alert view
     if (alertView.tag == 1)
     {

@@ -17,17 +17,19 @@
 @property (nonatomic) NSInteger arrayIndex;
 @property (nonatomic) NSInteger cardId;
 
-
 @property (nonatomic) id <AIGameCardImageViewDelegate> delegate;
 
 @end
+
+
+#pragma mark - Delegate
 
 @protocol AIGameCardImageViewDelegate <NSObject>
 
 @optional
 
--(void)tapAtGameCardForId:(NSInteger)cardId arrayIndex:(NSInteger)arrayIndex cardName:(AIGameCardName)cardName;
+- (void)tapAtGameCardForId:(NSInteger)cardId arrayIndex:(NSInteger)arrayIndex cardName:(AIGameCardName)cardName;
 
--(void)didLongPressAtGameCardImageViewForZoom:(UIImageView *)imageView cardId:(NSInteger)cardId cardName:(AIGameCardName)cardName;
+- (void)didLongPressAtGameCardImageViewForZoom:(UIImageView *)imageView cardId:(NSInteger)cardId cardName:(AIGameCardName)cardName;
 
 @end

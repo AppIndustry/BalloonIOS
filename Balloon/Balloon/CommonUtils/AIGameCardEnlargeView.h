@@ -28,6 +28,6 @@
 
 @required
 
--(void)didDismissGameCardEnlargeView:(AIGameCardEnlargeView *)myEnlargeView;
+- (void)didDismissGameCardEnlargeView:(AIGameCardEnlargeView *)myEnlargeView;
 
 @end
