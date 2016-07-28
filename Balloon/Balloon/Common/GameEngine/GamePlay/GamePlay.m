@@ -8,6 +8,10 @@
 
 #import "GamePlay.h"
 
+#define kMAXIMUM_TIME_COUNT 60
+#define kMINIMUM_TIME_COUNT 0
+#define kPLAYER @"player"
+
 @implementation GamePlay
 
 - (instancetype)init {
@@ -21,78 +25,235 @@
     return self;
 }
 
+#pragma mark - Setting up Variables
+
 - (void)initializeStartingVariable {
+    
+    //initialize Default Game Settings
+    self.settings = [[GameInGameSettings alloc]init];
+    
     //create first draw deck and shuffle them
-    _drawDeck = [[GameCardDeck alloc]initWithDeck];
+    self.drawDeck = [[GameCardDeck alloc]initWithDeck];
     
     //initialize discard deck
-    _discardDeck = [[GameCardDeck alloc]init];
+    self.discardDeck = [[GameCardDeck alloc]init];
     
     //set play direction
-    _isForwardPlay = YES;
+    self.isForwardPlay = YES;
     
     //set default number of cards to play
-    _isDoublePlayNeeded = NO;
+    self.isDoublePlayNeeded = NO;
     
     //set balloon pop
-    _isBalloonPop = NO;
+    self.isBalloonPop = NO;
     
     //set enlarge view flag
-    _hasDisplayEnlargeView = NO;
+    self.hasDisplayEnlargeView = NO;
     
     //set double play flag
-    _hasCompleteDoublePlay = YES;
+    self.hasCompleteDoublePlay = YES;
     
     //set flag for giving warning to player when selecting double play
-    _hasGivenWarningForDoublePlay = NO;
+    self.hasGivenWarningForDoublePlay = NO;
     
-    /*
-    //set previous card id for selection color to default 0
-    previousCardId = 0;
+    //set starting time count
+    self.currentTimeCount = kMINIMUM_TIME_COUNT;
     
-    //initialize player hand array
-    playerHandArray0 = [[NSMutableArray alloc]init];
-    playerHandArray1 = [[NSMutableArray alloc]init];
-    playerHandArray2 = [[NSMutableArray alloc]init];
-    playerHandArray3 = [[NSMutableArray alloc]init];
+    //set initial player turn ID
+    self.nextTurnPlayerID = 0;
+}
+
+- (void)setupPlayerVariables {
     
-    //set initial player life in NSMutableDictionary
-    playerLifeCountDictionary = [[NSMutableDictionary alloc]init];
-    NSString *tempNum = @"3";
-    [playerLifeCountDictionary setObject:tempNum forKey:@"player0"];
-    [playerLifeCountDictionary setObject:tempNum forKey:@"player1"];
-    [playerLifeCountDictionary setObject:tempNum forKey:@"player2"];
-    [playerLifeCountDictionary setObject:tempNum forKey:@"player3"];
+    self.playersDictionary = [[NSMutableDictionary alloc]init];
     
-    //set initial count
-    nextPlayerIDTurn = 0;
-    timeCount = 0;
-    userID = 0;
+    for (int i = 0; i < self.settings.numberOfPlayers; i++) {
+        
+        NSString * userId = [NSString stringWithFormat:@"%@%i", kPLAYER, i];
+        
+        GamePlayer * player = [[GamePlayer alloc]init];
+        player.index = i;
+        player.userID = userId;
+        player.playerHand = [[NSMutableArray alloc] init];
+        player.lifeCount = self.settings.lifePerPlayer;
+        
+        [self.playersDictionary setObject:player forKey:userId];
+    }
+}
+
+- (void)distributeCardsToPlayers:(BOOL)isStartingDistribute {
     
-    //calculate card frame size before drawing any cards to screen
-    [self calculateCardSize];
+    //Distribute cards during start of the game where everyone's playerHand is empty
+    if (isStartingDistribute) {
+        
+        for (int i = 0; i < self.settings.cardPerPlayer; i++) {
+            
+            for (int j = 0; j < self.settings.numberOfPlayers; j++) {
+                
+                AIGameCard * card = (AIGameCard *)[self.drawDeck objectAtIndex:0];
+                
+                NSString * userId = [self getUserID:j];
+                
+                GamePlayer * player = (GamePlayer *)[self.playersDictionary objectForKey:userId];
+                
+                if (player != nil && player.playerHand != nil) {
+                    [player.playerHand addObject:card];
+                }
+            
+                [self.drawDeck removeObjectAtIndex:0];
+                
+                [self.playersDictionary setObject:player forKey:userId];
+            }
+        }
+    }
     
-    //set button attribute
-    [self setSubmitButtonAttritbute];
+    //Distribute cards to player during each round to refill up their play hand
+    else {
+        
+        for (int i = 0; i < self.settings.numberOfPlayers; i++) {
+            
+            NSString * userId = [self getUserID:i];
+            
+            GamePlayer * player = (GamePlayer *)[self.playersDictionary objectForKey:userId];
+            
+            if (player.lifeCount > 0) {
+                
+                while (player.playerHand.count < self.settings.cardPerPlayer) {
+                    
+                    AIGameCard * card = (AIGameCard *)[self.drawDeck objectAtIndex:0];
+                    
+                    [player.playerHand addObject:card];
+                    
+                    [self.drawDeck removeObjectAtIndex:0];
+                }
+            }
+            
+            [self.playersDictionary setObject:player forKey:userId];
+        }
+    }
+}
+
+- (NSString *)getUserID:(int)userID {
+    return [NSString stringWithFormat:@"%@%i", kPLAYER, userID];
+}
+
+#pragma mark - Game Flow
+
+- (void)startGame {
     
-    //add lifeCount and timeCount labels to screen
-    [self addLifeCountAndTimeCountLabel];
+    int randomNumber = arc4random_uniform(4);
     
-    //show life count view
-    [self showPlayerLifeView];
+    self.nextTurnPlayerID = randomNumber;
     
-    //distribute card to players
-    [self distributeCardsToPlayers:YES];
+    self.nextTurnPlayerID -= 1;
     
-    //show draw deck and discard deck
-    [self showDiscardAndDrawDeck:YES];
+    if (self.nextTurnPlayerID == -1) {
+        self.nextTurnPlayerID = self.settings.numberOfPlayers - 1;
+    }
     
-    //display cards on the screen
-    [self showCardsToScreen];
+    //inform user to start game
+}
+
+- (void)discardGameCard:(AIGameCard *)card {
     
-    //display opponent number card view and their number of cards indicator
-    [self showOpponentsCardView];
-    */
+    if (self.discardDeck) {
+         [self.discardDeck addObject:card];
+    }
+}
+
+- (void)nextPlayerTurn:(BOOL)isPlayerSkip {
+    
+    int numberAdd = 1;
+    
+    if (isPlayerSkip) {
+        numberAdd = 2;
+    }
+    
+    for (int i = 0; i < numberAdd; i++) {
+        
+        if (self.isForwardPlay) {
+            
+            self.nextTurnPlayerID  += 1;
+            
+            if (self.nextTurnPlayerID == self.settings.numberOfPlayers) {
+                self.nextTurnPlayerID = 0;
+            }
+            
+            NSString * userID = [self getUserID:self.nextTurnPlayerID];
+            
+            GamePlayer * player = [self.playersDictionary objectForKey:userID];
+            
+            if (player.lifeCount <= 0) {
+                
+                self.nextTurnPlayerID += 1;
+                
+                if (self.nextTurnPlayerID == self.settings.numberOfPlayers) {
+                    self.nextTurnPlayerID = 0;
+                }
+            }
+        }
+        
+        else {
+        
+            self.nextTurnPlayerID -= 1;
+            
+            if (self.nextTurnPlayerID == -1) {
+                self.nextTurnPlayerID = self.settings.numberOfPlayers - 1;
+            }
+            
+            NSString * userID = [self getUserID:self.nextTurnPlayerID];
+            
+            GamePlayer * player = [self.playersDictionary objectForKey:userID];
+            
+            if (player.lifeCount <= 0) {
+                self.nextTurnPlayerID -= 1;
+                
+                if (self.nextTurnPlayerID == -1) {
+                    self.nextTurnPlayerID = self.settings.numberOfPlayers - 1;
+                }
+            }
+        }
+    }
+    
+    if (self.isDoublePlayNeeded && self.hasCompleteDoublePlay) {
+        
+        if (!self.isForwardPlay) {
+            
+            self.nextTurnPlayerID  += 1;
+            
+            if (self.nextTurnPlayerID == self.settings.numberOfPlayers) {
+                self.nextTurnPlayerID = 0;
+            }
+        }
+        else {
+            
+            self.nextTurnPlayerID -= 1;
+            
+            if (self.nextTurnPlayerID == -1) {
+                self.nextTurnPlayerID = self.settings.numberOfPlayers - 1;
+            }
+        }
+    }
+    
+    NSString * userId = [self getUserID:self.nextTurnPlayerID];
+    
+    GamePlayer * player = (GamePlayer *)[self.playersDictionary objectForKey:userId];
+    
+    if (player.lifeCount > 0)
+    {
+        /*
+        if (nextPlayerIDTurn == userID) {
+            
+        }
+        else {
+            //[self automateAIPlayer];
+        }*/
+    }
+    else {
+        [self nextPlayerTurn:NO];
+    }
+    
+    
 }
 
 @end

@@ -10,6 +10,7 @@
 
 @interface GamePlayer : NSObject
 
+@property (nonatomic) int index;
 @property (nonatomic, strong) NSString * userID;
 @property (nonatomic) NSInteger lifeCount;
 @property (nonatomic, strong) NSMutableArray * playerHand;

@@ -41,6 +41,8 @@
 		BC1DD13A1D488F0900B618B5 /* GameMechanics.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1391D488F0900B618B5 /* GameMechanics.m */; };
 		BC1DD13E1D48979000B618B5 /* GamePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD13D1D48979000B618B5 /* GamePlayer.m */; };
 		BC1DD1411D48A1D600B618B5 /* GameCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1401D48A1D600B618B5 /* GameCardDeck.m */; };
+		BC1DD1451D49B3DE00B618B5 /* GameInGameSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1441D49B3DE00B618B5 /* GameInGameSettings.m */; };
+		BC1DD1481D49B3F300B618B5 /* GameWorldSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1471D49B3F300B618B5 /* GameWorldSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,10 @@
 		BC1DD13D1D48979000B618B5 /* GamePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GamePlayer.m; path = Common/GameEngine/GameObject/GamePlayer.m; sourceTree = "<group>"; };
 		BC1DD13F1D48A1D600B618B5 /* GameCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameCardDeck.h; path = Common/GameEngine/GameObject/GameCardDeck.h; sourceTree = "<group>"; };
 		BC1DD1401D48A1D600B618B5 /* GameCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameCardDeck.m; path = Common/GameEngine/GameObject/GameCardDeck.m; sourceTree = "<group>"; };
+		BC1DD1431D49B3DE00B618B5 /* GameInGameSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameInGameSettings.h; path = Common/GameEngine/GameSettings/GameInGameSettings.h; sourceTree = "<group>"; };
+		BC1DD1441D49B3DE00B618B5 /* GameInGameSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameInGameSettings.m; path = Common/GameEngine/GameSettings/GameInGameSettings.m; sourceTree = "<group>"; };
+		BC1DD1461D49B3F300B618B5 /* GameWorldSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameWorldSettings.h; path = Common/GameEngine/GameSettings/GameWorldSettings.h; sourceTree = "<group>"; };
+		BC1DD1471D49B3F300B618B5 /* GameWorldSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameWorldSettings.m; path = Common/GameEngine/GameSettings/GameWorldSettings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +273,7 @@
 		BC1DD12C1D48766500B618B5 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				BC1DD1421D49B39700B618B5 /* GameSettings */,
 				BC1DD13B1D48977200B618B5 /* GameObject */,
 				BC1DD12D1D48770800B618B5 /* GamePlay */,
 				BC1DD12E1D48771200B618B5 /* GameMechanics */,
@@ -301,6 +308,17 @@
 				BC1DD1401D48A1D600B618B5 /* GameCardDeck.m */,
 			);
 			name = GameObject;
+			sourceTree = "<group>";
+		};
+		BC1DD1421D49B39700B618B5 /* GameSettings */ = {
+			isa = PBXGroup;
+			children = (
+				BC1DD1431D49B3DE00B618B5 /* GameInGameSettings.h */,
+				BC1DD1441D49B3DE00B618B5 /* GameInGameSettings.m */,
+				BC1DD1461D49B3F300B618B5 /* GameWorldSettings.h */,
+				BC1DD1471D49B3F300B618B5 /* GameWorldSettings.m */,
+			);
+			name = GameSettings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,10 +450,12 @@
 				BC1DD12A1D48758E00B618B5 /* AIGameCardEnlargeView.m in Sources */,
 				28D0F3531B0850DC00603401 /* AISinglePlayerSelectionViewController.m in Sources */,
 				28BA8DD41ACC407D00CB91D1 /* AIGameMenuViewController.m in Sources */,
+				BC1DD1451D49B3DE00B618B5 /* GameInGameSettings.m in Sources */,
 				BC1DD13A1D488F0900B618B5 /* GameMechanics.m in Sources */,
 				28BA8D861ACC3F3500CB91D1 /* AppDelegate.m in Sources */,
 				28BA8DD51ACC407D00CB91D1 /* AIGameSceneViewController.m in Sources */,
 				28BA8DD61ACC407D00CB91D1 /* AICommonUtils.m in Sources */,
+				BC1DD1481D49B3F300B618B5 /* GameWorldSettings.m in Sources */,
 				28BA8D831ACC3F3500CB91D1 /* main.m in Sources */,
 				BC1DD12B1D48758E00B618B5 /* AIGameCardImageView.m in Sources */,
 			);

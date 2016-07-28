@@ -37,7 +37,10 @@
     
     NSMutableDictionary *playerLifeCountDictionary;
     
-    int nextPlayerIDTurn, timeCount, userID;
+    int nextPlayerIDTurn, timeCount;
+    
+    //Player user ID, for current Device
+    int userID;
     NSInteger selectedCardIndex;
     NSInteger previousCardId;
     
@@ -806,6 +809,7 @@
 
 //UIView
 - (void)showPlayerLifeView {
+    
     UIColor *bgColor = [UIColor clearColor];
     
     computerLifeView1 = [[UIView alloc]initWithFrame:CGRectMake(0, 220, 20, 200)];
@@ -827,8 +831,7 @@
     
     CGFloat yPosition = 15;
     
-    for (int i = 1; i <= 3; i++)
-    {
+    for (int i = 1; i <= 3; i++) {
         UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(6, yPosition, 8, 8)];
         circleView.backgroundColor = [UIColor redColor];
         circleView.layer.cornerRadius = circleView.frame.size.height / 2;
@@ -842,8 +845,8 @@
     
     yPosition = 15;
     
-    for (int i = 1; i <= 3; i++)
-    {
+    for (int i = 1; i <= 3; i++) {
+        
         UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(6, yPosition, 8, 8)];
         circleView.backgroundColor = [UIColor redColor];
         circleView.layer.cornerRadius = circleView.frame.size.height / 2;
@@ -857,8 +860,8 @@
     
     yPosition = 15;
     
-    for (int i = 1; i <= 3; i++)
-    {
+    for (int i = 1; i <= 3; i++) {
+        
         UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(yPosition, 6, 8, 8)];
         circleView.backgroundColor = [UIColor redColor];
         circleView.layer.cornerRadius = circleView.frame.size.height / 2;
@@ -872,8 +875,8 @@
     
     yPosition = 15;
     
-    for (int i = 1; i <= 3; i++)
-    {
+    for (int i = 1; i <= 3; i++) {
+        
         UIView *circleView = [[UIView alloc]initWithFrame:CGRectMake(yPosition, 6, 8, 8)];
         circleView.backgroundColor = [UIColor redColor];
         circleView.layer.cornerRadius = circleView.frame.size.height / 2;
