@@ -43,6 +43,8 @@
 		BC1DD1411D48A1D600B618B5 /* GameCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1401D48A1D600B618B5 /* GameCardDeck.m */; };
 		BC1DD1451D49B3DE00B618B5 /* GameInGameSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1441D49B3DE00B618B5 /* GameInGameSettings.m */; };
 		BC1DD1481D49B3F300B618B5 /* GameWorldSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = BC1DD1471D49B3F300B618B5 /* GameWorldSettings.m */; };
+		BC21C9D21DF7F4F10010A90E /* Localizable.m in Sources */ = {isa = PBXBuildFile; fileRef = BC21C9D11DF7F4F10010A90E /* Localizable.m */; };
+		BC21C9D41DF7F51E0010A90E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BC21C9D31DF7F51E0010A90E /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,9 @@
 		BC1DD1441D49B3DE00B618B5 /* GameInGameSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameInGameSettings.m; path = Common/GameEngine/GameSettings/GameInGameSettings.m; sourceTree = "<group>"; };
 		BC1DD1461D49B3F300B618B5 /* GameWorldSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameWorldSettings.h; path = Common/GameEngine/GameSettings/GameWorldSettings.h; sourceTree = "<group>"; };
 		BC1DD1471D49B3F300B618B5 /* GameWorldSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameWorldSettings.m; path = Common/GameEngine/GameSettings/GameWorldSettings.m; sourceTree = "<group>"; };
+		BC21C9D01DF7F4F10010A90E /* Localizable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Localizable.h; path = Common/Localizable/Localizable.h; sourceTree = "<group>"; };
+		BC21C9D11DF7F4F10010A90E /* Localizable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Localizable.m; path = Common/Localizable/Localizable.m; sourceTree = "<group>"; };
+		BC21C9D31DF7F51E0010A90E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Common/Localizable/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +170,8 @@
 				28BA8D851ACC3F3500CB91D1 /* AppDelegate.m */,
 				28BA8D8A1ACC3F3500CB91D1 /* Main.storyboard */,
 				BC1DD1211D48752E00B618B5 /* Common */,
-				28BA8DC71ACC407D00CB91D1 /* Classes */,
 				28BA8DCC1ACC407D00CB91D1 /* CommonUtils */,
+				28BA8DC71ACC407D00CB91D1 /* Classes */,
 				28BA8D8D1ACC3F3500CB91D1 /* Images.xcassets */,
 				28BA8D8F1ACC3F3500CB91D1 /* LaunchScreen.xib */,
 				28BA8D801ACC3F3500CB91D1 /* Supporting Files */,
@@ -253,6 +258,7 @@
 			children = (
 				BC1DD12C1D48766500B618B5 /* GameEngine */,
 				BC1DD1221D48753400B618B5 /* Object */,
+				BC21C9CF1DF7F4820010A90E /* Localizable */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -321,6 +327,16 @@
 			name = GameSettings;
 			sourceTree = "<group>";
 		};
+		BC21C9CF1DF7F4820010A90E /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				BC21C9D01DF7F4F10010A90E /* Localizable.h */,
+				BC21C9D11DF7F4F10010A90E /* Localizable.m */,
+				BC21C9D31DF7F51E0010A90E /* Localizable.strings */,
+			);
+			name = Localizable;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -365,12 +381,13 @@
 		28BA8D751ACC3F3500CB91D1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = myAppIndustry;
 				TargetAttributes = {
 					28BA8D7C1ACC3F3500CB91D1 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 9RLDP4WJTW;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -412,6 +429,7 @@
 				28BA8DC41ACC3FB700CB91D1 /* ToThirtySecond.png in Resources */,
 				28BA8DC11ACC3FB700CB91D1 /* Reverse.png in Resources */,
 				28BA8DC31ACC3FB700CB91D1 /* TenSecond.png in Resources */,
+				BC21C9D41DF7F51E0010A90E /* Localizable.strings in Resources */,
 				28BA8DB91ACC3FB700CB91D1 /* DoublePlay.png in Resources */,
 				28BA8DBA1ACC3FB700CB91D1 /* DownToZeroSecond.png in Resources */,
 				28BA8DC51ACC3FB700CB91D1 /* TradeHand.png in Resources */,
@@ -453,6 +471,7 @@
 				BC1DD1451D49B3DE00B618B5 /* GameInGameSettings.m in Sources */,
 				BC1DD13A1D488F0900B618B5 /* GameMechanics.m in Sources */,
 				28BA8D861ACC3F3500CB91D1 /* AppDelegate.m in Sources */,
+				BC21C9D21DF7F4F10010A90E /* Localizable.m in Sources */,
 				28BA8DD51ACC407D00CB91D1 /* AIGameSceneViewController.m in Sources */,
 				28BA8DD61ACC407D00CB91D1 /* AICommonUtils.m in Sources */,
 				BC1DD1481D49B3F300B618B5 /* GameWorldSettings.m in Sources */,
@@ -512,8 +531,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -522,6 +543,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -554,8 +576,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -563,6 +587,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -581,6 +606,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mun Fai Leong (GGVZ769AND)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Balloon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -596,6 +622,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Mun Fai Leong (GGVZ769AND)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Balloon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

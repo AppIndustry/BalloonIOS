@@ -2,6 +2,11 @@
 //  AIGameMenuViewController.m
 //  BalloonPopper
 //
+//  Game Menu
+//  Mainly shows the front page of the app
+//  Showed the options of playing individually or multiplayer
+//  Login to game center
+//
 //  Created by Mun Fai Leong on 3/8/15.
 //  Copyright (c) 2015 myAppIndustry. All rights reserved.
 //

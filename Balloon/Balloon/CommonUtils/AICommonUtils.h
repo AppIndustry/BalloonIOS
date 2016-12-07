@@ -13,6 +13,8 @@
 #import "AIGameCardImageView.h"
 #import "AIGameCardEnlargeView.h"
 
+#import "Localizable.h"
+
 @interface AICommonUtils : NSObject
 
 #pragma mark - GET CARD IMAGE

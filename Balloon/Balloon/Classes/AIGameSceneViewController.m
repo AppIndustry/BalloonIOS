@@ -2,6 +2,9 @@
 //  AIGameSceneViewController.m
 //  BalloonPopper
 //
+//  Game Scene
+//  The game play area
+//
 //  Created by Mun Fai Leong on 3/8/15.
 //  Copyright (c) 2015 myAppIndustry. All rights reserved.
 //
