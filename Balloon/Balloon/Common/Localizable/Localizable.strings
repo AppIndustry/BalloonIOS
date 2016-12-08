@@ -5,3 +5,30 @@
   Created by MUNFAI-IT on 07/12/2016.
   Copyright © 2016 myAppIndustry. All rights reserved.
 */
+
+"" = "";
+
+"kLocale_Balloon" = "Balloon";
+"kLocale_Tagline" = "Pop the balloon whenever you are\nanytime, anywhere";
+
+"kLocale_SinglePlayer" = "Single Player";
+"kLocale_MultiPlayer" = "Multi Player";
+
+"kLocale_GameMode_Full" = "Full Game Mode";
+"kLocale_GameMode_Short" = "Short Game Mode";
+"kLocale_GameMode_Full_Description" = "Player wins when all other players have lost all remaining life balloon.";
+"kLocale_GameMode_Short_Description" = "When a player losses all his remaining life balloon, other player with the most number of remaining life balloon win.\n\nIf in any situation two (2) players have the same amount of remaining life balloon, player with the least cumulative card value in his hand wins.";
+
+"kLocale_Player" = "Player";
+"kLocale_Computer" = "Computer";
+
+"kLocale_You" = "You";
+"kLocale_Your" = "Your";
+
+"kLocale_OK" = "OK";
+"kLocale_Cancel" = "Cancel";
+
+"kLocale_Login" = "Login";
+"kLocale_Authenticated" = "Authenticated";
+"kLocale_Unauthenticated" = "Unauthenticated";
+"KLocale_GameCenter_LoginError" = "You are not login to the Game Center";

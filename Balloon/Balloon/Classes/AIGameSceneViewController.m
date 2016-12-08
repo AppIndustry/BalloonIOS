@@ -1080,8 +1080,8 @@
     
     NSString *playerName;
     
-    switch (nextPlayerIDTurn)
-    {
+    switch (nextPlayerIDTurn) {
+            
         case 0:
             playerName = @"You";
             break;
@@ -1104,14 +1104,24 @@
     
     nextPlayerIDTurn -= 1;
     
-    if (nextPlayerIDTurn == -1)
+    if (nextPlayerIDTurn == -1) {
         nextPlayerIDTurn = 3;
+    }
     
+    //UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@ will start the game", playerName] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    //alert.tag = 5;
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:[NSString stringWithFormat:@"%@ will start the game", playerName] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    alert.tag = 5;
+    //[alert show];
     
-    [alert show];
+    UIAlertController * controller = [UIAlertController alertControllerWithTitle:@"Start" message:[NSString stringWithFormat:@"%@ will start the game", playerName] preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction * actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self nextPlayerTurn:NO];
+    }];
+    
+    [controller addAction:actionOK];
+    
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 
@@ -2299,19 +2309,17 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     //game over alert view
-    if (alertView.tag == 1)
-    {
-        if (buttonIndex == 0)
-        {
+    if (alertView.tag == 1) {
+        
+        if (buttonIndex == 0) {
             [self.navigationController popViewControllerAnimated:YES];
         }
-        else if (buttonIndex == 1)
-        {
+        else if (buttonIndex == 1) {
             
         }
     }
-    else if (alertView.tag == 2)  //player trade hand
-    {
+    else if (alertView.tag == 2) {  //player trade hand
+        
         NSString *tempString = [alertView buttonTitleAtIndex:buttonIndex];
         
         tempString = [tempString substringFromIndex:tempString.length - 1];
@@ -2342,12 +2350,10 @@
         
         [self processPostOperation:NO cardName:GameCardTradeHand hasPopped:NO];
     }
-    else if (alertView.tag == 3) //player life lost message
-    {
+    else if (alertView.tag == 3) { //player life lost message
         [self completeOneProcessOperation:NO];
     }
-    else if (alertView.tag == 5) //set start game flow
-    {
+    else if (alertView.tag == 5) { //set start game flow
         [self nextPlayerTurn:NO];
     }
 }

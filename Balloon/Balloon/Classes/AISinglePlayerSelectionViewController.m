@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"Single Player";
+    self.navigationItem.title = [Localizable getLocalizeStringForKey:kLocale_Single_Player];
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     
     [self createView];
@@ -68,7 +68,7 @@
 - (void)createView {
     fullGameButton = [[UIButton alloc]initWithFrame:CGRectMake(60, self.view.frame.size.height / 4, self.view.frame.size.width - 120, 44)];
     [fullGameButton setTintColor:[UIColor clearColor]];
-    [fullGameButton setTitle:@"FULL GAME MODE" forState:UIControlStateNormal];
+    [fullGameButton setTitle:[[Localizable getLocalizeStringForKey:kLocale_GameMode_Full] uppercaseString] forState:UIControlStateNormal];
     [fullGameButton setTitleColor:[AICommonUtils getAIColorWithRGB228:1.0] forState:UIControlStateHighlighted];
     [fullGameButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
     [fullGameButton.layer addSublayer:[AICommonUtils createOneSidedBorderForUIView:fullGameButton Side:BorderBottom]];
@@ -77,7 +77,7 @@
     
     shortGameButton = [[UIButton alloc]initWithFrame:CGRectMake(60, (self.view.frame.size.height / 4) * 2, self.view.frame.size.width - 120, 44)];
     [shortGameButton setTintColor:[UIColor clearColor]];
-    [shortGameButton setTitle:@"SHORT GAME MODE" forState:UIControlStateNormal];
+    [shortGameButton setTitle:[[Localizable getLocalizeStringForKey:kLocale_GameMode_Short] uppercaseString] forState:UIControlStateNormal];
     [shortGameButton setTitleColor:[AICommonUtils getAIColorWithRGB228:1.0] forState:UIControlStateHighlighted];
     [shortGameButton setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
     [shortGameButton.layer addSublayer:[AICommonUtils createOneSidedBorderForUIView:shortGameButton Side:BorderBottom]];
@@ -110,11 +110,11 @@
     shortGameButton.titleLabel.attributedText = [AICommonUtils createStringWithSpacing:shortGameButton.titleLabel.text spacingValue:4.0 withUnderLine:NO];
     
     fullGameDescriptionLabel.font = [AICommonUtils getCustomTypeface:fontAvenirLight ofSize:12.0];
-    fullGameDescriptionLabel.text = @"Player wins when all other players have lost all remaining life balloon.";
+    fullGameDescriptionLabel.text = [Localizable getLocalizeStringForKey:kLocale_GameMode_Full_Description];
     fullGameDescriptionLabel.attributedText = [AICommonUtils createStringWithSpacing:fullGameDescriptionLabel.text spacingValue:2.0 withUnderLine:NO];
     
     shortGameDescriptionLabel.font = [AICommonUtils getCustomTypeface:fontAvenirLight ofSize:12.0];
-    shortGameDescriptionLabel.text = @"When a player losses all his remaining life balloon, other player with the most number of remaining life balloon win.\n\nIf in any situation two (2) players have the same amount of remaining life balloon, player with the least cumulative card value in his hand wins.";
+    shortGameDescriptionLabel.text = [Localizable getLocalizeStringForKey:kLocale_GameMode_Short_Description];
     shortGameDescriptionLabel.attributedText = [AICommonUtils createStringWithSpacing:shortGameDescriptionLabel.text spacingValue:2.0 withUnderLine:NO];
     
     [fullGameDescriptionLabel sizeToFit];

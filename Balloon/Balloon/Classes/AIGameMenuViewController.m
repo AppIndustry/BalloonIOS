@@ -79,14 +79,14 @@
     [self.view addSubview:multiplayerButton];
     
     titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, (self.view.frame.size.height / 2) - 100, self.view.frame.size.width - 40, 44)];
-    titleLabel.text = @"Balloon";
+    titleLabel.text = [Localizable getLocalizeStringForKey:kLocale_Balloon];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [AICommonUtils getAIColorWithRGB228:1.0];
     
     descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, titleLabel.frame.origin.y + titleLabel.frame.size.height + 10, self.view.frame.size.width - 40, 44)];
     descriptionLabel.textColor = [AICommonUtils getAIColorWithRGB228:1.0];
     descriptionLabel.textAlignment = NSTextAlignmentCenter;
-    descriptionLabel.text = @"Pop the balloon whenever you are\nanytime, anywhere";
+    descriptionLabel.text = [Localizable getLocalizeStringForKey:kLocale_Tagline];
     descriptionLabel.numberOfLines = 2;
     
     [self.view addSubview:titleLabel];
@@ -198,10 +198,10 @@
         [self performSegueWithIdentifier:@"singlePlayerSelection" sender:self];
     }
     else {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Unauthenticated" message:@"You are not login to the Game Center" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[Localizable getLocalizeStringForKey:kLocale_Unauthenticated] message:[Localizable getLocalizeStringForKey:kLocale_GameCenter_LoginError] preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction *login = [UIAlertAction actionWithTitle:@"Login" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:[Localizable getLocalizeStringForKey:kLocale_Cancel] style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *login = [UIAlertAction actionWithTitle:[Localizable getLocalizeStringForKey:kLocale_Login] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
             [self autheticatePlayer];
         }];
         
