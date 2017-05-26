@@ -15,4 +15,6 @@
 @property (nonatomic) NSInteger lifeCount;
 @property (nonatomic, strong) NSMutableArray * playerHand;
 
+@property (nonatomic) BOOL isComputer;
+
 @end

@@ -25,6 +25,7 @@
     return self;
 }
 
+
 #pragma mark - Setting up Variables
 
 - (void)initializeStartingVariable {
@@ -63,13 +64,16 @@
     self.nextTurnPlayerID = 0;
 }
 
+
+#pragma mark - Setting up
+
 - (void)setupPlayerVariables {
     
     self.playersDictionary = [[NSMutableDictionary alloc]init];
     
     for (int i = 0; i < self.settings.numberOfPlayers; i++) {
         
-        NSString * userId = [NSString stringWithFormat:@"%@%i", kPLAYER, i];
+        NSString * userId = [self getUserID:i];
         
         GamePlayer * player = [[GamePlayer alloc]init];
         player.index = i;
@@ -80,6 +84,27 @@
         [self.playersDictionary setObject:player forKey:userId];
     }
 }
+
+- (void)resetDoublePlayFlag {
+    self.hasCompleteDoublePlay = YES;
+    self.isDoublePlayNeeded = NO;
+}
+
+- (NSString *)getUserID:(int)userID {
+    return [NSString stringWithFormat:@"%@%i", kPLAYER, userID];
+}
+
+
+#pragma mark - Deck
+
+- (void)shuffleDeck {
+    [self.drawDeck addObjectsFromArray:self.discardDeck];
+    [self.drawDeck reshuffle];
+    [self.discardDeck reset];
+}
+
+
+#pragma mark - Distribute Cards
 
 - (void)distributeCardsToPlayers:(BOOL)isStartingDistribute {
     
@@ -99,7 +124,7 @@
                 if (player != nil && player.playerHand != nil) {
                     [player.playerHand addObject:card];
                 }
-            
+                
                 [self.drawDeck removeObjectAtIndex:0];
                 
                 [self.playersDictionary setObject:player forKey:userId];
@@ -133,9 +158,30 @@
     }
 }
 
-- (NSString *)getUserID:(int)userID {
-    return [NSString stringWithFormat:@"%@%i", kPLAYER, userID];
+- (void)distributeCardsToOtherPlayers:(NSInteger)numberOfCards {
+    
+    if (self.drawDeck.count < (self.settings.numberOfPlayers * numberOfCards)) {
+        [self shuffleDeck];
+    }
+    
+    for (int i = 0; i < numberOfCards; i++) {
+        
+        for (NSString * userId in self.playersDictionary.allKeys) {
+            
+            GamePlayer * player = (GamePlayer *)self.playersDictionary[userId];
+            
+            if (player.index != self.nextTurnPlayerID) {
+                
+                if (player.lifeCount > 0) {
+                    AIGameCard * card = (AIGameCard *)self.drawDeck[0];
+                    [player.playerHand addObject:card];
+                    [self.drawDeck removeObjectAtIndex:0];
+                }
+            }
+        }
+    }
 }
+
 
 #pragma mark - Game Flow
 
@@ -239,8 +285,7 @@
     
     GamePlayer * player = (GamePlayer *)[self.playersDictionary objectForKey:userId];
     
-    if (player.lifeCount > 0)
-    {
+    if (player.lifeCount > 0) {
         /*
         if (nextPlayerIDTurn == userID) {
             
@@ -254,6 +299,190 @@
     }
     
     
+}
+
+
+#pragma mark - Processing
+
+- (void)processGamePlayForUserId:(int)userId selectedCard:(AIGameCard *)card {
+    
+    BOOL isBalloonPopped = [self validateGameCard:card];
+    
+    [self validateDoublePlay];
+    
+    [self processPostOperationForGameCard:card hasPopped:isBalloonPopped userId:userId];
+}
+
+- (BOOL)validateGameCard:(AIGameCard *)card {
+    BOOL hasPopped = NO;
+    
+    if (self.isBalloonPop) {
+        
+        switch (card.cardName) {
+            case GameCardPop:
+            case GameCardCut:
+                break;
+                
+            default:
+                hasPopped = YES;
+                break;
+        }
+    }
+    else if (self.isDoublePlayNeeded && !self.hasCompleteDoublePlay) {
+        
+        switch (card.cardName) {
+            case GameCardToZeroSecond:
+            case GameCardToThirtySecond:
+            case GameCardToSixtySecond:
+            case GameCardAddFiveSecond:
+            case GameCardAddTenSecond:
+                break;
+                
+            default:
+                hasPopped = YES;
+                break;
+        }
+    }
+    
+    return hasPopped;
+    
+}
+
+- (void)validateDoublePlay {
+    
+    if (!self.hasCompleteDoublePlay) {
+        self.hasCompleteDoublePlay = YES;
+    }
+    else {
+        [self resetDoublePlayFlag];
+    }
+}
+
+- (void)processPostOperationForGameCard:(AIGameCard *)card hasPopped:(BOOL)hasPopped userId:(int)userId {
+    BOOL isPlayerSkip = NO;
+    BOOL hasDonePostOperation = YES;
+    
+    if (card.isNumberCard) {
+        self.currentTimeCount += (int)card.cardValue;
+    }
+    else {
+        
+        switch (card.cardName) {
+                
+            case GameCardDoublePlay: {
+                self.isDoublePlayNeeded = YES;
+                self.hasCompleteDoublePlay = NO;
+                self.hasGivenWarningForDoublePlay = NO;
+            }
+                break;
+                
+            case GameCardDrawOne: {
+                if (!hasPopped) {
+                    [self distributeCardsToOtherPlayers:1];
+                }
+            }
+                break;
+                
+            case GameCardDrawTwo: {
+                if (!hasPopped) {
+                    [self distributeCardsToOtherPlayers:2];
+                }
+            }
+                break;
+                
+            case GameCardPop: {
+                self.isBalloonPop = YES;
+            }
+                break;
+                
+            case GameCardCut: {
+                self.currentTimeCount = 0;
+                self.isBalloonPop = NO;
+            }
+                break;
+                
+            case GameCardSkip: {
+                isPlayerSkip = YES;
+            }
+                break;
+                
+            case GameCardToSixtySecond: {
+                self.currentTimeCount = 60;
+            }
+                break;
+                
+            case GameCardToThirtySecond: {
+                self.currentTimeCount = 30;
+            }
+                break;
+                
+            case GameCardToZeroSecond: {
+                self.currentTimeCount = 0;
+            }
+                break;
+                
+            case GameCardReverse: {
+                self.isForwardPlay = !self.isForwardPlay;
+            }
+                break;
+                
+            case GameCardTradeHand: {
+                
+                if (!hasPopped) {
+                    GamePlayer * player = [self getPlayerForUserId:userId];
+                    
+                    if (player.playerHand.count > 0) {
+                        
+                        if (player.isComputer) {
+                            
+                        }
+                        else {
+                            
+                        }
+                    }
+                    else {
+                        //player hand finish cards, end the game round.
+                    }
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+
+#pragma mark - Get Player Hand
+
+- (GamePlayer *)getPlayerForUserId:(int)userId {
+    
+    NSString * user = [self getUserID:userId];
+    
+    GamePlayer * player = (GamePlayer *)self.playersDictionary[user];
+    
+    return player;
+}
+
+- (NSMutableArray *)getPlayerHandForUserId:(int)userId {
+    
+    GamePlayer * player = [self getPlayerForUserId:userId];
+    
+    return player.playerHand;
+}
+
+- (void)setPlayerHand:(NSMutableArray *)playerHand forUserId:(int)userId {
+    
+    GamePlayer * player = [self getPlayerForUserId:userId];
+    
+    player.playerHand = [playerHand mutableCopy];
+    
+    [self updatePlayerDictionaryForGamePlayer:player];
+}
+
+- (void)updatePlayerDictionaryForGamePlayer:(GamePlayer *)player {
+    [self.playersDictionary setObject:player forKey:[self getUserID:player.index]];
 }
 
 @end
